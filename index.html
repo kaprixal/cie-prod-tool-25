@@ -14,9 +14,10 @@
     }
   </style>
 </head>
-<body class="bg-gray-900 flex items-center justify-center max-h-[700px]">
+<!-- Naming convention: noun#-item -->
+<body class="bg-gray-900 flex items-center justify-center h-[700px]">
 
-  <div class="w-full max-w-2xl bg-gray-800 p-6 rounded-lg text-gray-200">
+  <div class="w-full max-w-2xl h-full bg-gray-800 p-6 text-gray-200">
     <!-- Top Tabs -->
     <div class="grid grid-cols-3 border-b border-blue-500 mb-2">
       <button class="tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg" data-tab="mode">MODE</button>
@@ -231,6 +232,8 @@
       localStorage.setItem('guest1-info', document.getElementById('guest1-info').value);
       localStorage.setItem('guest2-name', document.getElementById('guest2-name').value);
       localStorage.setItem('guest2-info', document.getElementById('guest2-info').value);
+      localStorage.setItem('match1-format', document.getElementById('match1-format').value);
+      localStorage.setItem('match1-details', document.getElementById('match1-details').value);
 
       // Save the selected radio button value
       const selectedSeriesFormat = document.querySelector('input[name="match-count"]:checked');
@@ -275,7 +278,7 @@
           document.getElementById("info").classList.add('active');
           subTabButtons.forEach(btn => {
             btn.classList.remove('!bg-blue-500', '!hover:bg-blue-400');
-            if (btn.dataset.tab === 'info') btn.classList.add('bg-blue-500', 'hover:bg-blue-400');
+            if (btn.dataset.tab === 'info') btn.classList.add('!bg-blue-500', '!hover:bg-blue-400');
           });
         } else {
           document.getElementById("general-sub-tabs").style.display = "none";
