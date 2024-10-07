@@ -215,7 +215,7 @@
       // Load the radio button selection
       const seriesFormat = localStorage.getItem('match-count');
       if (seriesFormat) {
-        document.querySelector(`input[name="match-count"][value="${match-count}"]`).checked = true;
+        document.querySelector(`input[name="match-count"][value="${seriesFormat}"]`).checked = true;
       }
     };
 
@@ -274,7 +274,7 @@
           document.getElementById("general-sub-tabs").style.display = "flex";
           document.getElementById("info").classList.add('active');
           subTabButtons.forEach(btn => {
-            btn.classList.remove('bg-blue-500', 'hover:bg-blue-400');
+            btn.classList.remove('!bg-blue-500', '!hover:bg-blue-400');
             if (btn.dataset.tab === 'info') btn.classList.add('bg-blue-500', 'hover:bg-blue-400');
           });
         } else {
@@ -282,13 +282,15 @@
         }
   
         // Highlight active tab button
-        tabButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'hover:bg-blue-400'));
-        button.classList.add('bg-blue-500', 'hover:bg-blue-400');
+        tabButtons.forEach(btn => btn.classList.remove('!bg-blue-500', '!hover:bg-blue-400'));
+        button.classList.add('!bg-blue-500', '!hover:bg-blue-400');
       });
     });
+
   
     // Sub-tab switching remains unchanged
     subTabButtons.forEach(button => {
+      
       button.addEventListener('click', () => {
         const activeSubTab = button.dataset.tab;
   
@@ -297,8 +299,9 @@
         document.getElementById(activeSubTab).classList.add('active');
   
         // Highlight the active sub-tab button
-        subTabButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'hover:bg-blue-400'));
-        button.classList.add('bg-blue-500', 'hover:bg-blue-400');
+        subTabButtons.forEach(btn => btn.classList.remove('!bg-blue-500', '!hover:bg-blue-400'));
+        console.log("button")
+        button.classList.add('!bg-blue-500', '!hover:bg-blue-400');
       });
     });
   
