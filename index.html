@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Info Form</title>
+  <link href="style.css" rel="stylesheet">
+  <style>
+    .tab-content {
+      display: none; /* Hide all tab content by default */
+    }
+    .tab-content.active {
+      display: block; /* Show the active tab content */
+    }
+  </style>
+</head>
+<body class="bg-gray-900 flex items-center justify-center max-h-[700px]">
+
+  <div class="w-full max-w-2xl bg-gray-800 p-6 rounded-lg text-gray-200">
+    <!-- Top Tabs -->
+    <div class="grid grid-cols-3 border-b border-blue-500 mb-2">
+      <button class="tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg" data-tab="mode">MODE</button>
+      <button class="tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg" data-tab="general">GENERAL</button>
+      <button class="tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg" data-tab="live">LIVE</button>
+    </div>
+    
+    <!-- General Sub Tabs -->
+    <div id="general-sub-tabs" class="flex flex-row w-full border-b border-blue-500 mb-3">
+      <button class="sub-tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg" data-tab="info">INFO</button>
+      <button class="sub-tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg" data-tab="schedule">SCHEDULE</button>
+    </div>
+    
+    <!-- Tab Contents -->
+    <div id="mode" class="tab-content">
+      <h2 class="text-lg">Mode Content Here</h2>
+    </div>
+
+    <div id="general" class="tab-content active text-sm">
+        <!-- General Tab Content -->
+        <div id="info" class="tab-content active">
+          <!-- Title Section -->
+          <div class="mb-2 p-2 bg-gray-700 rounded-lg">
+            <h2 class="mb-2 text-gray-400">TITLE</h2>
+            <div class="space-y-2">
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Stream Title</label>
+                <input type="text" id="stream-title" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Stream Title">
+              </div>
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Subtitle</label>
+                <input type="text" id="subtitle" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Subtitle">
+              </div>
+            </div>
+          </div>
+      
+          <!-- Casters Info Section -->
+          <div class="mb-2 p-2 bg-gray-700 rounded-lg">
+            <h2 class="mb-2 text-gray-400">CASTERS INFO</h2>
+            <div class="space-y-2">
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Caster #1 Name</label>
+                <input type="text" id="caster1-name" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Caster #1 Name">
+              </div>
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Caster #1 Info</label>
+                <input type="text" id="caster1-info" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Caster #1 Info">
+              </div>
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Caster #2 Name</label>
+                <input type="text" id="caster2-name" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Caster #2 Name">
+              </div>
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Caster #2 Info</label>
+                <input type="text" id="caster2-info" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Caster #2 Info">
+              </div>
+            </div>
+          </div>
+      
+          <!-- Guest Info Section -->
+          <div class="mb-4 p-4 bg-gray-700 rounded-lg">
+            <h2 class="mb-2 text-gray-400">GUEST INFO</h2>
+            <div class="space-y-2">
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Guest #1 Name</label>
+                <input type="text" id="guest1-name" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Guest #1 Name">
+              </div>
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Guest #1 Info</label>
+                <input type="text" id="guest1-info" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Guest #1 Info">
+              </div>
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Guest #2 Name</label>
+                <input type="text" id="guest2-name" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Guest #2 Name">
+              </div>
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Guest #2 Info</label>
+                <input type="text" id="guest2-info" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Guest #2 Info">
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div id="schedule" class="tab-content">
+          <div class="mb-4 pl-4 pr-4 pt-1 border-2 border-gray-900 rounded-lg">
+            <div class="space-y-2">
+              <div class="flex flex-row items-center">
+                <label class="pr-5 text-left">Match Count
+                </label>
+                <div>
+                  <label class="inline-flex items-center">
+                    <input type="radio" name="match-count" value="1" id="match-count-1" class="form-radio text-blue-500">
+                    <span class="m-2">1</span>
+                  </label>
+                  <label class="inline-flex items-center">
+                    <input type="radio" name="match-count" value="2" id="match-count-2" class="form-radio text-blue-500">
+                    <span class="m-2">2</span>
+                  </label>
+                  <label class="inline-flex items-center">
+                    <input type="radio" name="match-count" value="3" id="match-count-3" class="form-radio text-blue-500">
+                    <span class="m-2">3</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>          
+          <div class="mb-4 p-4 bg-gray-700 rounded-lg">
+            <h2 class="mb-2 text-gray-400">Match 1</h2>
+            <div class="space-y-2">
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Series Format</label>
+                <select id="match1-format" class="w-full bg-gray-800 h-6 rounded-md">
+                  <option value="">Select an option</option>
+                  <option value="bo1">Best of 1</option>
+                  <option value="bo2">Best of 2</option>
+                  <option value="bo3">Best of 3</option>
+                  </select>
+              </div>
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Match Details</label>
+                <input type="text" id="match1-details" class="w-full bg-gray-800 h-6 rounded-md p-1">
+              </div>
+            </div>
+          </div>
+          <div class="mb-4 p-4 bg-gray-700 rounded-lg">
+            <h2 class="mb-2 text-gray-400">Match 2</h2>
+            <div class="space-y-2">
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Series Format</label>
+                <select id="match1-format" class="w-full bg-gray-800 h-6 rounded-md">
+                  <option value="">Select an option</option>
+                  <option value="bo1">Best of 1</option>
+                  <option value="bo2">Best of 2</option>
+                  <option value="bo3">Best of 3</option>
+                  </select>
+              </div>
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Match Details</label>
+                <input type="text" id="match1-details" class="w-full bg-gray-800 h-6 rounded-md p-1">
+              </div>
+            </div>
+          </div>
+          <div class="mb-4 p-4 bg-gray-700 rounded-lg">
+            <h2 class="mb-2 text-gray-400">Match 3</h2>
+            <div class="space-y-2">
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Series Format</label>
+                <select id="match1-format" class="w-full bg-gray-800 h-6 rounded-md">
+                  <option value="">Select an option</option>
+                  <option value="bo1">Best of 1</option>
+                  <option value="bo2">Best of 2</option>
+                  <option value="bo3">Best of 3</option>
+                  </select>
+              </div>
+              <div class="flex flex-row items-center">
+                <label class="pr-3 w-40 text-right">Match Details</label>
+                <input type="text" id="match1-details" class="w-full bg-gray-800 h-6 rounded-md p-1">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    <div id="live" class="tab-content">
+      <h2 class="text-lg">Live Content Here</h2>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-between mt-4">
+      <!-- Close Button -->
+      <button class="w-10 h-10 bg-gray-700 hover:bg-red-500 rounded-full flex items-center justify-center">
+        <span class="text-xl text-gray-200">X</span>
+      </button>
+      
+      <!-- Apply Button -->
+      <button id="apply-button" class="bg-blue-500 hover:bg-blue-400 px-6 py-2 rounded-lg text-white">
+        APPLY
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Load values from localStorage on page load
+    window.onload = function() {
+      document.getElementById('stream-title').value = localStorage.getItem('stream-title') || '';
+      document.getElementById('subtitle').value = localStorage.getItem('subtitle') || '';
+      document.getElementById('caster1-name').value = localStorage.getItem('caster1-name') || '';
+      document.getElementById('caster1-info').value = localStorage.getItem('caster1-info') || '';
+      document.getElementById('caster2-name').value = localStorage.getItem('caster2-name') || '';
+      document.getElementById('caster2-info').value = localStorage.getItem('caster2-info') || '';
+      document.getElementById('guest1-name').value = localStorage.getItem('guest1-name') || '';
+      document.getElementById('guest1-info').value = localStorage.getItem('guest1-info') || '';
+      document.getElementById('guest2-name').value = localStorage.getItem('guest2-name') || '';
+      document.getElementById('guest2-info').value = localStorage.getItem('guest2-info') || '';
+
+      // Load the radio button selection
+      const seriesFormat = localStorage.getItem('match-count');
+      if (seriesFormat) {
+        document.querySelector(`input[name="match-count"][value="${match-count}"]`).checked = true;
+      }
+    };
+
+    // Event listener for Apply button to save data to localStorage
+    document.getElementById('apply-button').addEventListener('click', () => {
+      localStorage.setItem('stream-title', document.getElementById('stream-title').value);
+      localStorage.setItem('subtitle', document.getElementById('subtitle').value);
+      localStorage.setItem('caster1-name', document.getElementById('caster1-name').value);
+      localStorage.setItem('caster1-info', document.getElementById('caster1-info').value);
+      localStorage.setItem('caster2-name', document.getElementById('caster2-name').value);
+      localStorage.setItem('caster2-info', document.getElementById('caster2-info').value);
+      localStorage.setItem('guest1-name', document.getElementById('guest1-name').value);
+      localStorage.setItem('guest1-info', document.getElementById('guest1-info').value);
+      localStorage.setItem('guest2-name', document.getElementById('guest2-name').value);
+      localStorage.setItem('guest2-info', document.getElementById('guest2-info').value);
+
+      // Save the selected radio button value
+      const selectedSeriesFormat = document.querySelector('input[name="match-count"]:checked');
+      if (selectedSeriesFormat) {
+        localStorage.setItem('match-count', selectedSeriesFormat.value);
+      }
+    });
+
+    // Event listener for X button to clear fields in the active sub-tab content only
+    document.querySelector('.w-10.h-10').addEventListener('click', () => {
+      // Find the active main tab
+      const activeTabContent = document.querySelector('.tab-content.active');
+      
+      // Find the active sub-tab within the active main tab
+      const activeSubTabContent = activeTabContent.querySelector('.tab-content.active');
+      
+      // Clear all input fields within the active sub-tab content
+      const inputs = activeSubTabContent.querySelectorAll('input');
+      inputs.forEach(input => input.value = ''); // Clear input fields in active sub-tab
+      
+      // Clear radio button selection in the active sub-tab content
+      const radios = activeSubTabContent.querySelectorAll('input[type="radio"]');
+      radios.forEach(radio => radio.checked = false);
+    });
+
+    // Main tab and sub-tab switching code remains the same
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const subTabButtons = document.querySelectorAll('.sub-tab-button');
+  
+    // Main tab switching logic
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const activeTab = button.dataset.tab;
+  
+        // Hide all main tab content and show the selected one
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        document.getElementById(activeTab).classList.add('active');
+  
+        // Toggle visibility and reset sub-tabs if necessary
+        if (activeTab === "general") {
+          document.getElementById("general-sub-tabs").style.display = "flex";
+          document.getElementById("info").classList.add('active');
+          subTabButtons.forEach(btn => {
+            btn.classList.remove('bg-blue-500', 'hover:bg-blue-400');
+            if (btn.dataset.tab === 'info') btn.classList.add('bg-blue-500', 'hover:bg-blue-400');
+          });
+        } else {
+          document.getElementById("general-sub-tabs").style.display = "none";
+        }
+  
+        // Highlight active tab button
+        tabButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'hover:bg-blue-400'));
+        button.classList.add('bg-blue-500', 'hover:bg-blue-400');
+      });
+    });
+  
+    // Sub-tab switching remains unchanged
+    subTabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const activeSubTab = button.dataset.tab;
+  
+        // Hide all sub-tab content and show the selected one
+        document.querySelectorAll('#general .tab-content').forEach(content => content.classList.remove('active'));
+        document.getElementById(activeSubTab).classList.add('active');
+  
+        // Highlight the active sub-tab button
+        subTabButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'hover:bg-blue-400'));
+        button.classList.add('bg-blue-500', 'hover:bg-blue-400');
+      });
+    });
+  
+    // Initialize with the General tab open
+    tabButtons[1].click();
+  </script>
+
+</body>
+</html>
