@@ -2791,6 +2791,21 @@ video {
   text-align: center;
 }
 
+.fixed-width-select {
+  width: 30px; /* Fixed width for the select box */
+  white-space: nowrap; /* Prevent the text from wrapping */
+  overflow: hidden; /* Hide the overflow text */
+  text-overflow: ellipsis; /* Show '...' when the text overflows */
+}
+
+.fixed-width-map {
+  width: 60px; /* Fixed width for the select box */
+  white-space: nowrap; /* Prevent the text from wrapping */
+  overflow: hidden; /* Hide the overflow text */
+  text-overflow: ellipsis; /* Show '...' when the text overflows */
+}
+
+
 @media (min-width: 640px) {
   .sm\:underline {
     text-decoration-line: underline;
