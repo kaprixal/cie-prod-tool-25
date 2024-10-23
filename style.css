@@ -2957,6 +2957,11 @@ line-height: 1;
     top: 0;
     left: 0;
   }
+.stack-container {
+    position: relative;
+    overflow: auto;
+    width: 1920px; /* Adjust width as needed */
+    height: 1080px;} /* Adjust height as needed */
 
   #caster-1-name {
     position: absolute;
@@ -3010,4 +3015,18 @@ line-height: 1;
   align-content: center;
   padding-left: 50px;
   padding-right: 50px;
+}
+
+.caster-int{
+  position: absolute;
+  left: 375px;
+  height: 100px;
+  width: 280px;
+  text-align: left;
+  justify-content: center;
+  align-content: center;
+  padding-left: 30px;
+  overflow: clip;
+  z-index: 2;
+  color: white;
 }
