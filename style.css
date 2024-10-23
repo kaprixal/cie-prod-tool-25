@@ -1,4 +1,7 @@
-*, ::before, ::after {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;*
+, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -2176,6 +2179,42 @@ video {
   line-height: 1.75rem;
 }
 
+.text-2xl {
+  font-size: 1.5rem; /* 24px */
+line-height: 2rem; /* 32px */
+}
+
+.text-3xl {
+  font-size: 1.875rem; /* 30px */
+line-height: 2.25rem; /* 36px */
+}
+
+.text-4xl {
+  font-size: 2.25rem; /* 36px */
+line-height: 2.5rem; /* 40px */
+}
+
+.text-5xl {
+  	font-size: 3rem; /* 48px */
+line-height: 1;
+}
+
+.text-6xl {
+  	font-size: 3.75rem; /* 60px */
+line-height: 1;
+}
+.text-7xl {
+  		font-size: 4.5rem; /* 72px */
+line-height: 1;
+}
+.text-8xl {
+  		font-size: 6rem; /* 96px */
+line-height: 1;
+}
+.text-9xl {
+  	font-size: 8rem; /* 128px */
+line-height: 1;
+}
 .font-bold {
   font-weight: 700;
 }
@@ -2818,4 +2857,157 @@ video {
       paint-order: markers;
     }
   }
+}
+
+@font-face {
+    font-family: 'BuiltTilting';
+    src: url('assets/fonts/BuiltTilting/builttitlingbd.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BuiltTilting';
+    src: url('assets/fonts/BuiltTilting/builttitlingsb.ttf') format('truetype');
+    font-weight: bolder;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BuiltTilting';
+    src: url('assets/fonts/BuiltTilting/builttitlingrg.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BuiltTilting';
+    src: url('assets/fonts/BuiltTilting/builttitlinglt.ttf') format('truetype');
+    font-weight: lighter;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'IntegralCF';
+    src: url('assets/fonts/Integral CF/IntegralCF-Bold copy.otf') format('opentype');
+    font-weight: bolder;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IntegralCF';
+    src: url('assets/fonts/Integral CF/IntegralCF-Medium copy.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IntegralCF';
+    src: url('assets/fonts/Integral CF/IntegralCF-Regular copy.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Built Tilting font styles */
+.font-built-bold {
+    font-family: 'BuiltTilting';
+    font-weight: bold;
+    font-style: normal;
+}
+
+.font-built-bolder {
+    font-family: 'BuiltTilting';
+    font-weight: bolder;
+    font-style: normal;
+}
+
+.font-built-regular {
+    font-family: 'BuiltTilting';
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-built-light {
+    font-family: 'BuiltTilting';
+    font-weight: lighter;
+    font-style: normal;
+}
+
+/* Integral CF font styles */
+.font-integral-bolder {
+    font-family: 'IntegralCF';
+    font-weight: bolder;
+    font-style: normal;
+}
+
+.font-integral-bold {
+    font-family: 'IntegralCF';
+    font-weight: bold;
+    font-style: normal;
+}
+
+.font-integral-regular {
+    font-family: 'IntegralCF';
+    font-weight: normal;
+    font-style: normal;
+}
+/* Style for images */
+  .stacked-image {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+  }
+
+  #caster-1-name {
+    position: absolute;
+    top: 659px; /* Adjust the top position as needed */
+    left: 300px; /* Adjust the left position as needed */
+    z-index: 2;
+  }
+  #caster-1-tag {
+    position: absolute;
+    top: 697px; /* Adjust the top position as needed */
+    left: 300px; /* Adjust the left position as needed */
+    z-index: 2;
+  }
+
+  #caster-2-name {
+    position: absolute;
+    top: 659px; /* Adjust the top position as needed */
+    left: 1000px; /* Adjust the left position as needed */
+    z-index: 2;
+  }
+  #caster-2-tag {
+    position: absolute;
+    top: 697px; /* Adjust the top position as needed */
+    left: 1000px; /* Adjust the left position as needed */
+    z-index: 2;
+  }
+
+#caster-streamtitle{
+  position: absolute;
+  top: 880px;
+  left: 105px;
+  height: 65px;
+  width: 992px;
+  z-index: 2;
+  overflow-x: wrap;
+  justify-content: center;
+  align-content: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  }
+
+  #caster-subtitle{
+  position: absolute;
+  height: 65px;
+  width: 992px;
+  top: 940px;
+  left: 105px;
+  z-index: 2;
+  color: white;
+  justify-content: center;
+  align-content: center;
+  padding-left: 50px;
+  padding-right: 50px;
 }

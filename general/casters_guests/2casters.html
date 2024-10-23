@@ -1,31 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet">
-</head>
-<body>
-  <!-- Container for stacking -->
-<div class="stack-container">
+  <head>
+    <link href="../../style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Container for stacking -->
+    <div class="stack-container text-white">
+      <div id="caster-1-name" class="font-built-bolder text-4xl"></div>
+      <div id="caster-1-tag" class="font-built-bold text-2xl"></div>
+      <div id="caster-2-name" class="font-built-bolder text-4xl"></div>
+      <div id="caster-2-tag" class="font-built-bold text-2xl"></div>
+      <div class="flex flex-col">
+        <div
+          id="caster-streamtitle"
+          class="font-built-bolder text-7xl text-center"
+        ></div>
+        <div
+          id="caster-subtitle"
+          class="font-built-bold text-center text-2xl"
+        ></div>
+      </div>
 
-    <div id="caster-1-name" class="caster-1-name druk-medium-text"></div>
-    <div id="caster-1-tag" class="caster-1-tag druk-medium-text"></div>
-    <div id="caster-2-name" class="caster-2-name druk-medium-text"></div>
-    <div id="caster-2-tag" class="caster-2-tag druk-medium-text"></div>
-    <div id="caster-streamtitle" class="druk-wide-heavy"></div>
-    <div id="caster-subtitle" class="druk-medium-text"></div>
-    <div id="divider"></div>
-    <img class="stacked-image" id="vs-asset" alt="vs" style="z-index: 2;">
-    <div style="font-size: 80px; border-radius: 38px; font-weight: 900; position: absolute; top: 890px; left: 1340px; width:259.53px; height: 122px; z-index: 3;" id="miniscore" class="druk-wide-heavy"></div>
-    
-    <img class="stacked-image" src="assets\casters_and_interviews\casters_cam_box.png" alt="Image Description">
-    <img id="t1Logo" style="position: absolute; height: 136px; width: 136px; z-index: 3; top: 868px;"></div>
+      <div id="divider"></div>
+      <img
+        class="stacked-image"
+        src="casters_cam_box.png"
+        alt="Image Description"
+      />
+      <img class="stacked-image" id="vs-asset" alt="vs" style="z-index: 2" />
+      <div
+        style="
+          font-size: 80px;
+          border-radius: 38px;
+          font-weight: 900;
+          position: absolute;
+          top: 875px;
+          left: 1340px;
+          width: 259.53px;
+          height: 115px;
+          z-index: 3;
+          color: #172953;
+        "
+        id="miniscore"
+        class="text-center font-integral-bold"
+      ></div>
+      <img id="t1Logo" style="position: absolute; height: 136px; width: 136px; z-index: 3; top: 868px;"></div>
     <img id="t2Logo" style="position: absolute; height: 136px; width: 136px; z-index: 3; top: 868px;"></div>
-    <script>
+      <script>
+        getCasters();
+        function getCasters() {
+          var c1name = localStorage.getItem("caster1-name");
+          var c1tag = localStorage.getItem("caster1-info");
+          var c2name = localStorage.getItem("caster2-name");
+          var c2tag = localStorage.getItem("caster2-info");
+          var title = localStorage.getItem("stream-title");
+          var subtitle = localStorage.getItem("subtitle");
+
+          document.getElementById("caster-subtitle").innerHTML = subtitle;
+          document.getElementById("caster-streamtitle").innerHTML = title;
+
+          var c1nDiv = document.getElementById("caster-1-name");
+          c1nDiv.innerHTML = "<p>" + c1name + "</p>";
+
+          var c1tDiv = document.getElementById("caster-1-tag");
+          c1tDiv.innerHTML = "<p>" + c1tag + "</p>";
+
+          var c2nDiv = document.getElementById("caster-2-name");
+          c2nDiv.innerHTML = "<p>" + c2name + "</p>";
+
+          var c2tDiv = document.getElementById("caster-2-tag");
+          c2tDiv.innerHTML = "<p>" + c2tag + "</p>";
+
+          var curmatch = localStorage.getItem("curr-match");
+          var team1score = localStorage.getItem(`m${curmatch}t1totalscore`);
+          var team2score = localStorage.getItem(`m${curmatch}t2totalscore`);
+
+          document.getElementById('t1Logo').src = localStorage.getItem(`m${curmatch}-team1-logo`)
+        document.getElementById('t2Logo').src = localStorage.getItem(`m${curmatch}-team2-logo`);
+          if (team1score === "0" && team2score === "0") {
+            document.getElementById('t1Logo').style.left = '1229px';
+            document.getElementById('t2Logo').style.left = '1595px';
+            var miniscore_path =
+              "../../assets/casters_and_interviews/casters_vs_1.png";
+            document.getElementById("miniscore").classList.add("hidden");
+          } else {
+            document.getElementById('t1Logo').style.left = '1170px';
+            document.getElementById('t2Logo').style.left = '1640px';
+            var miniscore_path =
+              "../../assets/casters_and_interviews/casters_vs_2.png";
+            document.getElementById("miniscore").classList.remove("hidden");
+          }
+          var vsElement = document.getElementById("vs-asset");
+          vsElement.src = miniscore_path;
+          document.getElementById("miniscore").innerHTML =
+            team1score + " - " + team2score;
+        }
+        setInterval(function () {
+          getCasters();
+        }, 1 * 1000);
+      </script>
+      <!-- <script>
       setScore();
       getCasters();
       test();
@@ -42,7 +116,7 @@
         document.getElementById('caster-subtitle').innerHTML = subtitle;
         document.getElementById('caster-streamtitle').innerHTML = title;
 
-        document.getElementById('t1Logo').src = localStorage.getItem('t1_logo')
+        document.getElementById('t1Logo').src = localStorage.getItem('t1_logo');
         document.getElementById('t2Logo').src = localStorage.getItem('t2_logo');
 
 
@@ -269,8 +343,7 @@
     }, 1 * 1000)
 
 
-    </script>
-</div>
-</body>
-
+    </script> -->
+    </div>
+  </body>
 </html>
