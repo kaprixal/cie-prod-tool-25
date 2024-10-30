@@ -3726,7 +3726,7 @@ line-height: 1;
 }
 
 #animatedImage1 {
-  padding-right: 40px;
+  padding-right: 70px;
   width: 500px;
   height: 500px;
   animation: slide1 0.32s 1s;
@@ -3734,7 +3734,7 @@ line-height: 1;
 }
 
 #animatedImage2 {
-  padding-left: 40px;
+  padding-left: 70px;
   width: 500px;
   height: 500px;
   animation: slide2 0.32s 1s;
