@@ -2992,7 +2992,7 @@ line-height: 1;
 #caster-streamtitle{
   position: absolute;
   top: 880px;
-  left: 250px;
+  left: 300px;
   height: 65px;
   width: 992px;
   z-index: 2;
@@ -3008,7 +3008,7 @@ line-height: 1;
   height: 65px;
   width: 992px;
   top: 940px;
-  left: 250px;
+  left: 300px;
   z-index: 2;
   color: white;
   justify-content: center;
