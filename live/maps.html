@@ -56,7 +56,6 @@
 </body>
 <script>
     setBox();
-    getVALMaps();
     // Set map box
     function setBox(){
         var curmatch = localStorage.getItem("curr-match");
@@ -72,6 +71,8 @@
 
         if(localStorage.getItem("game") == "ow2"){
             getOWMaps();
+        }else if(localStorage.getItem("game") == "val"){
+            getVALMaps();
         }
     }
 
