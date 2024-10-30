@@ -3714,6 +3714,15 @@ line-height: 1;
     transform: translate(0px, 287px);
   }
 }
+#divider{
+  position: absolute;
+  top: 869px;
+  left: 420px;
+  height: 127px;
+  width: 4px;
+  background-color: white;
+  z-index: 3;
+}
 
 #animatedImage1 {
   padding-right: 15px;
