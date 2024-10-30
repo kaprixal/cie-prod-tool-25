@@ -3620,7 +3620,6 @@ line-height: 1;
   left: 100px;
   z-index: 1;
   font-size: 40px;
-  overflow-x: clip;
 }
 
 #roster-name-2{
@@ -3632,7 +3631,6 @@ line-height: 1;
   left: 448px;
   z-index: 1;
   font-size: 40px;
-  overflow-x: clip;
 }
 
 #roster-name-3{
@@ -3644,7 +3642,6 @@ line-height: 1;
   left: 796px;
   z-index: 1;
   font-size: 40px;
-  overflow-x: clip;
 }
 
 #roster-name-4{
@@ -3656,7 +3653,6 @@ line-height: 1;
   left: 1144px;
   z-index: 1;
   font-size: 40px;
-  overflow-x: clip;
 }
 
 #roster-name-5{
@@ -3668,7 +3664,7 @@ line-height: 1;
   left: 1492px;
   z-index: 1;
   font-size: 40px;
-  overflow-x: clip;
+  
 }
 
 .roster-team{
