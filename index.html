@@ -168,18 +168,8 @@
             case "ft1":
               // For ft1, only map 1 matters
               if (mapdone[0] === 0) {
-                localStorage.setItem(
-                  `m${matchNumber}-map1-state`,
-                  "in progress"
-                );
-                localStorage.setItem(`m${matchNumber}-map2-state`, "up next");
+                localStorage.setItem(`m${matchNumber}-map1-state`, "up next");
                 // Set the rest of the maps to "unplayed"
-                for (let i = 3; i <= totalMaps; i++) {
-                  localStorage.setItem(
-                    `m${matchNumber}-map${i}-state`,
-                    "unplayed"
-                  );
-                }
               } else {
                 // If map 1 is done, we are done with the match
                 localStorage.setItem(`m${matchNumber}-map1-state`, "done");
@@ -192,12 +182,12 @@
                 if (mapdone[i] === 0) {
                   localStorage.setItem(
                     `m${matchNumber}-map${i + 1}-state`,
-                    "in progress"
+                    "up next"
                   );
                   if (i + 2 <= 3) {
                     localStorage.setItem(
                       `m${matchNumber}-map${i + 2}-state`,
-                      "up next"
+                      "unplayed"
                     );
                   }
                   // Set the rest of the maps to "unplayed"
@@ -224,12 +214,12 @@
                 if (mapdone[i] === 0) {
                   localStorage.setItem(
                     `m${matchNumber}-map${i + 1}-state`,
-                    "in progress"
+                    "up next"
                   );
                   if (i + 1 < totalMaps) {
                     localStorage.setItem(
                       `m${matchNumber}-map${i + 2}-state`,
-                      "up next"
+                      "unplayed"
                     );
                   }
                   // Set the rest of the maps to "unplayed"
@@ -272,9 +262,9 @@
 
           // Count the wins for each team in the current match
           for (let i = 0; i < numMaps; i++) {
-            if (winners[i] === 1) {
+            if (winners[i] === 1 && mapdone[i] === 1) {
               count1++; // Increment Team 1 wins
-            } else if (winners[i] === 2) {
+            } else if (winners[i] === 2 && mapdone[i] === 1) {
               count2++; // Increment Team 2 wins
             } else if (winners[i] === 0) {
               count0++; // Increment draws

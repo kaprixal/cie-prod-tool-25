@@ -79,11 +79,11 @@
     function getVALMaps(){
         var curmatch = localStorage.getItem("curr-match");
         var format = localStorage.getItem(`match${curmatch}-format`);
-        var map1 = localStorage.getItem(`m${curmatch}-map1-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map1-name`).replace(/[\s:-]+/g, '').toLowerCase();
-        var map2 = localStorage.getItem(`m${curmatch}-map2-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map2-name`).replace(/[\s:-]+/g, '').toLowerCase();
-        var map3 = localStorage.getItem(`m${curmatch}-map3-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map3-name`).replace(/[\s:-]+/g, '').toLowerCase();
-        var map4 = localStorage.getItem(`m${curmatch}-map4-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map4-name`).replace(/[\s:-]+/g, '').toLowerCase();
-        var map5 = localStorage.getItem(`m${curmatch}-map5-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map5-name`).replace(/[\s:-]+/g, '').toLowerCase(); 
+        var map1 = localStorage.getItem(`m${curmatch}-map1-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map1-name`).replace(/[\s:.'-]+/g, '').toLowerCase();
+        var map2 = localStorage.getItem(`m${curmatch}-map2-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map2-name`).replace(/[\s:.'-]+/g, '').toLowerCase();
+        var map3 = localStorage.getItem(`m${curmatch}-map3-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map3-name`).replace(/[\s:.'-]+/g, '').toLowerCase();
+        var map4 = localStorage.getItem(`m${curmatch}-map4-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map4-name`).replace(/[\s:.'-]+/g, '').toLowerCase();
+        var map5 = localStorage.getItem(`m${curmatch}-map5-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map5-name`).replace(/[\s:.'-]+/g, '').toLowerCase(); 
         var map1n = localStorage.getItem(`m${curmatch}-map1-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map1-name`);
         var map2n = localStorage.getItem(`m${curmatch}-map2-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map2-name`);
         var map3n = localStorage.getItem(`m${curmatch}-map3-name`) == "+" ? "Undecided" : localStorage.getItem(`m${curmatch}-map3-name`);
@@ -162,11 +162,11 @@
     function getOWMaps(){
         var curmatch = localStorage.getItem("curr-match");
         var format = localStorage.getItem(`match${curmatch}-format`);
-        var map1 = localStorage.getItem(`m${curmatch}-map1-name`) == "+" ? localStorage.getItem(`m${curmatch}-map1-type`) : localStorage.getItem(`m${curmatch}-map1-name`).replace(/[\s:-]+/g, '').toUpperCase();
-        var map2 = localStorage.getItem(`m${curmatch}-map2-name`) == "+" ? localStorage.getItem(`m${curmatch}-map2-type`) : localStorage.getItem(`m${curmatch}-map2-name`).replace(/[\s:-]+/g, '').toUpperCase();
-        var map3 = localStorage.getItem(`m${curmatch}-map3-name`) == "+" ? localStorage.getItem(`m${curmatch}-map3-type`) : localStorage.getItem(`m${curmatch}-map3-name`).replace(/[\s:-]+/g, '').toUpperCase();
-        var map4 = localStorage.getItem(`m${curmatch}-map4-name`) == "+" ? localStorage.getItem(`m${curmatch}-map4-type`) : localStorage.getItem(`m${curmatch}-map4-name`).replace(/[\s:-]+/g, '').toUpperCase();
-        var map5 = localStorage.getItem(`m${curmatch}-map5-name`) == "+" ? localStorage.getItem(`m${curmatch}-map5-type`) : localStorage.getItem(`m${curmatch}-map5-name`).replace(/[\s:-]+/g, '').toUpperCase(); 
+        var map1 = localStorage.getItem(`m${curmatch}-map1-name`) == "+" ? localStorage.getItem(`m${curmatch}-map1-type`) : localStorage.getItem(`m${curmatch}-map1-name`).replace(/[\s:.'-]+/g, '').toUpperCase();
+        var map2 = localStorage.getItem(`m${curmatch}-map2-name`) == "+" ? localStorage.getItem(`m${curmatch}-map2-type`) : localStorage.getItem(`m${curmatch}-map2-name`).replace(/[\s:.'-]+/g, '').toUpperCase();
+        var map3 = localStorage.getItem(`m${curmatch}-map3-name`) == "+" ? localStorage.getItem(`m${curmatch}-map3-type`) : localStorage.getItem(`m${curmatch}-map3-name`).replace(/[\s:.'-]+/g, '').toUpperCase();
+        var map4 = localStorage.getItem(`m${curmatch}-map4-name`) == "+" ? localStorage.getItem(`m${curmatch}-map4-type`) : localStorage.getItem(`m${curmatch}-map4-name`).replace(/[\s:.'-]+/g, '').toUpperCase();
+        var map5 = localStorage.getItem(`m${curmatch}-map5-name`) == "+" ? localStorage.getItem(`m${curmatch}-map5-type`) : localStorage.getItem(`m${curmatch}-map5-name`).replace(/[\s:.'-]+/g, '').toUpperCase(); 
         var map1n = localStorage.getItem(`m${curmatch}-map1-name`) == "+" ? localStorage.getItem(`m${curmatch}-map1-type`) : localStorage.getItem(`m${curmatch}-map1-name`);
         var map2n = localStorage.getItem(`m${curmatch}-map2-name`) == "+" ? localStorage.getItem(`m${curmatch}-map2-type`) : localStorage.getItem(`m${curmatch}-map2-name`);
         var map3n = localStorage.getItem(`m${curmatch}-map3-name`) == "+" ? localStorage.getItem(`m${curmatch}-map3-type`) : localStorage.getItem(`m${curmatch}-map3-name`);
