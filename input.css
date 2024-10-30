@@ -4,32 +4,31 @@
 
 @font-face {
     font-family: 'BuiltTilting';
-    src: url('assets/fonts/Built Tilting/built titling bd copy.ttf') format('truetype');
+    src: url('assets/fonts/BuiltTilting/builttitlingbd.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'BuiltTilting';
-    src: url('assets/fonts/Built Tilting/built titling sb copy.ttf') format('truetype');
+    src: url('assets/fonts/BuiltTilting/builttitlingsb.ttf') format('truetype');
     font-weight: bolder;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'BuiltTilting';
-    src: url('assets/fonts/Built Tilting/built titling rg copy.ttf') format('truetype');
+    src: url('assets/fonts/BuiltTilting/builttitlingrg.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'BuiltTilting';
-    src: url('assets/fonts/Built Tilting/built titling lt copy.ttf') format('truetype');
+    src: url('assets/fonts/BuiltTilting/builttitlinglt.ttf') format('truetype');
     font-weight: lighter;
     font-style: normal;
 }
-
 @font-face {
     font-family: 'IntegralCF';
     src: url('assets/fonts/Integral CF/IntegralCF-Bold copy.otf') format('opentype');
@@ -50,3 +49,50 @@
     font-weight: normal;
     font-style: normal;
 }
+
+/* Built Tilting font styles */
+.font-built-bold {
+    font-family: 'BuiltTilting';
+    font-weight: bold;
+    font-style: normal;
+}
+
+.font-built-bolder {
+    font-family: 'BuiltTilting';
+    font-weight: bolder;
+    font-style: normal;
+}
+
+.font-built-regular {
+    font-family: 'BuiltTilting';
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-built-light {
+    font-family: 'BuiltTilting';
+    font-weight: lighter;
+    font-style: normal;
+}
+
+/* Integral CF font styles */
+.font-integral-bolder {
+    font-family: 'IntegralCF';
+    font-weight: bolder;
+    font-style: normal;
+}
+
+.font-integral-bold {
+    font-family: 'IntegralCF';
+    font-weight: bold;
+    font-style: normal;
+}
+
+.font-integral-regular {
+    font-family: 'IntegralCF';
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+

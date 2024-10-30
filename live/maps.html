@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../style.css" rel="stylesheet" />
+<body>
+  <!-- Container for stacking -->
+<div class="stack-container text-center">
+    <img class="stacked-image" id="mapset">
+    <div id="total-score">
+        <div style="font-size: 25px; color: #0D534D;" id="match-score" class="font-integral-bold">MATCH SCORE</div><br>
+        <div style="font-size: 80px; font-weight: 900;" id="miniscore" class="font-integral-bold"></div>
+        <img id="logo1" style="height:136px; width:136px;"></img>
+        <img id="logo2" style="height:136px; width:136px;"></img>
+    </div>
+
+    <div class="font-integral-regular bo1">
+        <img id="bo1m1display">
+        <div id="bo1m1state"></div>
+    </div>
+    <div class="font-integral-regular bo3">
+        <img id="bo3m1display">
+        <div id="bo3m1state"></div>
+    </div>
+    <div class="font-integral-regular bo3">
+        <img id="bo3m2display">
+        <div id="bo3m2state"></div>
+    </div>
+    <div class="font-integral-regular bo3">
+        <img id="bo3m3display">
+        <div id="bo3m3state"></div>
+    </div>
+    <div class="font-integral-regular bo5 ">
+        <img id="bo5m1display" >
+        <div id="bo5m1state"></div>
+    </div>
+    <div class="font-integral-regular bo5">
+        <img id="bo5m2display">
+        <div id="bo5m2state"></div>
+    </div>
+    <div class="font-integral-regular bo5">
+        <img id="bo5m3display">
+        <div id="bo5m3state"></div>
+    </div>
+    <div class="font-integral-regular bo5">
+        <img id="bo5m4display">
+        <div id="bo5m4state"></div>
+    </div>
+    <div class="font-integral-regular bo5">
+        <img id="bo5m5display">
+        <div id="bo5m5state"></div>
+    </div>
+
+</div>
+</body>
+<script>
+    setBox();
+    getVALMaps();
+    // Set map box
+    function setBox(){
+        var curmatch = localStorage.getItem("curr-match");
+        var format = localStorage.getItem(`match${curmatch}-format`);
+        document.getElementById("mapset").src = "..\\assets\\maps\\map_" + format + "_box.png";
+        var team1score = localStorage.getItem(`m${curmatch}t1totalscore`);
+        var team2score = localStorage.getItem(`m${curmatch}t2totalscore`);
+
+        document.getElementById('logo1').src = localStorage.getItem(`m${curmatch}-team1-logo`);
+        document.getElementById('logo2').src = localStorage.getItem(`m${curmatch}-team2-logo`);
+        document.getElementById("miniscore").innerHTML =
+        team1score + " - " + team2score;
+
+        if(localStorage.getItem("game") == "ow2"){
+            getOWMaps();
+        }
+    }
+
+    function getVALMaps(){
+        var curmatch = localStorage.getItem("curr-match");
+        var format = localStorage.getItem(`match${curmatch}-format`);
+        var map1 = localStorage.getItem(`m${curmatch}-map1-name`) == "+" ? localStorage.getItem(`m${curmatch}-map1-type`) : localStorage.getItem(`m${curmatch}-map1-name`).replace(/[\s:-]+/g, '').toUpperCase();
+        var map2 = localStorage.getItem(`m${curmatch}-map2-name`) == "+" ? localStorage.getItem(`m${curmatch}-map2-type`) : localStorage.getItem(`m${curmatch}-map2-name`).replace(/[\s:-]+/g, '').toUpperCase();
+        var map3 = localStorage.getItem(`m${curmatch}-map3-name`) == "+" ? localStorage.getItem(`m${curmatch}-map3-type`) : localStorage.getItem(`m${curmatch}-map3-name`).replace(/[\s:-]+/g, '').toUpperCase();
+        var map4 = localStorage.getItem(`m${curmatch}-map4-name`) == "+" ? localStorage.getItem(`m${curmatch}-map4-type`) : localStorage.getItem(`m${curmatch}-map4-name`).replace(/[\s:-]+/g, '').toUpperCase();
+        var map5 = localStorage.getItem(`m${curmatch}-map5-name`) == "+" ? localStorage.getItem(`m${curmatch}-map5-type`) : localStorage.getItem(`m${curmatch}-map5-name`).replace(/[\s:-]+/g, '').toUpperCase(); 
+        var map1n = localStorage.getItem(`m${curmatch}-map1-name`) == "+" ? localStorage.getItem(`m${curmatch}-map1-type`) : localStorage.getItem(`m${curmatch}-map1-name`);
+        var map2n = localStorage.getItem(`m${curmatch}-map2-name`) == "+" ? localStorage.getItem(`m${curmatch}-map2-type`) : localStorage.getItem(`m${curmatch}-map2-name`);
+        var map3n = localStorage.getItem(`m${curmatch}-map3-name`) == "+" ? localStorage.getItem(`m${curmatch}-map3-type`) : localStorage.getItem(`m${curmatch}-map3-name`);
+        var map4n = localStorage.getItem(`m${curmatch}-map4-name`) == "+" ? localStorage.getItem(`m${curmatch}-map4-type`) : localStorage.getItem(`m${curmatch}-map4-name`);
+        var map5n = localStorage.getItem(`m${curmatch}-map5-name`) == "+" ? localStorage.getItem(`m${curmatch}-map5-type`) : localStorage.getItem(`m${curmatch}-map5-name`); 
+        
+        var map1state = localStorage.getItem(`m${curmatch}-map1-state`);
+        var map2state = localStorage.getItem(`m${curmatch}-map2-state`);
+        var map3state = localStorage.getItem(`m${curmatch}-map3-state`);
+        var map4state = localStorage.getItem(`m${curmatch}-map4-state`);
+        var map5state = localStorage.getItem(`m${curmatch}-map5-state`);
+
+        if (format == "ft1") {
+            document.getElementById("bo1m1display").src = "..\\assets\\maps\\val\\map_tile_valo_bo1_" + map1 + ".png";
+            document.getElementById("bo1m1state").innerHTML = map1state;
+
+            // Set other images to "blank.png"
+            document.getElementById("bo3m1display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo3m2display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo3m3display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m1display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m2display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m3display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m4display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m5display").src = "..\\assets\\maps\\blank.png";
+
+            setDivState('bo1m1state', map1state, localStorage.getItem(`m${curmatch}-map1-t1`) + " - " + localStorage.getItem(`m${curmatch}-map1-t2`), map1n, 1, localStorage.getItem(`m${curmatch}-map1-type`));
+            } else if (format == "ft2") {
+            document.getElementById("bo3m1display").src = "..\\assets\\maps\\val\\map_tile_valo_bo3_" + map1 + ".png";
+            document.getElementById("bo3m1state").innerHTML = map1state;
+            document.getElementById("bo3m2display").src = "..\\assets\\maps\\val\\map_tile_valo_bo3_" + map2 + ".png";
+            document.getElementById("bo3m2state").innerHTML = map2state;
+            document.getElementById("bo3m3display").src = "..\\assets\\maps\\val\\map_tile_valo_bo3_" + map3 + ".png";
+            document.getElementById("bo3m3state").innerHTML = map3state;
+
+            // Set other images to "blank.png"
+            document.getElementById("bo1m1display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m1display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m2display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m3display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m4display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m5display").src = "..\\assets\\maps\\blank.png";
+
+            setDivState('bo3m1state', map1state, localStorage.getItem(`m${curmatch}-map1-t1`) + " - " + localStorage.getItem(`m${curmatch}-map1-t2`), map1n, 1, localStorage.getItem(`m${curmatch}-map1-type`));
+            setDivState('bo3m2state', map2state, localStorage.getItem(`m${curmatch}-map2-t1`) + " - " + localStorage.getItem(`m${curmatch}-map2-t2`), map2n, 2, localStorage.getItem(`m${curmatch}-map2-type`));
+            setDivState('bo3m3state', map3state, localStorage.getItem(`m${curmatch}-map3-t1`) + " - " + localStorage.getItem(`m${curmatch}-map3-t2`), map3n, 3, localStorage.getItem(`m${curmatch}-map3-type`));
+            
+            } else if (format == "ft3") {
+            document.getElementById("bo5m1display").src = "..\\assets\\maps\\val\\map_tile_valo_bo5_" + map1 + ".png";
+            document.getElementById("bo5m1state").innerHTML = map1state;
+            document.getElementById("bo5m2display").src = "..\\assets\\maps\\val\\map_tile_valo_bo5_" + map2 + ".png";
+            document.getElementById("bo5m2state").innerHTML = map2state;
+            document.getElementById("bo5m3display").src = "..\\assets\\maps\\val\\map_tile_valo_bo5_" + map3 + ".png";
+            document.getElementById("bo5m3state").innerHTML = map3state;
+            document.getElementById("bo5m4display").src = "..\\assets\\maps\\val\\map_tile_valo_bo5_" + map4 + ".png";
+            document.getElementById("bo5m4state").innerHTML = map4state;
+            document.getElementById("bo5m5display").src = "..\\assets\\maps\\val\\map_tile_valo_bo5_" + map5 + ".png";
+            document.getElementById("bo5m5state").innerHTML = map5state;
+
+            // Set other images to "blank.png"
+            document.getElementById("bo1m1display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo3m1display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo3m2display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo3m3display").src = "..\\assets\\maps\\blank.png";
+            
+            setDivState('bo5m1state', map1state, localStorage.getItem(`m${curmatch}-map1-t1`) + " - " + localStorage.getItem(`m${curmatch}-map1-t2`), map1n, 1, localStorage.getItem(`m${curmatch}-map1-type`));
+            setDivState('bo5m2state', map2state, localStorage.getItem(`m${curmatch}-map2-t1`) + " - " + localStorage.getItem(`m${curmatch}-map2-t2`), map2n, 2, localStorage.getItem(`m${curmatch}-map2-type`));
+            setDivState('bo5m3state', map3state, localStorage.getItem(`m${curmatch}-map3-t1`) + " - " + localStorage.getItem(`m${curmatch}-map3-t2`), map3n, 3, localStorage.getItem(`m${curmatch}-map3-type`));
+            setDivState('bo5m4state', map4state, localStorage.getItem(`m${curmatch}-map4-t1`) + " - " + localStorage.getItem(`m${curmatch}-map4-t2`), map4n, 4, localStorage.getItem(`m${curmatch}-map4-type`));
+            setDivState('bo5m5state', map5state, localStorage.getItem(`m${curmatch}-map5-t1`) + " - " + localStorage.getItem(`m${curmatch}-map5-t2`), map5n, 5, localStorage.getItem(`m${curmatch}-map5-type`));
+            
+        }
+    }
+
+    // Get map info from overwatch
+    function getOWMaps(){
+        var curmatch = localStorage.getItem("curr-match");
+        var format = localStorage.getItem(`match${curmatch}-format`);
+        var map1 = localStorage.getItem(`m${curmatch}-map1-name`) == "+" ? localStorage.getItem(`m${curmatch}-map1-type`) : localStorage.getItem(`m${curmatch}-map1-name`).replace(/[\s:-]+/g, '').toUpperCase();
+        var map2 = localStorage.getItem(`m${curmatch}-map2-name`) == "+" ? localStorage.getItem(`m${curmatch}-map2-type`) : localStorage.getItem(`m${curmatch}-map2-name`).replace(/[\s:-]+/g, '').toUpperCase();
+        var map3 = localStorage.getItem(`m${curmatch}-map3-name`) == "+" ? localStorage.getItem(`m${curmatch}-map3-type`) : localStorage.getItem(`m${curmatch}-map3-name`).replace(/[\s:-]+/g, '').toUpperCase();
+        var map4 = localStorage.getItem(`m${curmatch}-map4-name`) == "+" ? localStorage.getItem(`m${curmatch}-map4-type`) : localStorage.getItem(`m${curmatch}-map4-name`).replace(/[\s:-]+/g, '').toUpperCase();
+        var map5 = localStorage.getItem(`m${curmatch}-map5-name`) == "+" ? localStorage.getItem(`m${curmatch}-map5-type`) : localStorage.getItem(`m${curmatch}-map5-name`).replace(/[\s:-]+/g, '').toUpperCase(); 
+        var map1n = localStorage.getItem(`m${curmatch}-map1-name`) == "+" ? localStorage.getItem(`m${curmatch}-map1-type`) : localStorage.getItem(`m${curmatch}-map1-name`);
+        var map2n = localStorage.getItem(`m${curmatch}-map2-name`) == "+" ? localStorage.getItem(`m${curmatch}-map2-type`) : localStorage.getItem(`m${curmatch}-map2-name`);
+        var map3n = localStorage.getItem(`m${curmatch}-map3-name`) == "+" ? localStorage.getItem(`m${curmatch}-map3-type`) : localStorage.getItem(`m${curmatch}-map3-name`);
+        var map4n = localStorage.getItem(`m${curmatch}-map4-name`) == "+" ? localStorage.getItem(`m${curmatch}-map4-type`) : localStorage.getItem(`m${curmatch}-map4-name`);
+        var map5n = localStorage.getItem(`m${curmatch}-map5-name`) == "+" ? localStorage.getItem(`m${curmatch}-map5-type`) : localStorage.getItem(`m${curmatch}-map5-name`); 
+        
+        var map1state = localStorage.getItem(`m${curmatch}-map1-state`);
+        var map2state = localStorage.getItem(`m${curmatch}-map2-state`);
+        var map3state = localStorage.getItem(`m${curmatch}-map3-state`);
+        var map4state = localStorage.getItem(`m${curmatch}-map4-state`);
+        var map5state = localStorage.getItem(`m${curmatch}-map5-state`);
+
+        if (format == "ft1") {
+            document.getElementById("bo1m1display").src = "..\\assets\\maps\\ow2\\" + format + "\\" + map1 + ".png";
+            document.getElementById("bo1m1state").innerHTML = map1state;
+
+            // Set other images to "blank.png"
+            document.getElementById("bo3m1display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo3m2display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo3m3display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m1display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m2display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m3display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m4display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m5display").src = "..\\assets\\maps\\blank.png";
+
+            setDivState('bo1m1state', map1state, localStorage.getItem(`m${curmatch}-map1-t1`) + " - " + localStorage.getItem(`m${curmatch}-map1-t2`), map1n, 1, localStorage.getItem(`m${curmatch}-map1-type`));
+            } else if (format == "ft2") {
+            document.getElementById("bo3m1display").src = "..\\assets\\maps\\ow2\\" + format + "\\" + map1 + ".png";
+            document.getElementById("bo3m1state").innerHTML = map1state;
+            document.getElementById("bo3m2display").src = "..\\assets\\maps\\ow2\\" + format + "\\" + map2 + ".png";
+            document.getElementById("bo3m2state").innerHTML = map2state;
+            document.getElementById("bo3m3display").src = "..\\assets\\maps\\ow2\\" + format + "\\" + map3 + ".png";
+            document.getElementById("bo3m3state").innerHTML = map3state;
+
+            // Set other images to "blank.png"
+            document.getElementById("bo1m1display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m1display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m2display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m3display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m4display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo5m5display").src = "..\\assets\\maps\\blank.png";
+
+            setDivState('bo3m1state', map1state, localStorage.getItem(`m${curmatch}-map1-t1`) + " - " + localStorage.getItem(`m${curmatch}-map1-t2`), map1n, 1, localStorage.getItem(`m${curmatch}-map1-type`));
+            setDivState('bo3m2state', map2state, localStorage.getItem(`m${curmatch}-map2-t1`) + " - " + localStorage.getItem(`m${curmatch}-map2-t2`), map2n, 2, localStorage.getItem(`m${curmatch}-map2-type`));
+            setDivState('bo3m3state', map3state, localStorage.getItem(`m${curmatch}-map3-t1`) + " - " + localStorage.getItem(`m${curmatch}-map3-t2`), map3n, 3, localStorage.getItem(`m${curmatch}-map3-type`));
+            
+            } else if (format == "ft3") {
+            document.getElementById("bo5m1display").src = "..\\assets\\maps\\ow2\\" + format + "\\" + map1 + ".png";
+            document.getElementById("bo5m1state").innerHTML = map1state;
+            document.getElementById("bo5m2display").src = "..\\assets\\maps\\ow2\\" + format + "\\" + map2 + ".png";
+            document.getElementById("bo5m2state").innerHTML = map2state;
+            document.getElementById("bo5m3display").src = "..\\assets\\maps\\ow2\\" + format + "\\" + map3 + ".png";
+            document.getElementById("bo5m3state").innerHTML = map3state;
+            document.getElementById("bo5m4display").src = "..\\assets\\maps\\ow2\\" + format + "\\" + map4 + ".png";
+            document.getElementById("bo5m4state").innerHTML = map4state;
+            document.getElementById("bo5m5display").src = "..\\assets\\maps\\ow2\\" + format + "\\" + map5 + ".png";
+            document.getElementById("bo5m5state").innerHTML = map5state;
+
+            // Set other images to "blank.png"
+            document.getElementById("bo1m1display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo3m1display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo3m2display").src = "..\\assets\\maps\\blank.png";
+            document.getElementById("bo3m3display").src = "..\\assets\\maps\\blank.png";
+            
+            setDivState('bo5m1state', map1state, localStorage.getItem(`m${curmatch}-map1-t1`) + " - " + localStorage.getItem(`m${curmatch}-map1-t2`), map1n, 1, localStorage.getItem(`m${curmatch}-map1-type`));
+            setDivState('bo5m2state', map2state, localStorage.getItem(`m${curmatch}-map2-t1`) + " - " + localStorage.getItem(`m${curmatch}-map2-t2`), map2n, 2, localStorage.getItem(`m${curmatch}-map2-type`));
+            setDivState('bo5m3state', map3state, localStorage.getItem(`m${curmatch}-map3-t1`) + " - " + localStorage.getItem(`m${curmatch}-map3-t2`), map3n, 3, localStorage.getItem(`m${curmatch}-map3-type`));
+            setDivState('bo5m4state', map4state, localStorage.getItem(`m${curmatch}-map4-t1`) + " - " + localStorage.getItem(`m${curmatch}-map4-t2`), map4n, 4, localStorage.getItem(`m${curmatch}-map4-type`));
+            setDivState('bo5m5state', map5state, localStorage.getItem(`m${curmatch}-map5-t1`) + " - " + localStorage.getItem(`m${curmatch}-map5-t2`), map5n, 5, localStorage.getItem(`m${curmatch}-map5-type`));
+            
+        }
+    }
+
+    function setDivState(divId, state, scores, map, index, type) {
+        var icon = null;
+        if (localStorage.getItem("game") == "ow2"){
+            icon = "..\\assets\\maps\\ow2\\ow_icons\\modeicon_" + type + ".png";
+        }else{
+            icon = "..\\assets\\maps\\blank.png";
+        }
+        var div = document.getElementById(divId);
+        var curmatch = localStorage.getItem("curr-match");
+        div.classList.remove('unplayed', 'upnext', 'ipr', 'done-blue', 'done-red', 'done-draw');
+        var winners = localStorage.getItem(`m${curmatch}winners`).replace(/[\s:,-]+/g, '');
+        if (state === 'unplayed') {
+            div.classList.add('unplayed');
+            div.innerHTML = "<br><br><h1 style=\"margin-top:210px; font-size:30px; height: 100px;\">" + map +"</h1><img class=\"icon\" style=\"margin-top: 135px;\" src=" + icon +">"
+        } else if (state === 'up next') {
+            div.classList.add('upnext');
+            div.innerHTML = "<br><h1 style=\"margin-top:210px; font-size:20px;\">UP NEXT:</h1><h2 style=\"font-size: 30px; margin-top: 35px;\">" + map +"</h2><img class=\"icon\" src=" + icon +">"
+        } else if (state === 'in progress') {
+            div.classList.add('ipr');
+            div.innerHTML = "<br><h1 style=\"font-size: 80px; margin-top:210px;\">" + scores + "</h1><h2>" + map +"</h2><img class=\"icon\" src=" + icon + ">";
+        } else if (state == 'done'){
+            console.log(winners);
+            if(winners[index - 1] == 1){
+                var winner = localStorage.getItem(`m${curmatch}-team1-logo`)
+                div.innerHTML = "<br><img class=\"winner-logo\" src=\""+ winner +"\"><h1 style=\"font-size: 80px; margin-top:35px;\">" + scores + "</h1><h2>" + map +"</h2><img class=\"icon\" src=" + icon + ">";
+                div.classList.add('done-blue');
+            } else if(winners[index - 1] == 2){
+                var winner = localStorage.getItem(`m${curmatch}-team2-logo`)
+                div.innerHTML = "<br><img class=\"winner-logo\" src=\""+ winner +"\"><h1 style=\"font-size: 80px; margin-top:35px;\">" + scores + "</h1><h2>" + map +"</h2><img class=\"icon\" src=" + icon + ">";
+                div.classList.add('done-red');
+            } else {
+                div.classList.add('done-draw');
+            }
+        }
+    }
+
+    setInterval(function(){
+        setBox();
+    }, 1 * 1000)
+</script>
+</html>

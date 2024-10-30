@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body style="text-align: center">
+    <div id="animatedbox" class="flex flex-row justify-evenly">
+      <img id="animatedImage1" />
+      <img id="animatedImage2" />
+    </div>
+
+    <script>
+      getLogos();
+      function getLogos() {
+        var curmatch = localStorage.getItem("curr-match");
+
+        var logo1 = localStorage.getItem(`m${curmatch}-team1-logo`);
+        var logo2 = localStorage.getItem(`m${curmatch}-team2-logo`);
+
+        var div1 = document.getElementById("animatedImage1");
+        var div2 = document.getElementById("animatedImage2");
+
+        div1.src = logo1;
+        div2.src = logo2;
+      }
+      setInterval(function () {
+        getLogos();
+      }, 1 * 1000);
+    </script>
+  </body>
+</html>

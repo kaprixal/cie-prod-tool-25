@@ -1,310 +1,2142 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stream Info Form</title>
-  <link href="style.css" rel="stylesheet">
-  <style>
-    .tab-content {
-      display: none; /* Hide all tab content by default */
-    }
-    .tab-content.active {
-      display: block; /* Show the active tab content */
-    }
-  </style>
-</head>
-<body class="bg-gray-900 flex items-center justify-center max-h-[700px]">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stream Info Form</title>
+    <link href="style.css" rel="stylesheet" />
+    <style>
+      /* Style for the tab and sub-tab buttons */
+      .tab-button,
+      .sub-tab-button {
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
 
-  <div class="w-full max-w-2xl bg-gray-800 p-6 rounded-lg text-gray-200">
-    <!-- Top Tabs -->
-    <div class="grid grid-cols-3 border-b border-blue-500 mb-2">
-      <button class="tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg" data-tab="mode">MODE</button>
-      <button class="tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg" data-tab="general">GENERAL</button>
-      <button class="tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg" data-tab="live">LIVE</button>
-    </div>
-    
-    <!-- General Sub Tabs -->
-    <div id="general-sub-tabs" class="flex flex-row w-full border-b border-blue-500 mb-3">
-      <button class="sub-tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg" data-tab="info">INFO</button>
-      <button class="sub-tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg" data-tab="schedule">SCHEDULE</button>
-    </div>
-    
-    <!-- Tab Contents -->
-    <div id="mode" class="tab-content">
-      <h2 class="text-lg">Mode Content Here</h2>
-    </div>
+      .tab-button.active,
+      .sub-tab-button.active {
+        background-color: #007bff; /* Active background color */
+        color: white; /* Active text color */
+      }
 
-    <div id="general" class="tab-content active text-sm">
-        <!-- General Tab Content -->
-        <div id="info" class="tab-content active">
-          <!-- Title Section -->
+      /* Hover effect for better user experience */
+      .tab-button:hover,
+      .sub-tab-button:hover {
+        background-color: #0069d9; /* Change background color on hover */
+      }
+
+      .tab-content {
+        display: none; /* Hide all tab content by default */
+      }
+      .tab-content.active {
+        display: block; /* Show the active tab content */
+      }
+    </style>
+    <script src="script.js"></script>
+    <script>
+      // General function to save data to local storage
+      function saveData(formName, event) {
+        event.preventDefault(); // Prevent the form from submitting
+        // Get the form element
+        var form = document.forms[formName];
+
+        // Loop through each select element inside the form
+        var selects = form.querySelectorAll("select");
+        selects.forEach(function (select) {
+          var selectId = select.getAttribute("id");
+          var selectedValue = select.value;
+          localStorage.setItem(selectId, selectedValue);
+        });
+
+        // Loop through text inputs (e.g., player names)
+        var playerNames = form.querySelectorAll('input[type="text"]');
+        playerNames.forEach(function (input) {
+          var inputId = input.getAttribute("id");
+          localStorage.setItem(inputId, input.value);
+        });
+
+        // Loop through radio buttons
+        var radios = form.querySelectorAll('input[type="radio"]');
+        radios.forEach(function (radio) {
+          if (radio.checked) {
+            localStorage.setItem(radio.name, radio.value); // Use the name as the key
+          }
+        });
+        var checks = form.querySelectorAll('input[type="checkbox"]');
+
+        checks.forEach(function (check) {
+          localStorage.setItem(check.id, check.checked); // Use the checkbox name as the key, store true/false
+        });
+
+        const maptypeElements = document.querySelectorAll(
+          ".w-13.bg-gray-800.h-6.rounded-md"
+        );
+        const mapnameElements = document.querySelectorAll(
+          ".w-16.bg-gray-800.h-6.rounded-md"
+        );
+        const charElements = document.querySelectorAll(
+          ".w-auto.bg-gray-800.h-3.rounded-md"
+        );
+        const roleElements = document.querySelectorAll(
+          ".w-auto.bg-gray-700.h-3.rounded-md"
+        );
+        if (localStorage.getItem("game") == "lol") {
+          charElements.forEach((selectElement) => {
+            selectElement.classList.remove("hidden");
+          });
+          roleElements.forEach((selectElement) => {
+            selectElement.classList.remove("hidden");
+          });
+          maptypeElements.forEach((selectElement) => {
+            selectElement.classList.add("hidden");
+          });
+          mapnameElements.forEach((selectElement) => {
+            selectElement.classList.add("hidden");
+          });
+        } else if (localStorage.getItem("game") == "val") {
+          maptypeElements.forEach((selectElement) => {
+            selectElement.classList.add("hidden");
+          });
+        } else if (localStorage.getItem("game") == "cs2") {
+          charElements.forEach((selectElement) => {
+            selectElement.classList.add("hidden");
+          });
+          roleElements.forEach((selectElement) => {
+            selectElement.classList.add("hidden");
+          });
+          maptypeElements.forEach((selectElement) => {
+            selectElement.classList.add("hidden");
+          });
+        } else {
+          maptypeElements.forEach((selectElement) => {
+            selectElement.classList.remove("hidden");
+          });
+          mapnameElements.forEach((selectElement) => {
+            selectElement.classList.remove("hidden");
+          });
+          charElements.forEach((selectElement) => {
+            selectElement.classList.remove("hidden");
+          });
+          roleElements.forEach((selectElement) => {
+            selectElement.classList.remove("hidden");
+          });
+        }
+
+        const totalMatches = 3; // Total number of matches
+        const totalMaps = 5; // Total number of maps
+
+        // Iterate through each match
+        for (let matchNumber = 1; matchNumber <= totalMatches; matchNumber++) {
+          const curr_match = localStorage.getItem("curr-match");
+          const matchformat = localStorage.getItem(
+            `match${matchNumber}-format`
+          );
+          const winners = []; // Array to store winners of each map
+          const mapdone = []; // Array to store the status of each map
+
+          // Calculate winners for each map in the current match
+          for (let i = 1; i <= totalMaps; i++) {
+            // Construct keys for localStorage
+            const t1Score =
+              parseInt(localStorage.getItem(`m${matchNumber}-map${i}-t1`)) || 0;
+            const t2Score =
+              parseInt(localStorage.getItem(`m${matchNumber}-map${i}-t2`)) || 0;
+
+            // Determine the winner for the current map
+            if (t1Score > t2Score) {
+              winners.push(1); // Team 1 wins
+            } else if (t2Score > t1Score) {
+              winners.push(2); // Team 2 wins
+            } else {
+              winners.push(0); // It's a draw
+            }
+
+            // Check if the current map is done
+            if (
+              localStorage.getItem(`m${matchNumber}-map${i}-done`) === "true"
+            ) {
+              mapdone.push(1);
+            } else {
+              mapdone.push(0);
+            }
+          }
+
+          // Handle the match state based on the format
+          switch (matchformat) {
+            case "ft1":
+              // For ft1, only map 1 matters
+              if (mapdone[0] === 0) {
+                localStorage.setItem(
+                  `m${matchNumber}-map1-state`,
+                  "in progress"
+                );
+                localStorage.setItem(`m${matchNumber}-map2-state`, "up next");
+                // Set the rest of the maps to "unplayed"
+                for (let i = 3; i <= totalMaps; i++) {
+                  localStorage.setItem(
+                    `m${matchNumber}-map${i}-state`,
+                    "unplayed"
+                  );
+                }
+              } else {
+                // If map 1 is done, we are done with the match
+                localStorage.setItem(`m${matchNumber}-map1-state`, "done");
+              }
+              break;
+
+            case "ft2":
+              // For ft2, we need to check maps 1, 2, and 3
+              for (let i = 0; i < 3; i++) {
+                if (mapdone[i] === 0) {
+                  localStorage.setItem(
+                    `m${matchNumber}-map${i + 1}-state`,
+                    "in progress"
+                  );
+                  if (i + 2 <= 3) {
+                    localStorage.setItem(
+                      `m${matchNumber}-map${i + 2}-state`,
+                      "up next"
+                    );
+                  }
+                  // Set the rest of the maps to "unplayed"
+                  for (let j = i + 3; j <= totalMaps; j++) {
+                    localStorage.setItem(
+                      `m${matchNumber}-map${j}-state`,
+                      "unplayed"
+                    );
+                  }
+                  break; // Exit the loop after setting the states
+                } else {
+                  // If a map is done, set its state to done
+                  localStorage.setItem(
+                    `m${matchNumber}-map${i + 1}-state`,
+                    "done"
+                  );
+                }
+              }
+              break;
+
+            case "ft3":
+              // For ft3, we need to check all 5 maps
+              for (let i = 0; i < totalMaps; i++) {
+                if (mapdone[i] === 0) {
+                  localStorage.setItem(
+                    `m${matchNumber}-map${i + 1}-state`,
+                    "in progress"
+                  );
+                  if (i + 1 < totalMaps) {
+                    localStorage.setItem(
+                      `m${matchNumber}-map${i + 2}-state`,
+                      "up next"
+                    );
+                  }
+                  // Set the rest of the maps to "unplayed"
+                  for (let j = i + 2; j < totalMaps; j++) {
+                    localStorage.setItem(
+                      `m${matchNumber}-map${j + 1}-state`,
+                      "unplayed"
+                    );
+                  }
+                  break; // Exit the loop after setting the states
+                } else {
+                  // If a map is done, set its state to done
+                  localStorage.setItem(
+                    `m${matchNumber}-map${i + 1}-state`,
+                    "done"
+                  );
+                }
+              }
+              break;
+          }
+
+          // Initialize counts for each match
+          let count1 = 0; // Count of Team 1 wins
+          let count2 = 0; // Count of Team 2 wins
+          let count0 = 0; // Count of draws
+          let numMaps = 0; // Number of maps to consider
+          let mapDoneKey = ""; // Key to check if the last map is done
+
+          // Determine the number of maps based on the format for the current match
+          if (matchformat === "ft1") {
+            numMaps = 1;
+            mapDoneKey = `m${matchNumber}-map1-done`;
+          } else if (matchformat === "ft2") {
+            numMaps = 3;
+            mapDoneKey = `m${matchNumber}-map3-done`;
+          } else if (matchformat === "ft3") {
+            numMaps = 5; // Assuming ft3 means a best of 5
+            mapDoneKey = `m${matchNumber}-map5-done`;
+          }
+
+          // Count the wins for each team in the current match
+          for (let i = 0; i < numMaps; i++) {
+            if (winners[i] === 1) {
+              count1++; // Increment Team 1 wins
+            } else if (winners[i] === 2) {
+              count2++; // Increment Team 2 wins
+            } else if (winners[i] === 0) {
+              count0++; // Increment draws
+            }
+          }
+          console.log(winners);
+          localStorage.setItem(`m${matchNumber}winners`, winners);
+          localStorage.setItem(`m${matchNumber}mapdone`, mapdone);
+
+          // Save the total scores to localStorage for the current match
+          localStorage.setItem(`m${matchNumber}t1totalscore`, count1);
+          localStorage.setItem(`m${matchNumber}t2totalscore`, count2);
+
+          // Determine the winner if the last map is done
+          if (localStorage.getItem(mapDoneKey) === "true") {
+            console.log("in here");
+            if (count1 > count2) {
+              localStorage.setItem(`m${matchNumber}winner`, "t1");
+            } else if (count2 > count1) {
+              localStorage.setItem(`m${matchNumber}winner`, "t2");
+            }
+          } else {
+            localStorage.setItem(`m${matchNumber}winner`, "none");
+          }
+        }
+
+        // To check the results for each match
+        for (let matchNumber = 1; matchNumber <= totalMatches; matchNumber++) {
+          console.log(
+            `Match ${matchNumber} - Team 1 Score: ${localStorage.getItem(
+              `m${matchNumber}t1totalscore`
+            )}`
+          );
+          console.log(
+            `Match ${matchNumber} - Team 2 Score: ${localStorage.getItem(
+              `m${matchNumber}t2totalscore`
+            )}`
+          );
+          console.log(
+            `Match ${matchNumber} Winner: ${localStorage.getItem(
+              `m${matchNumber}winner`
+            )}`
+          );
+        }
+      }
+    </script>
+  </head>
+  <!-- Naming convention: noun#-item -->
+  <body class="bg-gray-900 flex items-center justify-center h-[700px]">
+    <div class="w-full max-w-2xl h-full bg-gray-800 p-6 text-gray-200">
+      <!-- Top Tabs -->
+      <div class="grid grid-cols-3 border-b border-blue-500 mb-2">
+        <button
+          class="tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg"
+          data-tab="mode"
+        >
+          MODE
+        </button>
+        <button
+          class="tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg"
+          data-tab="general"
+        >
+          GENERAL
+        </button>
+        <button
+          class="tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg"
+          data-tab="live"
+        >
+          LIVE
+        </button>
+      </div>
+
+      <!-- General Sub Tabs -->
+      <div
+        id="general-sub-tabs"
+        class="flex flex-row w-full border-b border-blue-500 mb-3"
+      >
+        <button
+          class="sub-tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg"
+          data-tab="info"
+        >
+          INFO
+        </button>
+        <button
+          class="sub-tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg"
+          data-tab="schedule"
+        >
+          SCHEDULE
+        </button>
+      </div>
+
+      <div
+        id="live-sub-tabs"
+        class="flex flex-row w-full border-b border-blue-500 mb-3"
+      >
+        <button
+          class="sub-tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg"
+          data-tab="match1"
+        >
+          Match 1
+        </button>
+        <button
+          class="sub-tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg"
+          data-tab="match2"
+        >
+          Match 2
+        </button>
+        <button
+          class="sub-tab-button px-4 py-1 bg-gray-700 hover:bg-gray-600 rounded-t-lg"
+          data-tab="match3"
+        >
+          Match 3
+        </button>
+      </div>
+
+      <!-- Tab Contents -->
+      <div id="mode" class="tab-content">
+        <form
+          name="modeform"
+          id="mode-form"
+          method="post"
+          onsubmit="saveData('modeform', event)"
+        >
           <div class="mb-2 p-2 bg-gray-700 rounded-lg">
-            <h2 class="mb-2 text-gray-400">TITLE</h2>
+            <h2 class="mb-2 text-gray-400">BROADCAST MODE</h2>
             <div class="space-y-2">
               <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Stream Title</label>
-                <input type="text" id="stream-title" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Stream Title">
+                <label class="pr-3 w-40 text-right">Game</label>
+                <select
+                  class="w-full bg-gray-800 h-6 rounded-md pb-4"
+                  id="game"
+                >
+                  <option value="">Choose a game</option>
+                  <option value="ow2">Overwatch 2</option>
+                  <option value="lol">League of Legends</option>
+                  <option value="val">Valorant</option>
+                  <option value="cs2">Counter-Strike 2</option>
+                </select>
               </div>
               <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Subtitle</label>
-                <input type="text" id="subtitle" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Subtitle">
+                <label class="pr-3 w-40 text-right">Current Match</label>
+                <select
+                  class="w-full bg-gray-800 h-6 rounded-md pb-4"
+                  id="curr-match"
+                >
+                  <option value="">Choose Current Match</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
               </div>
             </div>
           </div>
-      
-          <!-- Casters Info Section -->
-          <div class="mb-2 p-2 bg-gray-700 rounded-lg">
-            <h2 class="mb-2 text-gray-400">CASTERS INFO</h2>
-            <div class="space-y-2">
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Caster #1 Name</label>
-                <input type="text" id="caster1-name" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Caster #1 Name">
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Caster #1 Info</label>
-                <input type="text" id="caster1-info" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Caster #1 Info">
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Caster #2 Name</label>
-                <input type="text" id="caster2-name" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Caster #2 Name">
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Caster #2 Info</label>
-                <input type="text" id="caster2-info" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Caster #2 Info">
-              </div>
-            </div>
+          <!-- Buttons -->
+          <div class="flex justify-between mt-4">
+            <!-- Close Button -->
+            <button
+              class="w-10 h-10 bg-gray-700 hover:bg-red-500 rounded-full flex items-center justify-center"
+            >
+              <span class="text-xl text-gray-200">X</span>
+            </button>
+
+            <!-- Apply Button -->
+            <input
+              type="submit"
+              value="APPLY"
+              id="apply-button"
+              class="bg-blue-500 hover:bg-blue-400 px-6 py-2 rounded-lg text-white"
+            />
           </div>
-      
-          <!-- Guest Info Section -->
-          <div class="mb-4 p-4 bg-gray-700 rounded-lg">
-            <h2 class="mb-2 text-gray-400">GUEST INFO</h2>
-            <div class="space-y-2">
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Guest #1 Name</label>
-                <input type="text" id="guest1-name" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Guest #1 Name">
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Guest #1 Info</label>
-                <input type="text" id="guest1-info" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Guest #1 Info">
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Guest #2 Name</label>
-                <input type="text" id="guest2-name" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Guest #2 Name">
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Guest #2 Info</label>
-                <input type="text" id="guest2-info" class="w-full bg-gray-800 h-6 rounded-md p-1" placeholder="Guest #2 Info">
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <div id="schedule" class="tab-content">
-          <div class="mb-4 pl-4 pr-4 pt-1 border-2 border-gray-900 rounded-lg">
-            <div class="space-y-2">
-              <div class="flex flex-row items-center">
-                <label class="pr-5 text-left">Match Count
-                </label>
-                <div>
-                  <label class="inline-flex items-center">
-                    <input type="radio" name="match-count" value="1" id="match-count-1" class="form-radio text-blue-500">
-                    <span class="m-2">1</span>
-                  </label>
-                  <label class="inline-flex items-center">
-                    <input type="radio" name="match-count" value="2" id="match-count-2" class="form-radio text-blue-500">
-                    <span class="m-2">2</span>
-                  </label>
-                  <label class="inline-flex items-center">
-                    <input type="radio" name="match-count" value="3" id="match-count-3" class="form-radio text-blue-500">
-                    <span class="m-2">3</span>
-                  </label>
+        </form>
+      </div>
+
+      <form
+        name="generalform"
+        id="gen-form"
+        method="post"
+        onsubmit="saveData('generalform', event)"
+      >
+        <div id="general" class="tab-content active text-sm">
+          <!-- General Tab Content -->
+          <div id="info" class="tab-content active">
+            <!-- Title Section -->
+            <div class="mb-2 p-2 bg-gray-700 rounded-lg">
+              <h2 class="mb-2 text-gray-400">TITLE</h2>
+              <div class="space-y-2">
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Stream Title</label>
+                  <input
+                    type="text"
+                    id="stream-title"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                    placeholder="Stream Title"
+                  />
+                </div>
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Subtitle</label>
+                  <input
+                    type="text"
+                    id="subtitle"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                    placeholder="Subtitle"
+                  />
                 </div>
               </div>
             </div>
-          </div>          
-          <div class="mb-4 p-4 bg-gray-700 rounded-lg">
-            <h2 class="mb-2 text-gray-400">Match 1</h2>
-            <div class="space-y-2">
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Series Format</label>
-                <select id="match1-format" class="w-full bg-gray-800 h-6 rounded-md">
-                  <option value="">Select an option</option>
-                  <option value="bo1">Best of 1</option>
-                  <option value="bo2">Best of 2</option>
-                  <option value="bo3">Best of 3</option>
-                  </select>
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Match Details</label>
-                <input type="text" id="match1-details" class="w-full bg-gray-800 h-6 rounded-md p-1">
+
+            <!-- Casters Info Section -->
+            <div class="mb-2 p-2 bg-gray-700 rounded-lg">
+              <h2 class="mb-2 text-gray-400">CASTERS INFO</h2>
+              <div class="space-y-2">
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Caster #1 Name</label>
+                  <input
+                    type="text"
+                    id="caster1-name"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                    placeholder="Caster #1 Name"
+                  />
+                </div>
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Caster #1 Info</label>
+                  <input
+                    type="text"
+                    id="caster1-info"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                    placeholder="Caster #1 Info"
+                  />
+                </div>
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Caster #2 Name</label>
+                  <input
+                    type="text"
+                    id="caster2-name"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                    placeholder="Caster #2 Name"
+                  />
+                </div>
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Caster #2 Info</label>
+                  <input
+                    type="text"
+                    id="caster2-info"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                    placeholder="Caster #2 Info"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div class="mb-4 p-4 bg-gray-700 rounded-lg">
-            <h2 class="mb-2 text-gray-400">Match 2</h2>
-            <div class="space-y-2">
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Series Format</label>
-                <select id="match1-format" class="w-full bg-gray-800 h-6 rounded-md">
-                  <option value="">Select an option</option>
-                  <option value="bo1">Best of 1</option>
-                  <option value="bo2">Best of 2</option>
-                  <option value="bo3">Best of 3</option>
-                  </select>
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Match Details</label>
-                <input type="text" id="match1-details" class="w-full bg-gray-800 h-6 rounded-md p-1">
+
+            <!-- Guest Info Section -->
+            <div class="mb-4 p-4 bg-gray-700 rounded-lg">
+              <h2 class="mb-2 text-gray-400">GUEST INFO</h2>
+              <div class="space-y-2">
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Guest #1 Name</label>
+                  <input
+                    type="text"
+                    id="guest1-name"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                    placeholder="Guest #1 Name"
+                  />
+                </div>
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Guest #1 Info</label>
+                  <input
+                    type="text"
+                    id="guest1-info"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                    placeholder="Guest #1 Info"
+                  />
+                </div>
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Guest #2 Name</label>
+                  <input
+                    type="text"
+                    id="guest2-name"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                    placeholder="Guest #2 Name"
+                  />
+                </div>
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Guest #2 Info</label>
+                  <input
+                    type="text"
+                    id="guest2-info"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                    placeholder="Guest #2 Info"
+                  />
+                </div>
               </div>
             </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-between mt-4">
+              <!-- Close Button -->
+              <button
+                class="w-10 h-10 bg-gray-700 hover:bg-red-500 rounded-full flex items-center justify-center"
+              >
+                <span class="text-xl text-gray-200">X</span>
+              </button>
+
+              <!-- Apply Button -->
+              <input
+                type="submit"
+                value="APPLY"
+                id="apply-button"
+                class="bg-blue-500 hover:bg-blue-400 px-6 py-2 rounded-lg text-white"
+              />
+            </div>
           </div>
-          <div class="mb-4 p-4 bg-gray-700 rounded-lg">
-            <h2 class="mb-2 text-gray-400">Match 3</h2>
-            <div class="space-y-2">
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Series Format</label>
-                <select id="match1-format" class="w-full bg-gray-800 h-6 rounded-md">
-                  <option value="">Select an option</option>
-                  <option value="bo1">Best of 1</option>
-                  <option value="bo2">Best of 2</option>
-                  <option value="bo3">Best of 3</option>
+
+          <div id="schedule" class="tab-content">
+            <div
+              class="mb-4 pl-4 pr-4 pt-1 border-2 border-gray-900 rounded-lg"
+            >
+              <div class="space-y-2">
+                <div class="flex flex-row items-center">
+                  <label class="pr-5 text-left">Match Count </label>
+                  <div>
+                    <label class="inline-flex items-center">
+                      <input
+                        type="radio"
+                        name="match-count"
+                        value="1"
+                        id="match-count-1"
+                        class="form-radio text-blue-500"
+                      />
+                      <span class="m-2">1</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                      <input
+                        type="radio"
+                        name="match-count"
+                        value="2"
+                        id="match-count-2"
+                        class="form-radio text-blue-500"
+                      />
+                      <span class="m-2">2</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                      <input
+                        type="radio"
+                        name="match-count"
+                        value="3"
+                        id="match-count-3"
+                        class="form-radio text-blue-500"
+                      />
+                      <span class="m-2">3</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-4 p-4 bg-gray-700 rounded-lg">
+              <h2 class="mb-2 text-gray-400">Match 1</h2>
+              <div class="space-y-2">
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Series Format</label>
+                  <select
+                    id="match1-format"
+                    class="w-full bg-gray-800 h-6 rounded-md"
+                  >
+                    <option value="">Select an option</option>
+                    <option value="ft1">First to 1</option>
+                    <option value="ft2">First to 2</option>
+                    <option value="ft3">First to 3</option>
                   </select>
+                </div>
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Match Details</label>
+                  <input
+                    type="text"
+                    id="match1-details"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                  />
+                </div>
               </div>
-              <div class="flex flex-row items-center">
-                <label class="pr-3 w-40 text-right">Match Details</label>
-                <input type="text" id="match1-details" class="w-full bg-gray-800 h-6 rounded-md p-1">
+            </div>
+            <div class="mb-4 p-4 bg-gray-700 rounded-lg">
+              <h2 class="mb-2 text-gray-400">Match 2</h2>
+              <div class="space-y-2">
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Series Format</label>
+                  <select
+                    id="match2-format"
+                    class="w-full bg-gray-800 h-6 rounded-md"
+                  >
+                    <option value="">Select an option</option>
+                    <option value="ft1">First to 1</option>
+                    <option value="ft2">First to 2</option>
+                    <option value="ft3">First to 3</option>
+                  </select>
+                </div>
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Match Details</label>
+                  <input
+                    type="text"
+                    id="match2-details"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                  />
+                </div>
               </div>
+            </div>
+            <div class="mb-4 p-4 bg-gray-700 rounded-lg">
+              <h2 class="mb-2 text-gray-400">Match 3</h2>
+              <div class="space-y-2">
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Series Format</label>
+                  <select
+                    id="match3-format"
+                    class="w-full bg-gray-800 h-6 rounded-md"
+                  >
+                    <option value="">Select an option</option>
+                    <option value="ft1">First to 1</option>
+                    <option value="ft2">First to 2</option>
+                    <option value="ft3">First to 3</option>
+                  </select>
+                </div>
+                <div class="flex flex-row items-center">
+                  <label class="pr-3 w-40 text-right">Match Details</label>
+                  <input
+                    type="text"
+                    id="match3-details"
+                    class="w-full bg-gray-800 h-6 rounded-md p-1"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- Buttons -->
+            <div class="flex justify-between mt-4">
+              <!-- Close Button -->
+              <button
+                class="w-10 h-10 bg-gray-700 hover:bg-red-500 rounded-full flex items-center justify-center"
+              >
+                <span class="text-xl text-gray-200">X</span>
+              </button>
+
+              <!-- Apply Button -->
+              <input
+                type="submit"
+                value="APPLY"
+                id="apply-button"
+                class="bg-blue-500 hover:bg-blue-400 px-6 py-2 rounded-lg text-white"
+              />
             </div>
           </div>
         </div>
-      </div>
-      
-    <div id="live" class="tab-content">
-      <h2 class="text-lg">Live Content Here</h2>
+      </form>
+
+      <!-- Live Tab Content -->
+      <form
+        name="liveform"
+        id="live-form"
+        method="post"
+        onsubmit="saveData('liveform', event)"
+      >
+        <div id="live" class="tab-content">
+          <!-- Info Section (Copied from General Tab) -->
+          <div id="match1" class="tab-content active text-sm">
+            <!-- Title Section -->
+
+            <div class="flex flex-row">
+              <div class="mb-2 p-2 bg-gray-900 rounded-lg">
+                <h2 class="mb-2 text-gray-400">Team 1</h2>
+                <div class="space-y-2">
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Team</label>
+                    <input
+                      type="text"
+                      id="m1-team1-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 1 Name"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Logo</label>
+                    <input
+                      type="text"
+                      id="m1-team1-logo"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 1 Logo Link"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Info</label>
+                    <input
+                      type="text"
+                      id="m1-team1-info"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 1 Info"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m1-p1-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P1 IGN"
+                    />
+                    <select
+                      id="m1-p1-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m1-p1-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m1-p2-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P2 IGN"
+                    />
+                    <select
+                      id="m1-p2-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m1-p2-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m1-p3-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P3 IGN"
+                    />
+                    <select
+                      id="m1-p3-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m1-p3-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m1-p4-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P4 IGN"
+                    />
+                    <select
+                      id="m1-p4-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m1-p4-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m1-p5-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P5 IGN"
+                    />
+                    <select
+                      id="m1-p5-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m1-p5-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-2 p-2 bg-gray-900 rounded-lg">
+                <h2 class="mb-2 text-gray-400">Team 2</h2>
+                <div class="space-y-2">
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Team</label>
+                    <input
+                      type="text"
+                      id="m1-team2-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 2 Name"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Logo</label>
+                    <input
+                      type="text"
+                      id="m1-team2-logo"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 2 Logo Link"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Info</label>
+                    <input
+                      type="text"
+                      id="m1-team2-info"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 2 Info"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m1-p6-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P1 IGN"
+                    />
+                    <select
+                      id="m1-p6-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m1-p6-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m1-p7-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P2 IGN"
+                    />
+                    <select
+                      id="m1-p7-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m1-p7-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m1-p8-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P3 IGN"
+                    />
+                    <select
+                      id="m1-p8-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m1-p8-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m1-p9-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P4 IGN"
+                    />
+                    <select
+                      id="m1-p9-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m1-p9-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m1-p10-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P5 IGN"
+                    />
+                    <select
+                      id="m1-p10-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m1-p10-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              id="swap-button-m1"
+              class="bg-gray-500 hover:bg-gray-400 px-6 py-2 rounded-lg text-white w-full"
+            >
+              SWAP
+            </button>
+            <div class="h-6"></div>
+            <div
+              id="m1-maps"
+              class="py-2 bg-gray-900 rounded-lg flex flex-row justify-evenly w-full overflow-x-auto"
+            >
+              <div class="space-y-2">
+                <div class="flex flex-col items-center w-1/6">
+                  <!-- Set a fixed width -->
+                  <label class="">Map 1</label>
+                  <select
+                    id="m1-map1-type"
+                    class="w-13 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <select
+                    id="m1-map1-name"
+                    class="w-16 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <div class="flex flex-row">
+                    <input
+                      type="text"
+                      id="m1-map1-t1"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                    <!-- Reduced width -->
+                    :
+                    <input
+                      type="text"
+                      id="m1-map1-t2"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+
+                    <!-- Reduced width -->
+                  </div>
+                  Done?
+                  <input
+                    type="checkbox"
+                    id="m1-map1-done"
+                    class="w-10 bg-gray-800 h-3 rounded-xl"
+                  />
+                </div>
+              </div>
+              <div class="flex flex-col items-center w-1/6">
+                <!-- Set a fixed width -->
+                <label class="">Map 2</label>
+                <select
+                  id="m1-map2-type"
+                  class="w-13 bg-gray-800 h-6 rounded-md"
+                ></select>
+                <select
+                  id="m1-map2-name"
+                  class="w-16 bg-gray-800 h-6 rounded-md"
+                ></select>
+                <div class="flex flex-row">
+                  <input
+                    type="text"
+                    id="m1-map2-t1"
+                    class="w-10 bg-gray-800 h-6 rounded-md p-1 fixed-width-select"
+                  />
+                  <!-- Reduced width -->
+                  :
+                  <input
+                    type="text"
+                    id="m1-map2-t2"
+                    class="w-10 bg-gray-800 h-6 rounded-md p-1 fixed-width-select"
+                  />
+                  <!-- Reduced width -->
+                </div>
+                Done?
+                <input
+                  type="checkbox"
+                  id="m1-map2-done"
+                  class="w-10 bg-gray-800 h-3 rounded-xl"
+                />
+              </div>
+              <div class="flex flex-col items-center w-1/6">
+                <!-- Set a fixed width -->
+                <label class="">Map 3</label>
+                <select
+                  id="m1-map3-type"
+                  class="w-13 bg-gray-800 h-6 rounded-md"
+                ></select>
+                <select
+                  id="m1-map3-name"
+                  class="w-16 bg-gray-800 h-6 rounded-md"
+                ></select>
+                <div class="flex flex-row">
+                  <input
+                    type="text"
+                    id="m1-map3-t1"
+                    class="w-10 bg-gray-800 h-6 rounded-md p-1 fixed-width-select"
+                  />
+                  <!-- Reduced width -->
+                  :
+                  <input
+                    type="text"
+                    id="m1-map3-t2"
+                    class="w-10 bg-gray-800 h-6 rounded-md p-1 fixed-width-select"
+                  />
+                  <!-- Reduced width -->
+                </div>
+                Done?
+                <input
+                  type="checkbox"
+                  id="m1-map3-done"
+                  class="w-10 bg-gray-800 h-3 rounded-xl"
+                />
+              </div>
+              <div class="flex flex-col items-center w-1/6">
+                <!-- Set a fixed width -->
+                <label class="">Map 4</label>
+                <select
+                  id="m1-map4-type"
+                  class="w-13 bg-gray-800 h-6 rounded-md"
+                ></select>
+                <select
+                  id="m1-map4-name"
+                  class="w-16 bg-gray-800 h-6 rounded-md"
+                ></select>
+                <div class="flex flex-row">
+                  <input
+                    type="text"
+                    id="m1-map4-t1"
+                    class="w-10 bg-gray-800 h-6 rounded-md p-1 fixed-width-select"
+                  />
+                  <!-- Reduced width -->
+                  :
+                  <input
+                    type="text"
+                    id="m1-map4-t2"
+                    class="w-10 bg-gray-800 h-6 rounded-md p-1 fixed-width-select"
+                  />
+                  <!-- Reduced width -->
+                </div>
+                Done?
+                <input
+                  type="checkbox"
+                  id="m1-map4-done"
+                  class="w-10 bg-gray-800 h-3 rounded-xl"
+                />
+              </div>
+              <div class="flex flex-col items-center w-1/6">
+                <!-- Set a fixed width -->
+                <label class="">Map 5</label>
+                <select
+                  id="m1-map5-type"
+                  class="w-13 bg-gray-800 h-6 rounded-md"
+                ></select>
+                <select
+                  id="m1-map5-name"
+                  class="w-16 bg-gray-800 h-6 rounded-md"
+                ></select>
+                <div class="flex flex-row">
+                  <input
+                    type="text"
+                    id="m1-map5-t1"
+                    class="w-10 bg-gray-800 h-6 rounded-md p-1 fixed-width-select"
+                  />
+                  <!-- Reduced width -->
+                  :
+                  <input
+                    type="text"
+                    id="m1-map5-t2"
+                    class="w-10 bg-gray-800 h-6 rounded-md p-1 fixed-width-select"
+                  />
+                  <!-- Reduced width -->
+                </div>
+                Done?
+                <input
+                  type="checkbox"
+                  id="m1-map5-done"
+                  class="w-10 bg-gray-800 h-3 rounded-xl"
+                />
+              </div>
+            </div>
+            <!-- Buttons -->
+            <div class="flex justify-between mt-4">
+              <!-- Close Button -->
+              <button
+                id="clear-button1"
+                class="w-10 h-10 bg-gray-700 hover:bg-red-500 rounded-full flex items-center justify-center"
+              >
+                <span class="text-xl text-gray-200">X</span>
+              </button>
+
+              <!-- Apply Button -->
+              <input
+                type="submit"
+                value="APPLY"
+                id="apply-button"
+                class="bg-blue-500 hover:bg-blue-400 px-6 py-2 rounded-lg text-white"
+              />
+            </div>
+          </div>
+          <div id="match2" class="tab-content active text-sm">
+            <!-- Title Section -->
+            <div class="flex flex-row">
+              <div class="mb-2 p-2 bg-gray-900 rounded-lg">
+                <h2 class="mb-2 text-gray-400">Team 1</h2>
+                <div class="space-y-2">
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Team</label>
+                    <input
+                      type="text"
+                      id="m2-team1-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 1 Name"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Logo</label>
+                    <input
+                      type="text"
+                      id="m2-team1-logo"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 1 Logo Link"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Info</label>
+                    <input
+                      type="text"
+                      id="m2-team1-info"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 1 Info"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m2-p1-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P1 IGN"
+                    />
+                    <select
+                      id="m2-p1-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m2-p1-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m2-p2-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P2 IGN"
+                    />
+                    <select
+                      id="m2-p2-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m2-p2-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m2-p3-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P3 IGN"
+                    />
+                    <select
+                      id="m2-p3-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m2-p3-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m2-p4-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P4 IGN"
+                    />
+                    <select
+                      id="m2-p4-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m2-p4-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m2-p5-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P5 IGN"
+                    />
+                    <select
+                      id="m2-p5-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m2-p5-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-2 p-2 bg-gray-900 rounded-lg">
+                <h2 class="mb-2 text-gray-400">Team 2</h2>
+                <div class="space-y-2">
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Team</label>
+                    <input
+                      type="text"
+                      id="m2-team2-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 2 Name"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Logo</label>
+                    <input
+                      type="text"
+                      id="m2-team2-logo"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 2 Logo Link"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Info</label>
+                    <input
+                      type="text"
+                      id="m2-team2-info"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 2 Info"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m2-p6-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P1 IGN"
+                    />
+                    <select
+                      id="m2-p6-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m2-p6-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m2-p7-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P2 IGN"
+                    />
+                    <select
+                      id="m2-p7-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m2-p7-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m2-p8-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P3 IGN"
+                    />
+                    <select
+                      id="m2-p8-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m2-p8-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m2-p9-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P4 IGN"
+                    />
+                    <select
+                      id="m2-p9-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m2-p9-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m2-p10-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P5 IGN"
+                    />
+                    <select
+                      id="m2-p10-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m2-p10-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              id="swap-button-m2"
+              class="bg-gray-500 hover:bg-gray-400 px-6 py-2 rounded-lg text-white w-full"
+            >
+              SWAP
+            </button>
+            <div class="h-6"></div>
+            <div
+              id="m2-maps"
+              class="py-2 bg-gray-900 rounded-lg flex flex-row justify-evenly w-full overflow-x-auto"
+            >
+              <div class="space-y-2">
+                <div class="flex flex-col items-center w-1/6">
+                  <label class="">Map 1</label>
+                  <select
+                    id="m2-map1-type"
+                    class="w-13 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <select
+                    id="m2-map1-name"
+                    class="w-16 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <div class="flex flex-row">
+                    <input
+                      type="text"
+                      id="m2-map1-t1"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                    :
+                    <input
+                      type="text"
+                      id="m2-map1-t2"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                  </div>
+                  Done?
+                  <input
+                    type="checkbox"
+                    id="m2-map1-done"
+                    class="w-10 bg-gray-800 h-3 rounded-xl"
+                  />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex flex-col items-center w-1/6">
+                  <label class="">Map 2</label>
+                  <select
+                    id="m2-map2-type"
+                    class="w-13 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <select
+                    id="m2-map2-name"
+                    class="w-16 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <div class="flex flex-row">
+                    <input
+                      type="text"
+                      id="m2-map2-t1"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                    :
+                    <input
+                      type="text"
+                      id="m2-map2-t2"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                  </div>
+                  Done?
+                  <input
+                    type="checkbox"
+                    id="m2-map2-done"
+                    class="w-10 bg-gray-800 h-3 rounded-xl"
+                  />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex flex-col items-center w-1/6">
+                  <label class="">Map 3</label>
+                  <select
+                    id="m2-map3-type"
+                    class="w-13 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <select
+                    id="m2-map3-name"
+                    class="w-16 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <div class="flex flex-row">
+                    <input
+                      type="text"
+                      id="m2-map3-t1"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                    :
+                    <input
+                      type="text"
+                      id="m2-map3-t2"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                  </div>
+                  Done?
+                  <input
+                    type="checkbox"
+                    id="m2-map3-done"
+                    class="w-10 bg-gray-800 h-3 rounded-xl"
+                  />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex flex-col items-center w-1/6">
+                  <label class="">Map 4</label>
+                  <select
+                    id="m2-map4-type"
+                    class="w-13 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <select
+                    id="m2-map4-name"
+                    class="w-16 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <div class="flex flex-row">
+                    <input
+                      type="text"
+                      id="m2-map4-t1"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                    :
+                    <input
+                      type="text"
+                      id="m2-map4-t2"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                  </div>
+                  Done?
+                  <input
+                    type="checkbox"
+                    id="m2-map4-done"
+                    class="w-10 bg-gray-800 h-3 rounded-xl"
+                  />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex flex-col items-center w-1/6">
+                  <label class="">Map 5</label>
+                  <select
+                    id="m2-map5-type"
+                    class="w-13 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <select
+                    id="m2-map5-name"
+                    class="w-16 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <div class="flex flex-row">
+                    <input
+                      type="text"
+                      id="m2-map5-t1"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                    :
+                    <input
+                      type="text"
+                      id="m2-map5-t2"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                  </div>
+                  Done?
+                  <input
+                    type="checkbox"
+                    id="m2-map5-done"
+                    class="w-10 bg-gray-800 h-3 rounded-xl"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-between mt-4">
+              <!-- Close Button -->
+              <button
+                id="clear-button2"
+                class="w-10 h-10 bg-gray-700 hover:bg-red-500 rounded-full flex items-center justify-center"
+              >
+                <span class="text-xl text-gray-200">X</span>
+              </button>
+
+              <!-- Apply Button -->
+              <input
+                type="submit"
+                value="APPLY"
+                id="apply-button"
+                class="bg-blue-500 hover:bg-blue-400 px-6 py-2 rounded-lg text-white"
+              />
+            </div>
+          </div>
+
+          <div id="match3" class="tab-content active text-sm">
+            <!-- Title Section -->
+            <div class="flex flex-row">
+              <div class="mb-2 p-2 bg-gray-900 rounded-lg">
+                <h2 class="mb-2 text-gray-400">Team 1</h2>
+                <div class="space-y-2">
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Team</label>
+                    <input
+                      type="text"
+                      id="m3-team1-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 1 Name"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Logo</label>
+                    <input
+                      type="text"
+                      id="m3-team1-logo"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 1 Logo Link"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Info</label>
+                    <input
+                      type="text"
+                      id="m3-team1-info"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 1 Info"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m3-p1-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P1 IGN"
+                    />
+                    <select
+                      id="m3-p1-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m3-p1-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m3-p2-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P2 IGN"
+                    />
+                    <select
+                      id="m3-p2-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m3-p2-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m3-p3-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P3 IGN"
+                    />
+                    <select
+                      id="m3-p3-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m3-p3-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m3-p4-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P4 IGN"
+                    />
+                    <select
+                      id="m3-p4-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m3-p4-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m3-p5-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P5 IGN"
+                    />
+                    <select
+                      id="m3-p5-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m3-p5-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-2 p-2 bg-gray-900 rounded-lg">
+                <h2 class="mb-2 text-gray-400">Team 2</h2>
+                <div class="space-y-2">
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Team</label>
+                    <input
+                      type="text"
+                      id="m3-team2-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 2 Name"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Logo</label>
+                    <input
+                      type="text"
+                      id="m3-team2-logo"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 2 Logo Link"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <label class="pr-3 w-40 text-right">Info</label>
+                    <input
+                      type="text"
+                      id="m3-team2-info"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="Team 2 Info"
+                    />
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m3-p6-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P1 IGN"
+                    />
+                    <select
+                      id="m3-p6-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m3-p6-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m3-p7-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P2 IGN"
+                    />
+                    <select
+                      id="m3-p7-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m3-p7-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m3-p8-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P3 IGN"
+                    />
+                    <select
+                      id="m3-p8-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m3-p8-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m3-p9-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P4 IGN"
+                    />
+                    <select
+                      id="m3-p9-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m3-p9-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <input
+                      type="text"
+                      id="m3-p10-name"
+                      class="w-full bg-gray-800 h-6 rounded-md p-1"
+                      placeholder="P5 IGN"
+                    />
+                    <select
+                      id="m3-p10-character"
+                      class="w-auto bg-gray-800 h-3 rounded-md"
+                    ></select>
+                    <select
+                      id="m3-p10-role"
+                      class="w-auto bg-gray-700 h-3 rounded-md"
+                    ></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              id="swap-button-m3"
+              class="bg-gray-500 hover:bg-gray-400 px-6 py-2 rounded-lg text-white w-full"
+            >
+              SWAP
+            </button>
+            <div class="h-6"></div>
+            <div
+              id="m3-maps"
+              class="py-2 bg-gray-900 rounded-lg flex flex-row justify-evenly w-full overflow-x-auto"
+            >
+              <div class="space-y-2">
+                <div class="flex flex-col items-center w-1/6">
+                  <label class="">Map 1</label>
+                  <select
+                    id="m3-map1-type"
+                    class="w-13 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <select
+                    id="m3-map1-name"
+                    class="w-16 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <div class="flex flex-row">
+                    <input
+                      type="text"
+                      id="m3-map1-t1"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                    :
+                    <input
+                      type="text"
+                      id="m3-map1-t2"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                  </div>
+                  Done?
+                  <input
+                    type="checkbox"
+                    id="m3-map1-done"
+                    class="w-10 bg-gray-800 h-3 rounded-xl"
+                  />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex flex-col items-center w-1/6">
+                  <label class="">Map 2</label>
+                  <select
+                    id="m3-map2-type"
+                    class="w-13 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <select
+                    id="m3-map2-name"
+                    class="w-16 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <div class="flex flex-row">
+                    <input
+                      type="text"
+                      id="m3-map2-t1"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                    :
+                    <input
+                      type="text"
+                      id="m3-map2-t2"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                  </div>
+                  Done?
+                  <input
+                    type="checkbox"
+                    id="m3-map2-done"
+                    class="w-10 bg-gray-800 h-3 rounded-xl"
+                  />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex flex-col items-center w-1/6">
+                  <label class="">Map 3</label>
+                  <select
+                    id="m3-map3-type"
+                    class="w-13 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <select
+                    id="m3-map3-name"
+                    class="w-16 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <div class="flex flex-row">
+                    <input
+                      type="text"
+                      id="m3-map3-t1"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                    :
+                    <input
+                      type="text"
+                      id="m3-map3-t2"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                  </div>
+                  Done?
+                  <input
+                    type="checkbox"
+                    id="m3-map3-done"
+                    class="w-10 bg-gray-800 h-3 rounded-xl"
+                  />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex flex-col items-center w-1/6">
+                  <label class="">Map 4</label>
+                  <select
+                    id="m3-map4-type"
+                    class="w-13 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <select
+                    id="m3-map4-name"
+                    class="w-16 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <div class="flex flex-row">
+                    <input
+                      type="text"
+                      id="m3-map4-t1"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                    :
+                    <input
+                      type="text"
+                      id="m3-map4-t2"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                  </div>
+                  Done?
+                  <input
+                    type="checkbox"
+                    id="m3-map4-done"
+                    class="w-10 bg-gray-800 h-3 rounded-xl"
+                  />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex flex-col items-center w-1/6">
+                  <label class="">Map 5</label>
+                  <select
+                    id="m3-map5-type"
+                    class="w-13 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <select
+                    id="m3-map5-name"
+                    class="w-16 bg-gray-800 h-6 rounded-md"
+                  ></select>
+                  <div class="flex flex-row">
+                    <input
+                      type="text"
+                      id="m3-map5-t1"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                    :
+                    <input
+                      type="text"
+                      id="m3-map5-t2"
+                      class="w-10 bg-gray-800 h-6 rounded-md fixed-width-select"
+                    />
+                  </div>
+                  Done?
+                  <input
+                    type="checkbox"
+                    id="m3-map5-done"
+                    class="w-10 bg-gray-800 h-3 rounded-xl"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-between mt-4">
+              <!-- Close Button -->
+              <button
+                id="clear-button3"
+                class="w-10 h-10 bg-gray-700 hover:bg-red-500 rounded-full flex items-center justify-center"
+              >
+                <span class="text-xl text-gray-200">X</span>
+              </button>
+
+              <!-- Apply Button -->
+              <input
+                type="submit"
+                value="APPLY"
+                id="apply-button"
+                class="bg-blue-500 hover:bg-blue-400 px-6 py-2 rounded-lg text-white"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
 
-    <!-- Buttons -->
-    <div class="flex justify-between mt-4">
-      <!-- Close Button -->
-      <button class="w-10 h-10 bg-gray-700 hover:bg-red-500 rounded-full flex items-center justify-center">
-        <span class="text-xl text-gray-200">X</span>
-      </button>
-      
-      <!-- Apply Button -->
-      <button id="apply-button" class="bg-blue-500 hover:bg-blue-400 px-6 py-2 rounded-lg text-white">
-        APPLY
-      </button>
-    </div>
-  </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Function to clear inputs and selects in a given match section
+        function clearMatchInputs(matchId) {
+          const inputs = document.querySelectorAll(
+            `#${matchId} input[type='text']`
+          );
+          const selects = document.querySelectorAll(`#${matchId} select`);
 
-  <script>
-    // Load values from localStorage on page load
-    window.onload = function() {
-      document.getElementById('stream-title').value = localStorage.getItem('stream-title') || '';
-      document.getElementById('subtitle').value = localStorage.getItem('subtitle') || '';
-      document.getElementById('caster1-name').value = localStorage.getItem('caster1-name') || '';
-      document.getElementById('caster1-info').value = localStorage.getItem('caster1-info') || '';
-      document.getElementById('caster2-name').value = localStorage.getItem('caster2-name') || '';
-      document.getElementById('caster2-info').value = localStorage.getItem('caster2-info') || '';
-      document.getElementById('guest1-name').value = localStorage.getItem('guest1-name') || '';
-      document.getElementById('guest1-info').value = localStorage.getItem('guest1-info') || '';
-      document.getElementById('guest2-name').value = localStorage.getItem('guest2-name') || '';
-      document.getElementById('guest2-info').value = localStorage.getItem('guest2-info') || '';
-
-      // Load the radio button selection
-      const seriesFormat = localStorage.getItem('match-count');
-      if (seriesFormat) {
-        document.querySelector(`input[name="match-count"][value="${match-count}"]`).checked = true;
-      }
-    };
-
-    // Event listener for Apply button to save data to localStorage
-    document.getElementById('apply-button').addEventListener('click', () => {
-      localStorage.setItem('stream-title', document.getElementById('stream-title').value);
-      localStorage.setItem('subtitle', document.getElementById('subtitle').value);
-      localStorage.setItem('caster1-name', document.getElementById('caster1-name').value);
-      localStorage.setItem('caster1-info', document.getElementById('caster1-info').value);
-      localStorage.setItem('caster2-name', document.getElementById('caster2-name').value);
-      localStorage.setItem('caster2-info', document.getElementById('caster2-info').value);
-      localStorage.setItem('guest1-name', document.getElementById('guest1-name').value);
-      localStorage.setItem('guest1-info', document.getElementById('guest1-info').value);
-      localStorage.setItem('guest2-name', document.getElementById('guest2-name').value);
-      localStorage.setItem('guest2-info', document.getElementById('guest2-info').value);
-
-      // Save the selected radio button value
-      const selectedSeriesFormat = document.querySelector('input[name="match-count"]:checked');
-      if (selectedSeriesFormat) {
-        localStorage.setItem('match-count', selectedSeriesFormat.value);
-      }
-    });
-
-    // Event listener for X button to clear fields in the active sub-tab content only
-    document.querySelector('.w-10.h-10').addEventListener('click', () => {
-      // Find the active main tab
-      const activeTabContent = document.querySelector('.tab-content.active');
-      
-      // Find the active sub-tab within the active main tab
-      const activeSubTabContent = activeTabContent.querySelector('.tab-content.active');
-      
-      // Clear all input fields within the active sub-tab content
-      const inputs = activeSubTabContent.querySelectorAll('input');
-      inputs.forEach(input => input.value = ''); // Clear input fields in active sub-tab
-      
-      // Clear radio button selection in the active sub-tab content
-      const radios = activeSubTabContent.querySelectorAll('input[type="radio"]');
-      radios.forEach(radio => radio.checked = false);
-    });
-
-    // Main tab and sub-tab switching code remains the same
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const subTabButtons = document.querySelectorAll('.sub-tab-button');
-  
-    // Main tab switching logic
-    tabButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const activeTab = button.dataset.tab;
-  
-        // Hide all main tab content and show the selected one
-        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-        document.getElementById(activeTab).classList.add('active');
-  
-        // Toggle visibility and reset sub-tabs if necessary
-        if (activeTab === "general") {
-          document.getElementById("general-sub-tabs").style.display = "flex";
-          document.getElementById("info").classList.add('active');
-          subTabButtons.forEach(btn => {
-            btn.classList.remove('bg-blue-500', 'hover:bg-blue-400');
-            if (btn.dataset.tab === 'info') btn.classList.add('bg-blue-500', 'hover:bg-blue-400');
+          // Clear the text inputs
+          inputs.forEach(function (input) {
+            input.value = "";
           });
-        } else {
-          document.getElementById("general-sub-tabs").style.display = "none";
-        }
-  
-        // Highlight active tab button
-        tabButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'hover:bg-blue-400'));
-        button.classList.add('bg-blue-500', 'hover:bg-blue-400');
-      });
-    });
-  
-    // Sub-tab switching remains unchanged
-    subTabButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const activeSubTab = button.dataset.tab;
-  
-        // Hide all sub-tab content and show the selected one
-        document.querySelectorAll('#general .tab-content').forEach(content => content.classList.remove('active'));
-        document.getElementById(activeSubTab).classList.add('active');
-  
-        // Highlight the active sub-tab button
-        subTabButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'hover:bg-blue-400'));
-        button.classList.add('bg-blue-500', 'hover:bg-blue-400');
-      });
-    });
-  
-    // Initialize with the General tab open
-    tabButtons[1].click();
-  </script>
 
-</body>
+          // Reset the select elements
+          selects.forEach(function (select) {
+            select.selectedIndex = 0; // Set to the first option
+          });
+        }
+
+        // Add event listeners for the close buttons of match1, match2, and match3
+        document
+          .getElementById("clear-button1")
+          .addEventListener("click", function () {
+            clearMatchInputs("match1");
+          });
+
+        document
+          .getElementById("clear-button2")
+          .addEventListener("click", function () {
+            clearMatchInputs("match2");
+          });
+
+        document
+          .getElementById("clear-button3")
+          .addEventListener("click", function () {
+            clearMatchInputs("match3");
+          });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get all tab buttons
+        const tabButtons = document.querySelectorAll(".tab-button");
+        const subTabButtons = document.querySelectorAll(".sub-tab-button");
+
+        // Function to activate a tab
+        function activateTab(tabName) {
+          // Hide all tab contents
+          document.querySelectorAll(".tab-content").forEach(function (content) {
+            content.classList.remove("active");
+          });
+
+          // Remove "active" class from all tab buttons
+          tabButtons.forEach(function (button) {
+            button.classList.remove("active");
+          });
+
+          // Add "active" class to the clicked tab button
+          const activeTabButton = document.querySelector(
+            `[data-tab="${tabName}"]`
+          );
+          if (activeTabButton) {
+            activeTabButton.classList.add("active");
+          }
+
+          // Show the selected tab content
+          const activeTabContent = document.getElementById(tabName);
+          if (activeTabContent) {
+            activeTabContent.classList.add("active");
+          }
+
+          // Hide all sub-tabs initially
+          document.getElementById("general-sub-tabs").style.display = "none";
+          document.getElementById("live-sub-tabs").style.display = "none";
+
+          // Show the appropriate sub-tabs based on the selected main tab
+          if (tabName === "general") {
+            document.getElementById("general-sub-tabs").style.display = "flex";
+            activateSubTab("info"); // Default to 'info' sub-tab
+          } else if (tabName === "live") {
+            document.getElementById("live-sub-tabs").style.display = "flex";
+            activateSubTab("match1"); // Default to 'match1' sub-tab
+          }
+        }
+
+        // Function to activate a sub-tab
+        function activateSubTab(subTabName) {
+          // Hide all sub-tab contents within the active tab
+          document
+            .querySelectorAll(".tab-content.active .tab-content")
+            .forEach(function (content) {
+              content.classList.remove("active");
+            });
+
+          // Remove "active" class from all sub-tab buttons
+          subTabButtons.forEach(function (button) {
+            button.classList.remove("active");
+          });
+
+          // Add "active" class to the clicked sub-tab button
+          const activeSubTabButton = document.querySelector(
+            `[data-tab="${subTabName}"]`
+          );
+          if (activeSubTabButton) {
+            activeSubTabButton.classList.add("active");
+          }
+
+          // Show the selected sub-tab content
+          const activeSubTabContent = document.getElementById(subTabName);
+          if (activeSubTabContent) {
+            activeSubTabContent.classList.add("active");
+          }
+        }
+
+        // Add event listeners for main tabs
+        tabButtons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            const tabName = this.getAttribute("data-tab");
+            activateTab(tabName);
+          });
+        });
+
+        // Add event listeners for sub-tabs
+        subTabButtons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            const subTabName = this.getAttribute("data-tab");
+            activateSubTab(subTabName);
+          });
+        });
+
+        // Initially activate the first main tab and sub-tab
+        activateTab("general"); // Default to 'general' tab
+        activateSubTab("info"); // Default to 'info' sub-tab
+      });
+    </script>
+  </body>
 </html>

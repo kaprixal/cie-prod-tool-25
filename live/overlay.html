@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="stack-container font-integral-bold">
+      <div style="color: black">
+        <img class="overlay-logo" id="overlay-logo-1" />
+        <div
+          class="font-integral-bold text-white"
+          id="overlay-name-1"
+          style="z-index: 2"
+        ></div>
+        <div
+          class="font-integral-bold text-white"
+          id="overlay-name-2"
+          style="z-index: 2"
+        ></div>
+        <div
+          class="font-integral-bold"
+          id="overlay-score-1"
+          style="z-index: 2"
+        ></div>
+        <div
+          class="font-integral-bold"
+          id="overlay-score-2"
+          style="z-index: 2"
+        ></div>
+        <img class="overlay-logo" id="overlay-logo-2" />
+        <img class="stacked-image" id="game-overlay" style="z-index: 0" />
+        <div id="overlay-format" class="font-integral-bold capitalize"></div>
+        <div id="overlay-title" class="font-integral-bold capitalize"></div>
+        <div id="lol-bo5" style="display: none; z-index: 10">
+          <div id="s1" class="lol_square"></div>
+          <div id="s2" class="lol_square"></div>
+          <div id="s3" class="lol_square"></div>
+
+          <div id="s4" class="lol_square"></div>
+          <div id="s5" class="lol_square"></div>
+          <div id="s6" class="lol_square"></div>
+        </div>
+
+        <div id="lol-bo3" style="display: none">
+          <div id="s7" class="lol_square" style="top: 17px"></div>
+
+          <div id="s8" class="lol_square" style="top: 40px"></div>
+
+          <div id="s9" class="lol_square" style="top: 17px"></div>
+
+          <div id="s10" class="lol_square" style="top: 40px"></div>
+        </div>
+        <div id="val-bo5" style="display: none">
+          <div id="p_1" class="val_p"></div>
+          <div id="p_2" class="val_p"></div>
+          <div id="p_3" class="val_p"></div>
+
+          <div id="p_4" class="val_p"></div>
+          <div id="p_5" class="val_p"></div>
+          <div id="p_6" class="val_p"></div>
+        </div>
+
+        <div id="val-bo3">
+          <div id="p_7" class="val_p" style="left: 890px"></div>
+
+          <div id="p_8" class="val_p" style="top: 110px; left: 908px"></div>
+
+          <div id="p_9" class="val_p" style="right: 890px"></div>
+
+          <div id="p_10" class="val_p" style="top: 110px; right: 908px"></div>
+        </div>
+        <div
+          class="mapset"
+          id="bo3-mapset"
+          style="color: white; font-size: 8px"
+        >
+          <div class="map-label">
+            <div class="font-integral-bold map-off" id="b3m1d"></div>
+            <img style="height: 12px; width: 12px; opacity: 0.3" id="b3m1i" />
+          </div>
+          <div class="map-label">
+            <div class="font-integral-bold map-off" id="b3m2d"></div>
+            <img style="height: 12px; width: 12px; opacity: 0.3" id="b3m2i" />
+          </div>
+          <div class="map-label">
+            <div class="font-integral-bold map-off" id="b3m3d"></div>
+            <img style="height: 12px; width: 12px; opacity: 0.3" id="b3m3i" />
+          </div>
+        </div>
+        <div class="mapset" id="bo5-mapset" style="color: white">
+          <div class="map-label">
+            <div class="font-integral-bold map-off" id="b5m1d"></div>
+            <img style="height: 12px; width: 12px; opacity: 0.3" id="b5m1i" />
+          </div>
+          <div class="map-label">
+            <div class="font-integral-bold map-off" id="b5m2d"></div>
+            <img style="height: 12px; width: 12px; opacity: 0.3" id="b5m2i" />
+          </div>
+          <div class="map-label">
+            <div class="font-integral-bold map-off" id="b5m3d"></div>
+            <img style="height: 12px; width: 12px; opacity: 0.3" id="b5m3i" />
+          </div>
+          <div class="map-label">
+            <div class="font-integral-bold map-off" id="b5m4d"></div>
+            <img style="height: 12px; width: 12px; opacity: 0.3" id="b5m4i" />
+          </div>
+          <div class="map-label">
+            <div class="font-integral-bold map-off" id="b5m5d"></div>
+            <img style="height: 12px; width: 12px; opacity: 0.3" id="b5m5i" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    getScore();
+
+    function getScore() {
+      var curmatch = localStorage.getItem("curr-match");
+      console.log("curmatch:", curmatch);
+
+      var team1score = localStorage.getItem(`m${curmatch}t1totalscore`);
+      console.log("team1score:", team1score);
+
+      var team2score = localStorage.getItem(`m${curmatch}t2totalscore`);
+      console.log("team2score:", team2score);
+
+      var team1name = localStorage.getItem(`m${curmatch}-team1-name`);
+      console.log("team1name:", team1name);
+
+      var team2name = localStorage.getItem(`m${curmatch}-team2-name`);
+      console.log("team2name:", team2name);
+
+      document.getElementById("overlay-score-1").innerHTML = team1score;
+
+      document.getElementById("overlay-score-2").innerHTML = team2score;
+
+      document.getElementById("overlay-name-1").innerHTML = team1name;
+      document.getElementById("overlay-name-2").innerHTML = team2name;
+      document.getElementById("overlay-logo-1").src = localStorage.getItem(
+        `m${curmatch}-team1-logo`
+      );
+      document.getElementById("overlay-logo-2").src = localStorage.getItem(
+        `m${curmatch}-team2-logo`
+      );
+      format = localStorage.getItem(`match${curmatch}-format`);
+
+      if (format === "ft3") {
+        document.getElementById("overlay-format").innerHTML = "First to 3";
+      } else if (format === "ft2") {
+        document.getElementById("overlay-format").innerHTML = "First to 2";
+      } else {
+        document.getElementById("overlay-format").innerHTML = "First to 1";
+      }
+
+      document.getElementById("overlay-title").innerHTML =
+        localStorage.getItem("stream-title");
+      if (localStorage.getItem("game") === "ow2") {
+        getOWMaps();
+        setOWOverlay();
+      } else if (localStorage.getItem("game") === "lol") {
+        setLoLOverlay();
+        setLoLScore();
+        document.getElementById("bo3-mapset").style.display = "none";
+        document.getElementById("bo5-mapset").style.display = "none";
+      } else if (localStorage.getItem("game") === "val") {
+        getVALMaps();
+        setVALOverlay();
+      }
+    }
+    function removeAllClasses(elementIds) {
+      elementIds.forEach((id) => {
+        document.getElementById(id).className = "";
+      });
+    }
+    function setLoLScore() {
+      var curmatch = localStorage.getItem("curr-match");
+      var t1score = localStorage.getItem(`m${curmatch}t1totalscore`);
+      var t2score = localStorage.getItem(`m${curmatch}t2totalscore`);
+      console.log("t1score:", t1score);
+      console.log("t2score:", t2score);
+      format = localStorage.getItem(`match${curmatch}-format`);
+      if (format == "ft2") {
+        document.getElementById("lol-bo3").style.display = "";
+        document.getElementById("lol-bo5").style.display = "none";
+        if (t1score == "1") {
+          document.getElementById("s7").style.backgroundColor = "#fff";
+        } else if (t1score == "2") {
+          document.getElementById("s7").style.backgroundColor = "#fff";
+          document.getElementById("s8").style.backgroundColor = "#fff";
+        } else {
+          document.getElementById("s7").style.backgroundColor = "black";
+          document.getElementById("s8").style.backgroundColor = "black";
+        }
+
+        if (t2score == "1") {
+          document.getElementById("s9").style.backgroundColor = "#fff";
+        } else if (t2score == "2") {
+          document.getElementById("s9").style.backgroundColor = "#fff";
+          document.getElementById("s10").style.backgroundColor = "#fff";
+        } else {
+          document.getElementById("s9").style.backgroundColor = "black";
+          document.getElementById("s10").style.backgroundColor = "black";
+        }
+      } else if (format == "ft3") {
+        document.getElementById("lol-bo5").style.display = "";
+        document.getElementById("lol-bo3").style.display = "none";
+        if (t1score == "1") {
+          document.getElementById("s1").style.backgroundColor = "#fff";
+        } else if (t1score == "2") {
+          document.getElementById("s1").style.backgroundColor = "#fff";
+          document.getElementById("s2").style.backgroundColor = "#fff";
+        } else if (t1score == "3") {
+          document.getElementById("s1").style.backgroundColor = "#fff";
+          document.getElementById("s2").style.backgroundColor = "#fff";
+          document.getElementById("s3").style.backgroundColor = "#fff";
+        } else {
+          document.getElementById("s1").style.backgroundColor = "black";
+          document.getElementById("s2").style.backgroundColor = "black";
+          document.getElementById("s3").style.backgroundColor = "black";
+        }
+
+        if (t2score == "1") {
+          document.getElementById("s4").style.backgroundColor = "#fff";
+        } else if (t2score == "2") {
+          document.getElementById("s4").style.backgroundColor = "#fff";
+          document.getElementById("s5").style.backgroundColor = "#fff";
+        } else if (t2score == "3") {
+          document.getElementById("s4").style.backgroundColor = "#fff";
+          document.getElementById("s5").style.backgroundColor = "#fff";
+          document.getElementById("s6").style.backgroundColor = "#fff";
+        } else {
+          document.getElementById("s4").style.backgroundColor = "black";
+          document.getElementById("s5").style.backgroundColor = "black";
+          document.getElementById("s6").style.backgroundColor = "black";
+        }
+      }
+    }
+    function setLoLOverlay() {
+      removeAllClasses([
+        "overlay-score-1",
+        "overlay-score-2",
+        "overlay-name-1",
+        "overlay-name-2",
+        "overlay-format",
+        "overlay-title",
+        "overlay-logo-1",
+        "overlay-logo-2",
+        "bo3-mapset",
+        "bo5-mapset",
+      ]);
+      document.getElementById("game-overlay").src =
+        "..\\assets\\in_game_overlay\\ingame_league_main.png";
+      document.getElementById("bo3-mapset").classList.add("hidden");
+      document.getElementById("bo5-mapset").classList.add("hidden");
+      document.getElementById("overlay-score-1").classList.add("hidden");
+      document.getElementById("overlay-score-2").classList.add("hidden");
+      document
+        .getElementById("overlay-name-1")
+        .classList.add("lol-overlay-name-1");
+      document
+        .getElementById("overlay-name-2")
+        .classList.add("lol-overlay-name-2");
+      document
+        .getElementById("overlay-format")
+        .classList.add("ow-overlay-format");
+      document
+        .getElementById("overlay-title")
+        .classList.add("ow-overlay-title");
+      document
+        .getElementById("overlay-logo-1")
+        .classList.add("lol-overlay-logo1");
+      document
+        .getElementById("overlay-logo-2")
+        .classList.add("lol-overlay-logo2");
+      document.getElementById("val-bo3").style.display = "none";
+      document.getElementById("val-bo5").style.display = "none";
+    }
+
+    function setOWOverlay() {
+      removeAllClasses([
+        "overlay-score-1",
+        "overlay-score-2",
+        "overlay-name-1",
+        "overlay-name-2",
+        "overlay-format",
+        "overlay-title",
+        "overlay-logo-1",
+        "overlay-logo-2",
+        "bo3-mapset",
+        "bo5-mapset",
+      ]);
+      document.getElementById("game-overlay").src =
+        "..\\assets\\in_game_overlay\\ingame_ow_main.png";
+      document.getElementById("bo3-mapset").classList.add("ow-bo3-mapset");
+      document.getElementById("bo5-mapset").classList.add("ow-bo5-mapset");
+      document
+        .getElementById("overlay-score-1")
+        .classList.add("ow-overlay-score-1");
+      document
+        .getElementById("overlay-score-2")
+        .classList.add("ow-overlay-score-2");
+      document
+        .getElementById("overlay-name-1")
+        .classList.add("ow-overlay-name-1");
+      document
+        .getElementById("overlay-name-2")
+        .classList.add("ow-overlay-name-2");
+      document
+        .getElementById("overlay-format")
+        .classList.add("ow-overlay-format");
+      document
+        .getElementById("overlay-title")
+        .classList.add("ow-overlay-title");
+      document
+        .getElementById("overlay-logo-1")
+        .classList.add("ow-overlay-logo1");
+      document
+        .getElementById("overlay-logo-2")
+        .classList.add("ow-overlay-logo2");
+      document.getElementById("val-bo3").style.display = "none";
+      document.getElementById("val-bo5").style.display = "none";
+    }
+
+    function setVALOverlay() {
+      removeAllClasses([
+        "overlay-score-1",
+        "overlay-score-2",
+        "overlay-name-1",
+        "overlay-name-2",
+        "overlay-format",
+        "overlay-title",
+        "overlay-logo-1",
+        "overlay-logo-2",
+        "bo3-mapset",
+        "bo5-mapset",
+      ]);
+      document.getElementById("bo3-mapset").classList.add("val-bo3-mapset");
+      document.getElementById("bo5-mapset").classList.add("val-bo5-mapset");
+      var curmatch = localStorage.getItem("curr-match");
+      document.getElementById("game-overlay").src =
+        "..\\assets\\in_game_overlay\\ingame_valo_main.png";
+      document.getElementById("overlay-score-1").classList.add("hidden");
+      document.getElementById("overlay-score-2").classList.add("hidden");
+      document
+        .getElementById("overlay-name-1")
+        .classList.add("val-overlay-name-1");
+      document
+        .getElementById("overlay-name-2")
+        .classList.add("val-overlay-name-2");
+      document
+        .getElementById("overlay-format")
+        .classList.add("ow-overlay-format");
+      document
+        .getElementById("overlay-title")
+        .classList.add("val-overlay-title");
+      document
+        .getElementById("overlay-logo-1")
+        .classList.add("val-overlay-logo1");
+      document
+        .getElementById("overlay-logo-2")
+        .classList.add("val-overlay-logo2");
+
+      var t1score = localStorage.getItem(`m${curmatch}t1totalscore`);
+
+      var t2score = localStorage.getItem(`m${curmatch}t2totalscore`);
+      var format = localStorage.getItem(`match${curmatch}-format`);
+
+      if (format == "ft2") {
+        document.getElementById("val-bo3").style.display = "";
+        document.getElementById("val-bo5").style.display = "none";
+        if (t1score == "1") {
+          console.log(t1score);
+          document.getElementById("p_7").style.backgroundColor = "black";
+          document.getElementById("p_8").style.backgroundColor = "black";
+          document.getElementById("p_7").style.backgroundColor = "#fff";
+        } else if (t1score == "2") {
+          document.getElementById("p_7").style.backgroundColor = "black";
+          document.getElementById("p_8").style.backgroundColor = "black";
+          document.getElementById("p_7").style.backgroundColor = "#fff";
+          document.getElementById("p_8").style.backgroundColor = "#fff";
+        } else {
+          document.getElementById("p_7").style.backgroundColor = "black";
+          document.getElementById("p_8").style.backgroundColor = "black";
+        }
+
+        if (t2score == "1") {
+          document.getElementById("p_9").style.backgroundColor = "black";
+          document.getElementById("p_10").style.backgroundColor = "black";
+          document.getElementById("p_9").style.backgroundColor = "#fff";
+        } else if (t2score == "2") {
+          document.getElementById("p_9").style.backgroundColor = "black";
+          document.getElementById("p_10").style.backgroundColor = "black";
+          document.getElementById("p_9").style.backgroundColor = "#fff";
+          document.getElementById("p_10").style.backgroundColor = "#fff";
+        } else {
+          document.getElementById("p_9").style.backgroundColor = "black";
+          document.getElementById("p_10").style.backgroundColor = "black";
+        }
+      } else if (format == "ft3") {
+        document.getElementById("val-bo5").style.display = "";
+        document.getElementById("val-bo3").style.display = "none";
+        if (t1score == "1") {
+          document.getElementById("p_1").style.backgroundColor = "black";
+          document.getElementById("p_2").style.backgroundColor = "black";
+          document.getElementById("p_3").style.backgroundColor = "black";
+          document.getElementById("p_1").style.backgroundColor = "#fff";
+        } else if (t1score == "2") {
+          document.getElementById("p_1").style.backgroundColor = "black";
+          document.getElementById("p_2").style.backgroundColor = "black";
+          document.getElementById("p_3").style.backgroundColor = "black";
+          document.getElementById("p_1").style.backgroundColor = "#fff";
+          document.getElementById("p_2").style.backgroundColor = "#fff";
+        } else if (t1score == "3") {
+          document.getElementById("p_1").style.backgroundColor = "black";
+          document.getElementById("p_2").style.backgroundColor = "black";
+          document.getElementById("p_3").style.backgroundColor = "black";
+          document.getElementById("p_1").style.backgroundColor = "#fff";
+          document.getElementById("p_2").style.backgroundColor = "#fff";
+          document.getElementById("p_3").style.backgroundColor = "#fff";
+        } else {
+          document.getElementById("p_1").style.backgroundColor = "black";
+          document.getElementById("p_2").style.backgroundColor = "black";
+          document.getElementById("p_3").style.backgroundColor = "black";
+        }
+
+        if (t2score == "1") {
+          document.getElementById("p_4").style.backgroundColor = "black";
+          document.getElementById("p_5").style.backgroundColor = "black";
+          document.getElementById("p_6").style.backgroundColor = "black";
+          document.getElementById("p_4").style.backgroundColor = "#fff";
+        } else if (t2score == "2") {
+          document.getElementById("p_4").style.backgroundColor = "black";
+          document.getElementById("p_5").style.backgroundColor = "black";
+          document.getElementById("p_6").style.backgroundColor = "black";
+          document.getElementById("p_4").style.backgroundColor = "#fff";
+          document.getElementById("p_5").style.backgroundColor = "#fff";
+        } else if (t2score == "3") {
+          document.getElementById("p_4").style.backgroundColor = "black";
+          document.getElementById("p_5").style.backgroundColor = "black";
+          document.getElementById("p_6").style.backgroundColor = "black";
+          document.getElementById("p_4").style.backgroundColor = "#fff";
+          document.getElementById("p_5").style.backgroundColor = "#fff";
+          document.getElementById("p_6").style.backgroundColor = "#fff";
+        } else {
+          document.getElementById("p_4").style.backgroundColor = "black";
+          document.getElementById("p_5").style.backgroundColor = "black";
+          document.getElementById("p_6").style.backgroundColor = "black";
+        }
+      } else {
+        document.getElementById("val-bo5").style.display = "none";
+        document.getElementById("val-bo3").style.display = "none";
+      }
+    }
+
+    function getVALMaps() {
+      var curmatch = localStorage.getItem("curr-match");
+      format = localStorage.getItem(`match${curmatch}-format`);
+      var map1 = localStorage.getItem(`m${curmatch}-map1-name`).toUpperCase();
+      var map2 = localStorage.getItem(`m${curmatch}-map2-name`).toUpperCase();
+      var map3 = localStorage.getItem(`m${curmatch}-map3-name`).toUpperCase();
+      var map4 = localStorage.getItem(`m${curmatch}-map4-name`).toUpperCase();
+      var map5 = localStorage.getItem(`m${curmatch}-map5-name`).toUpperCase();
+      var map1t = localStorage.getItem(`m${curmatch}-map1-type`).toUpperCase();
+      var map2t = localStorage.getItem(`m${curmatch}-map2-type`).toUpperCase();
+      var map3t = localStorage.getItem(`m${curmatch}-map3-type`).toUpperCase();
+      var map4t = localStorage.getItem(`m${curmatch}-map4-type`).toUpperCase();
+      var map5t = localStorage.getItem(`m${curmatch}-map5-type`).toUpperCase();
+      var map1s = localStorage.getItem(`m${curmatch}-map1-state`);
+      var map2s = localStorage.getItem(`m${curmatch}-map2-state`);
+      var map3s = localStorage.getItem(`m${curmatch}-map3-state`);
+      var map4s = localStorage.getItem(`m${curmatch}-map4-state`);
+      var map5s = localStorage.getItem(`m${curmatch}-map5-state`);
+
+      if (format === "ft2") {
+        map1 = map1 === "+" ? "Undecided" : map1;
+        map2 = map2 === "+" ? "Undecided" : map2;
+        map3 = map3 === "+" ? "Undecided" : map3;
+
+        document.getElementById("bo5-mapset").style.display = "none";
+        document.getElementById("bo3-mapset").style.display = "";
+        document.getElementById("b3m1d").innerHTML = map1;
+        document.getElementById("b3m2d").innerHTML = map2;
+        document.getElementById("b3m3d").innerHTML = map3;
+        document.getElementById("b3m1i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\undecided" + ".png";
+        document.getElementById("b3m2i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\undecided" + ".png";
+        document.getElementById("b3m3i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\undecided" + ".png";
+        if (map2s === "in progress") {
+          document.getElementById("b3m2d").classList.add("map-on");
+          document.getElementById("b3m1d").classList.remove("map-on");
+          document.getElementById("b3m3d").classList.remove("map-on");
+          document.getElementById("b3m2i").style.opacity = "1";
+          document.getElementById("b3m1i").style.opacity = ".31";
+          document.getElementById("b3m3i").style.opacity = ".31";
+        } else if (map1s === "in progress") {
+          document.getElementById("b3m2d").classList.remove("map-on");
+          document.getElementById("b3m1d").classList.add("map-on");
+          document.getElementById("b3m3d").classList.remove("map-on");
+          document.getElementById("b3m2i").style.opacity = ".31";
+          document.getElementById("b3m1i").style.opacity = "1";
+          document.getElementById("b3m3i").style.opacity = ".31";
+        } else {
+          document.getElementById("b3m2d").classList.remove("map-on");
+          document.getElementById("b3m1d").classList.remove("map-on");
+          document.getElementById("b3m3d").classList.add("map-on");
+          document.getElementById("b3m3i").style.opacity = "1";
+          document.getElementById("b3m2i").style.opacity = ".31";
+          document.getElementById("b3m1i").style.opacity = ".31";
+        }
+      } else if (format === "ft3") {
+        map1 = map1 === "+" ? "Undecided" : map1;
+        map2 = map2 === "+" ? "Undecided" : map2;
+        map3 = map3 === "+" ? "Undecided" : map3;
+        map4 = map4 === "+" ? "Undecided" : map4;
+        map5 = map5 === "+" ? "Undecided" : map5;
+        document.getElementById("bo3-mapset").style.display = "none";
+        document.getElementById("bo5-mapset").style.display = "";
+        document.getElementById("b5m1d").innerHTML = map1;
+
+        document.getElementById("b5m2d").innerHTML = map2;
+
+        document.getElementById("b5m3d").innerHTML = map3;
+
+        document.getElementById("b5m4d").innerHTML = map4;
+
+        document.getElementById("b5m5d").innerHTML = map5;
+        document.getElementById("b5m1i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\undecided" + ".png";
+        document.getElementById("b5m2d").innerHTML = map2;
+        document.getElementById("b5m2i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\undecided" + ".png";
+        document.getElementById("b5m3d").innerHTML = map3;
+        document.getElementById("b5m3i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\undecided" + ".png";
+        document.getElementById("b5m4d").innerHTML = map4;
+        document.getElementById("b5m4i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\undecided" + ".png";
+        document.getElementById("b5m5d").innerHTML = map5;
+        document.getElementById("b5m5i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\undecided" + ".png";
+        if (map2s === "in progress") {
+          document.getElementById("b5m2d").classList.add("map-on");
+          document.getElementById("b5m1d").classList.remove("map-on");
+          document.getElementById("b5m3d").classList.remove("map-on");
+          document.getElementById("b5m4d").classList.remove("map-on");
+          document.getElementById("b5m5d").classList.remove("map-on");
+          document.getElementById("b5m2i").style.opacity = "1";
+          document.getElementById("b5m1i").style.opacity = ".31";
+          document.getElementById("b5m3i").style.opacity = ".31";
+          document.getElementById("b5m4i").style.opacity = ".31";
+          document.getElementById("b5m5i").style.opacity = ".31";
+        } else if (map1s === "in progress") {
+          document.getElementById("b5m2d").classList.remove("map-on");
+          document.getElementById("b5m1d").classList.add("map-on");
+          document.getElementById("b5m3d").classList.remove("map-on");
+          document.getElementById("b5m4d").classList.remove("map-on");
+          document.getElementById("b5m5d").classList.remove("map-on");
+          document.getElementById("b5m2i").style.opacity = ".31";
+          document.getElementById("b5m1i").style.opacity = "1";
+          document.getElementById("b5m3i").style.opacity = ".31";
+          document.getElementById("b5m4i").style.opacity = ".31";
+          document.getElementById("b5m5i").style.opacity = ".31";
+        } else if (map3s === "in progress") {
+          document.getElementById("b5m2d").classList.remove("map-on");
+          document.getElementById("b5m1d").classList.remove("map-on");
+          document.getElementById("b5m3d").classList.add("map-on");
+          document.getElementById("b5m4d").classList.remove("map-on");
+          document.getElementById("b5m5d").classList.remove("map-on");
+          document.getElementById("b5m3i").style.opacity = "1";
+          document.getElementById("b5m2i").style.opacity = ".31";
+          document.getElementById("b5m1i").style.opacity = ".31";
+          document.getElementById("b5m4i").style.opacity = "1";
+          document.getElementById("b5m4i").style.opacity = ".31";
+        } else if (map4s === "in progress") {
+          document.getElementById("b5m2d").classList.remove("map-on");
+          document.getElementById("b5m1d").classList.remove("map-on");
+          document.getElementById("b5m4d").classList.add("map-on");
+          document.getElementById("b5m3d").classList.remove("map-on");
+          document.getElementById("b5m5d").classList.remove("map-on");
+          document.getElementById("b5m4i").style.opacity = "1";
+          document.getElementById("b5m2i").style.opacity = ".31";
+          document.getElementById("b5m1i").style.opacity = ".31";
+          document.getElementById("b5m3i").style.opacity = ".31";
+          document.getElementById("b5m5i").style.opacity = ".31";
+        } else {
+          document.getElementById("b5m2d").classList.remove("map-on");
+          document.getElementById("b5m1d").classList.remove("map-on");
+          document.getElementById("b5m5d").classList.add("map-on");
+          document.getElementById("b5m3d").classList.remove("map-on");
+          document.getElementById("b5m4d").classList.remove("map-on");
+          document.getElementById("b5m5i").style.opacity = "1";
+          document.getElementById("b5m2i").style.opacity = ".31";
+          document.getElementById("b5m1i").style.opacity = ".31";
+          document.getElementById("b5m3i").style.opacity = ".31";
+          document.getElementById("b5m4i").style.opacity = ".31";
+        }
+      }
+    }
+
+    function getOWMaps() {
+      var curmatch = localStorage.getItem("curr-match");
+      var map1 = localStorage.getItem(`m${curmatch}-map1-name`).toUpperCase();
+      var map2 = localStorage.getItem(`m${curmatch}-map2-name`).toUpperCase();
+      var map3 = localStorage.getItem(`m${curmatch}-map3-name`).toUpperCase();
+      var map4 = localStorage.getItem(`m${curmatch}-map4-name`).toUpperCase();
+      var map5 = localStorage.getItem(`m${curmatch}-map5-name`).toUpperCase();
+      var map1t = localStorage.getItem(`m${curmatch}-map1-type`).toUpperCase();
+      var map2t = localStorage.getItem(`m${curmatch}-map2-type`).toUpperCase();
+      var map3t = localStorage.getItem(`m${curmatch}-map3-type`).toUpperCase();
+      var map4t = localStorage.getItem(`m${curmatch}-map4-type`).toUpperCase();
+      var map5t = localStorage.getItem(`m${curmatch}-map5-type`).toUpperCase();
+      var map1s = localStorage.getItem(`m${curmatch}-map1-state`);
+      var map2s = localStorage.getItem(`m${curmatch}-map2-state`);
+      var map3s = localStorage.getItem(`m${curmatch}-map3-state`);
+      var map4s = localStorage.getItem(`m${curmatch}-map4-state`);
+      var map5s = localStorage.getItem(`m${curmatch}-map5-state`);
+      format = localStorage.getItem(`match${curmatch}-format`);
+      if (format === "ft2") {
+        map1t = map1t === "+" ? "Undecided" : map1t;
+        map2t = map2t === "+" ? "Undecided" : map2t;
+        map3t = map3t === "+" ? "Undecided" : map3t;
+
+        map1 = map1 === "+" ? map1t : map1;
+        map2 = map2 === "+" ? map2t : map2;
+        map3 = map3 === "+" ? map3t : map3;
+        document.getElementById("bo5-mapset").style.display = "none";
+        document.getElementById("bo3-mapset").style.display = "";
+        document.getElementById("b3m1d").innerHTML = map1;
+        document.getElementById("b3m1i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\" +
+          map1t.toLowerCase() +
+          ".png";
+        document.getElementById("b3m2i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\" +
+          map2t.toLowerCase() +
+          ".png";
+        document.getElementById("b3m3i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\" +
+          map3t.toLowerCase() +
+          ".png";
+        document.getElementById("b3m2d").innerHTML = map2;
+        document.getElementById("b3m3d").innerHTML = map3;
+        if (map2s === "in progress") {
+          document.getElementById("b3m2d").classList.add("map-on");
+          document.getElementById("b3m1d").classList.remove("map-on");
+          document.getElementById("b3m3d").classList.remove("map-on");
+          document.getElementById("b3m2i").style.opacity = "1";
+          document.getElementById("b3m1i").style.opacity = ".31";
+          document.getElementById("b3m3i").style.opacity = ".31";
+        } else if (map1s === "in progress") {
+          document.getElementById("b3m2d").classList.remove("map-on");
+          document.getElementById("b3m1d").classList.add("map-on");
+          document.getElementById("b3m3d").classList.remove("map-on");
+          document.getElementById("b3m2i").style.opacity = ".31";
+          document.getElementById("b3m1i").style.opacity = "1";
+          document.getElementById("b3m3i").style.opacity = ".31";
+        } else {
+          document.getElementById("b3m2d").classList.remove("map-on");
+          document.getElementById("b3m1d").classList.remove("map-on");
+          document.getElementById("b3m3d").classList.add("map-on");
+          document.getElementById("b3m3i").style.opacity = "1";
+          document.getElementById("b3m2i").style.opacity = ".31";
+          document.getElementById("b3m1i").style.opacity = ".31";
+        }
+      } else if (format === "ft3") {
+        map1t = map1t === "+" ? "Undecided" : map1t;
+        map2t = map2t === "+" ? "Undecided" : map2t;
+        map3t = map3t === "+" ? "Undecided" : map3t;
+        map4t = map4t === "+" ? "Undecided" : map4t;
+        map5t = map5t === "+" ? "Undecided" : map5t;
+        map1 = map1 === "+" ? map1t : map1;
+        map2 = map2 === "+" ? map2t : map2;
+        map3 = map3 === "+" ? map3t : map3;
+        map4 = map4 === "+" ? map4t : map4;
+        map5 = map5 === "+" ? map5t : map5;
+        document.getElementById("bo3-mapset").style.display = "none";
+        document.getElementById("bo5-mapset").style.display = "";
+        document.getElementById("b5m1d").innerHTML = map1;
+        document.getElementById("b5m1i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\" +
+          map1t.toLowerCase() +
+          ".png";
+        document.getElementById("b5m2d").innerHTML = map2;
+        document.getElementById("b5m2i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\" +
+          map2t.toLowerCase() +
+          ".png";
+        document.getElementById("b5m3d").innerHTML = map3;
+        document.getElementById("b5m3i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\" +
+          map3t.toLowerCase() +
+          ".png";
+        document.getElementById("b5m4d").innerHTML = map4;
+        document.getElementById("b5m4i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\" +
+          map4t.toLowerCase() +
+          ".png";
+        document.getElementById("b5m5d").innerHTML = map5;
+        document.getElementById("b5m5i").src =
+          "..\\assets\\in_game_overlay\\ow_icons\\" +
+          map5t.toLowerCase() +
+          ".png";
+        if (map2s === "in progress") {
+          document.getElementById("b5m2d").classList.add("map-on");
+          document.getElementById("b5m1d").classList.remove("map-on");
+          document.getElementById("b5m3d").classList.remove("map-on");
+          document.getElementById("b5m4d").classList.remove("map-on");
+          document.getElementById("b5m5d").classList.remove("map-on");
+          document.getElementById("b5m2i").style.opacity = "1";
+          document.getElementById("b5m1i").style.opacity = ".31";
+          document.getElementById("b5m3i").style.opacity = ".31";
+          document.getElementById("b5m4i").style.opacity = ".31";
+          document.getElementById("b5m5i").style.opacity = ".31";
+        } else if (map1s === "in progress") {
+          document.getElementById("b5m2d").classList.remove("map-on");
+          document.getElementById("b5m1d").classList.add("map-on");
+          document.getElementById("b5m3d").classList.remove("map-on");
+          document.getElementById("b5m4d").classList.remove("map-on");
+          document.getElementById("b5m5d").classList.remove("map-on");
+          document.getElementById("b5m2i").style.opacity = ".31";
+          document.getElementById("b5m1i").style.opacity = "1";
+          document.getElementById("b5m3i").style.opacity = ".31";
+          document.getElementById("b5m4i").style.opacity = ".31";
+          document.getElementById("b5m5i").style.opacity = ".31";
+        } else if (map3s === "in progress") {
+          document.getElementById("b5m2d").classList.remove("map-on");
+          document.getElementById("b5m1d").classList.remove("map-on");
+          document.getElementById("b5m3d").classList.add("map-on");
+          document.getElementById("b5m4d").classList.remove("map-on");
+          document.getElementById("b5m5d").classList.remove("map-on");
+          document.getElementById("b5m3i").style.opacity = "1";
+          document.getElementById("b5m2i").style.opacity = ".31";
+          document.getElementById("b5m1i").style.opacity = ".31";
+          document.getElementById("b5m4i").style.opacity = "1";
+          document.getElementById("b5m4i").style.opacity = ".31";
+        } else if (map4s === "in progress") {
+          document.getElementById("b5m2d").classList.remove("map-on");
+          document.getElementById("b5m1d").classList.remove("map-on");
+          document.getElementById("b5m4d").classList.add("map-on");
+          document.getElementById("b5m3d").classList.remove("map-on");
+          document.getElementById("b5m5d").classList.remove("map-on");
+          document.getElementById("b5m4i").style.opacity = "1";
+          document.getElementById("b5m2i").style.opacity = ".31";
+          document.getElementById("b5m1i").style.opacity = ".31";
+          document.getElementById("b5m3i").style.opacity = ".31";
+          document.getElementById("b5m5i").style.opacity = ".31";
+        } else {
+          document.getElementById("b5m2d").classList.remove("map-on");
+          document.getElementById("b5m1d").classList.remove("map-on");
+          document.getElementById("b5m5d").classList.add("map-on");
+          document.getElementById("b5m3d").classList.remove("map-on");
+          document.getElementById("b5m4d").classList.remove("map-on");
+          document.getElementById("b5m5i").style.opacity = "1";
+          document.getElementById("b5m2i").style.opacity = ".31";
+          document.getElementById("b5m1i").style.opacity = ".31";
+          document.getElementById("b5m3i").style.opacity = ".31";
+          document.getElementById("b5m4i").style.opacity = ".31";
+        }
+      }
+    }
+    setInterval(function () {
+      getScore();
+    }, 1 * 1000);
+  </script>
+</html>
