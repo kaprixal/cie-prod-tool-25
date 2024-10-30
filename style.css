@@ -3723,7 +3723,7 @@ line-height: 1;
 
 #animatedImage1 {
   padding-right: 100px;
-  width: 500px;
+  width: 600px;
   height: 500px;
   animation: slide1 0.32s 1s;
   transform: translate(0, 287px);
@@ -3731,7 +3731,7 @@ line-height: 1;
 
 #animatedImage2 {
   padding-left: 100px;
-  width: 500px;
+  width: 600px;
   height: 500px;
   animation: slide2 0.32s 1s;
   transform: translate(0, 287px);
