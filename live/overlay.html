@@ -145,15 +145,7 @@
       document.getElementById("overlay-logo-2").src = localStorage.getItem(
         `m${curmatch}-team2-logo`
       );
-      format = localStorage.getItem(`match${curmatch}-format`);
-
-      if (format === "ft3") {
-        document.getElementById("overlay-format").innerHTML = "First to 3";
-      } else if (format === "ft2") {
-        document.getElementById("overlay-format").innerHTML = "First to 2";
-      } else {
-        document.getElementById("overlay-format").innerHTML = "First to 1";
-      }
+      document.getElementById("overlay-format").innerHTML = "";
 
       document.getElementById("overlay-title").innerHTML =
         localStorage.getItem("stream-title");
@@ -280,6 +272,15 @@
     }
 
     function setOWOverlay() {
+      var format = localStorage.getItem(`match${curmatch}-format`);
+
+      if (format === "ft3") {
+        document.getElementById("overlay-format").innerHTML = "First to 3";
+      } else if (format === "ft2") {
+        document.getElementById("overlay-format").innerHTML = "First to 2";
+      } else {
+        document.getElementById("overlay-format").innerHTML = "First to 1";
+      }
       removeAllClasses([
         "overlay-score-1",
         "overlay-score-2",
