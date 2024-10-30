@@ -3728,7 +3728,7 @@ line-height: 1;
   padding-right: 15px;
   width: 500px;
   height: 500px;
-  animation: slide1 0.5s 2s;
+  animation: slide1 0.32s 1s;
   transform: translate(0, 287px);
 }
 
@@ -3736,7 +3736,7 @@ line-height: 1;
   padding-left: 15px;
   width: 500px;
   height: 500px;
-  animation: slide2 0.5s 2s;
+  animation: slide2 0.32s 1s;
   transform: translate(0, 287px);
 }
 
