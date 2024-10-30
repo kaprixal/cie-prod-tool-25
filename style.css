@@ -3013,6 +3013,7 @@ line-height: 1;
   color: white;
   justify-content: center;
   align-content: center;
+  padding-top: 10px;
   padding-left: 50px;
   padding-right: 50px;
 }
