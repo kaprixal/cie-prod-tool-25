@@ -3724,7 +3724,7 @@ line-height: 1;
 }
 
 #animatedImage2 {
-  padding-right: 15px;
+  padding-left: 15px;
   width: 500px;
   height: 500px;
   animation: slide2 0.5s 2s;
