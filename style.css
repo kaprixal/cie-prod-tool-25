@@ -3716,15 +3716,15 @@ line-height: 1;
 }
 
 #animatedImage1 {
-  width: 530px;
-  height: 530px;
+  width: 500px;
+  height: 500px;
   animation: slide1 0.5s 2s;
   transform: translate(0, 287px);
 }
 
 #animatedImage2 {
-  width: 530px;
-  height: 530px;
+  width: 500px;
+  height: 500px;
   animation: slide2 0.5s 2s;
   transform: translate(0, 287px);
 }
