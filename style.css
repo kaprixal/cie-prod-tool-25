@@ -3722,16 +3722,16 @@ line-height: 1;
 }
 
 #animatedImage1 {
-  padding-right: 100px;
-  width: 600px;
+  padding-right: 150px;
+  width: 650px;
   height: 500px;
   animation: slide1 0.32s 1s;
   transform: translate(0, 287px);
 }
 
 #animatedImage2 {
-  padding-left: 100px;
-  width: 600px;
+  padding-left: 150px;
+  width: 650px;
   height: 500px;
   animation: slide2 0.32s 1s;
   transform: translate(0, 287px);
