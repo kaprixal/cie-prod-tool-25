@@ -104,9 +104,19 @@
             var path = "..\\assets\\league_champs\\";
             var iconpath = "..\\assets\\roster\\icons\\lol\\";
           } else if (localStorage.getItem("game") == "ow2") {
+            hero1 = hero1.toUpperCase();
+            hero2 = hero2.toUpperCase();
+            hero3 = hero3.toUpperCase();
+            hero4 = hero4.toUpperCase();
+            hero5 = hero5.toUpperCase();
             var path = "..\\assets\\ow_heroes\\";
             var iconpath = "..\\assets\\roster\\icons\\ow\\";
           } else if (localStorage.getItem("game") == "val") {
+            hero1 = hero1.toLowerCase();
+            hero2 = hero2.toLowerCase();
+            hero3 = hero3.toLowerCase();
+            hero4 = hero4.toLowerCase();
+            hero5 = hero5.toLowerCase();
             var path = "..\\assets\\val_agents\\";
             var iconpath = "..\\assets\\roster\\icons\\val\\";
           }
