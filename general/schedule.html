@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../style.css" rel="stylesheet" />
+  </head>
+  <style>
+    .bname{
+        font-size: 28px;
+        position: absolute;
+        height: 49px;
+        width: 210px;
+        z-index: 2;
+        display: flex;
+        justify-content: space-evenly;
+        text-align: center;
+        align-items: center;
+    }
+
+    .blogo{
+        width: 105px;
+        height: 105px;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .bdate{
+        position: absolute;
+        width: 90px;
+        z-index: 2;
+        font-size: 20px;
+        text-align: center;
+        left: 86px; 
+        width: 762px;
+    }
+
+    #b1t1n{
+        top: 439.4px;
+        left: 172px;
+    }
+    #b1t2n{
+        top: 439.4px;
+        left: 545px;
+    }
+
+    #b2t1n{
+        top: 667.45px;
+        left: 172px;
+    }
+    #b2t2n{
+        top: 667.45px;
+        left: 545px;
+    }
+
+    #b3t1n{
+        top: 895.6px;
+        left: 172px;
+    }
+    #b3t2n{
+        top: 895.6px;
+        left: 545px;
+    }
+    
+
+    #b1t1l{
+        top:328px;
+        left: 228px;
+    }
+    #b1t2l{
+        top:328px;
+        left: 601px;
+    }
+    #b2t1l{
+        top: 556px;
+        left: 228px;
+    }
+    #b2t2l{
+        top: 556px;
+        left: 601px;
+    }
+    
+    #b3t1l{
+        top: 784px;
+        left: 228px;
+    }
+    #b3t2l{
+        top: 784px;
+        left: 601px;
+    }
+    .games{
+        width: 90px;
+        position: absolute;
+        height: 38px;
+        left: 103px;
+        z-index: 2;
+    }
+
+    .bformat{
+        left: 790px;
+        position: absolute;
+        height: 38px;
+        width: 27px;
+        z-index: 2;
+    }
+
+    .gray-out{
+        filter: grayscale(100%);
+        opacity: 40%;
+    }
+  </style>
+  <body>
+    <!-- Container for stacking -->
+    <div class="stack-container">
+      <div style="color: white">
+        <img class="stacked-image" src="..\assets\break\starting_displaybox.png">
+        
+        <div class="font-integral-bold" id="break-title" style="position: absolute; width: 762px; height: 24px; top: 244px; left: 86px; font-size: 20px; color: white; text-align: left;"></div>
+        <div id="block1">
+            <img class="stacked-image" style="position: absolute; top: 306px; left: 86px;" id="g1">
+            <div id="b1t1n" class="bname font-integral-regular"></div>
+            <div id="b1t2n" class="bname font-integral-regular"></div>
+            <div id="b1date" class="bdate font-integral-regular" style="top:420px"></div>
+            <div id="b1score" class="font-integral-bold" style="top:350px; font-size: 38px; z-index: 2; position: absolute; left: 86px; width: 762px; text-align: center;"></div>
+            <img id="b1t1l" class= "blogo">
+            <img id="b1t2l" class= "blogo" >
+            <div id="f1" class="font-integral-bold bformat" style="top: 379px;"></div>
+            <div id="game1" class="font-integral-bold games" style="top: 379px;">Game 1</div>
+        </div>
+        
+        <div id="block2">
+            <img class="stacked-image" style="position: absolute; top: 534.15px; left: 86px;" id="g2">
+            <div id="b2t1n" class="bname font-integral-regular"></div>
+            <div id="b2t2n" class="bname font-integral-regular"></div>
+            <div id="b2date"class="bdate font-integral-regular"style="top:653.73px"></div>
+            <div id="b2score" class="font-integral-bold" style="top:573.73px; font-size: 38px; z-index: 2; position: absolute; left: 86px; width: 762px; text-align: center;"></div>
+            <img id="b2t1l" class= "blogo">
+            <img id="b2t2l" class= "blogo">
+            <div id="game2" class="font-integral-bold games" style="top: 607px;">Game 2</div>
+            <div id="f2" class="font-integral-bold bformat" style="top: 607px;"></div>
+
+        </div>
+        <div id="block3">
+            <img class="stacked-image" style="position: absolute; top: 762.3px; left: 86px;" id="g3">
+            <div id="b3t1n" class="bname font-integral-regular"></div>
+            <div id="b3t2n" class="bname font-integral-regular"></div>
+            <div id="b3date"class="bdate font-integral-regular" style="top:886px"></div>
+            <div id="b3score" class="font-integral-bold" style="top:806px; font-size: 38px; z-index: 2; position: absolute; left: 86px; width: 762px; text-align: center;"></div>
+            <img id="b3t1l" class= "blogo">
+            <img id="b3t2l" class= "blogo">
+            <div id="game3" class="font-integral-bold games" style="top: 835px;">Game 3</div>
+            <div id="f3" class="font-integral-bold bformat" style="top: 835px;"></div>
+        </div>
+        
+    </div>
+    <script>
+        getTeams();
+        function getTeams(){
+            document.getElementById('break-title').innerHTML = localStorage.getItem('stream-title');
+            var matchcount = localStorage.getItem("match-count") == null ? "0" : localStorage.getItem("match-count");
+            var match1f = localStorage.getItem("match1-format") == null ? "" : localStorage.getItem("match1-format");
+            var match2f = localStorage.getItem("match2-format") == null ? "" : localStorage.getItem("match2-format");
+            var match3f = localStorage.getItem("match3-format") == null ? "" : localStorage.getItem("match3-format");
+            var match1d = localStorage.getItem("match1-details") == null ? "" : localStorage.getItem("match1-details");
+            var match2d = localStorage.getItem("match2-details") == null ? "" : localStorage.getItem("match2-details");
+            var match3d = localStorage.getItem("match3-details") == null ? "" : localStorage.getItem("match3-details");
+
+            document.getElementById("f1").innerHTML = match1f;
+            document.getElementById("f2").innerHTML = match2f;
+            document.getElementById("f3").innerHTML = match3f;
+
+            document.getElementById("b1date").innerHTML = match1d;
+            document.getElementById("b2date").innerHTML = match2d;
+            document.getElementById("b3date").innerHTML = match3d;
+
+            document.getElementById("b1t1n").innerHTML = localStorage.getItem("m1-team1-name") == null ? "" : localStorage.getItem("m1-team1-name");
+            document.getElementById("b1t2n").innerHTML = localStorage.getItem("m1-team2-name") == null ? "" : localStorage.getItem("m1-team2-name");
+            document.getElementById("b2t1n").innerHTML = localStorage.getItem("m2-team1-name") == null ? "" : localStorage.getItem("m2-team1-name");
+            document.getElementById("b2t2n").innerHTML = localStorage.getItem("m2-team2-name") == null ? "" : localStorage.getItem("m2-team2-name");
+            document.getElementById("b3t1n").innerHTML = localStorage.getItem("m3-team1-name") == null ? "" : localStorage.getItem("m3-team1-name");
+            document.getElementById("b3t2n").innerHTML = localStorage.getItem("m3-team2-name") == null ? "" : localStorage.getItem("m3-team2-name");
+
+            document.getElementById("b1t1l").src = localStorage.getItem("m1-team1-logo") == null ? "" : localStorage.getItem("m1-team1-logo");
+            document.getElementById("b1t2l").src = localStorage.getItem("m1-team2-logo") == null ? "" : localStorage.getItem("m1-team2-logo");
+            document.getElementById("b2t1l").src = localStorage.getItem("m2-team1-logo") == null ? "" : localStorage.getItem("m2-team1-logo");
+            document.getElementById("b2t2l").src = localStorage.getItem("m2-team2-logo") == null ? "" : localStorage.getItem("m2-team2-logo");
+            document.getElementById("b3t1l").src = localStorage.getItem("m3-team1-logo") == null ? "" : localStorage.getItem("m3-team1-logo");
+            document.getElementById("b3t2l").src = localStorage.getItem("m3-team2-logo") == null ? "" : localStorage.getItem("m3-team2-logo");
+
+            var m1winner = localStorage.getItem("m1winner");
+            var m2winner = localStorage.getItem("m2winner");
+            var m3winner = localStorage.getItem("m3winner");
+
+            var m1t1s = localStorage.getItem("m1t1totalscore");
+            var m2t1s = localStorage.getItem("m2t1totalscore");
+            var m3t1s = localStorage.getItem("m3t1totalscore");
+            var m1t2s = localStorage.getItem("m1t2totalscore");
+            var m2t2s = localStorage.getItem("m2t2totalscore");
+            var m3t2s = localStorage.getItem("m3t2totalscore");
+
+            if(m1winner == "t1"){
+                
+                document.getElementById('g1').src = '..\\assets\\break\\startingsoon_blue.png';
+                document.getElementById('b1t2l').classList.add('gray-out');
+                document.getElementById('b1t1l').classList.remove('gray-out');
+                document.getElementById('b1score').innerHTML = m1t1s + " - " + m1t2s;
+            } else if(m1winner == "t2"){
+                document.getElementById('g1').src = '..\\assets\\break\\startingsoon_red.png';
+                document.getElementById('b1t1l').classList.add('gray-out');
+                document.getElementById('b1t2l').classList.remove('gray-out');
+                document.getElementById('b1score').innerHTML = m1t1s + " - " + m1t2s;
+            } else{
+                document.getElementById('g1').src = '..\\assets\\break\\startingsoon_vs.png';
+                document.getElementById('b1t1l').classList.remove('gray-out');
+                document.getElementById('b1t2l').classList.remove('gray-out');
+                document.getElementById('b1score').innerHTML = m1t1s + " - " + m1t2s === "0 - 0" ? "VS" : m1t1s + " - " + m1t2s;
+            }
+
+            if(m2winner == "t1"){
+                document.getElementById('g2').src = '..\\assets\\break\\startingsoon_blue.png';
+                document.getElementById('b2t2l').classList.add('gray-out');
+                document.getElementById('b2t1l').classList.remove('gray-out');
+                document.getElementById('b2score').innerHTML = m2t1s + " - " + m2t2s;
+            } else if(m2winner == "t2"){
+                document.getElementById('g2').src = '..\\assets\\break\\startingsoon_red.png';
+                document.getElementById('b2t1l').classList.add('gray-out');
+                document.getElementById('b2t2l').classList.remove('gray-out');
+                document.getElementById('b2score').innerHTML = m2t1s + " - " + m2t2s;
+            } else{
+                document.getElementById('g2').src = '..\\assets\\break\\startingsoon_vs.png';
+                document.getElementById('b2t1l').classList.remove('gray-out');
+                document.getElementById('b2t2l').classList.remove('gray-out');
+                document.getElementById('b2score').innerHTML = m2t1s + " - " + m2t2s === "0 - 0" ? "VS" : m2t1s + " - " + m2t2s;
+            }
+
+            if(m3winner == "t1"){
+                document.getElementById('g3').src = '..\\assets\\break\\startingsoon_blue.png';
+                document.getElementById('b3t2l').classList.add('gray-out');
+                document.getElementById('b3t1l').classList.remove('gray-out');
+                document.getElementById('b3score').innerHTML = m3t1s + " - " + m3t2s;
+            } else if(m3winner == "t2"){
+                document.getElementById('g3').src = '..\\assets\\break\\startingsoon_red.png';
+                document.getElementById('b3t1l').classList.add('gray-out');
+                document.getElementById('b3t2l').classList.remove('gray-out');
+                document.getElementById('b3score').innerHTML = m3t1s + " - " + m3t2s;
+            } else{
+                document.getElementById('g3').src = '..\\assets\\break\\startingsoon_vs.png';
+                document.getElementById('b3t1l').classList.remove('gray-out');
+                document.getElementById('b3t2l').classList.remove('gray-out');
+                document.getElementById('b3score').innerHTML = m3t1s + " - " + m3t2s === "0 - 0" ? "VS" : m3t1s + " - " + m3t2s;
+            }
+
+            if (matchcount == "1"){
+                document.getElementById("block2").classList.add("hidden");
+                document.getElementById("block3").classList.add("hidden");
+            } else if (matchcount == "2"){
+                document.getElementById("block2").classList.remove("hidden");
+                document.getElementById("block3").classList.add("hidden");
+            } else{
+                document.getElementById("block2").classList.remove("hidden");
+                document.getElementById("block3").classList.remove("hidden");
+            }
+        }
+
+    setInterval(function(){
+        getTeams();
+    }, 1 * 1000)
+    </script>
+  </body>
+</html>

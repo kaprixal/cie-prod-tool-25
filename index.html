@@ -281,6 +281,8 @@
             }
           }
           console.log(winners);
+          localStorage.setItem(`m${matchNumber}winners`, winners);
+          localStorage.setItem(`m${matchNumber}mapdone`, mapdone);
 
           // Save the total scores to localStorage for the current match
           localStorage.setItem(`m${matchNumber}t1totalscore`, count1);
@@ -295,7 +297,7 @@
               localStorage.setItem(`m${matchNumber}winner`, "t2");
             }
           } else {
-            localStorage.setItem(`m${matchNumber}winner`, "draw");
+            localStorage.setItem(`m${matchNumber}winner`, "none");
           }
         }
 

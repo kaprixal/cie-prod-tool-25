@@ -75,8 +75,8 @@
           var team1score = localStorage.getItem(`m${curmatch}t1totalscore`);
           var team2score = localStorage.getItem(`m${curmatch}t2totalscore`);
 
-          document.getElementById('t1Logo').src = localStorage.getItem(`m${curmatch}-team1-logo`)
-        document.getElementById('t2Logo').src = localStorage.getItem(`m${curmatch}-team2-logo`);
+          document.getElementById('t1Logo').src = localStorage.getItem(`m${curmatch}-team1-logo`);
+         document.getElementById('t2Logo').src = localStorage.getItem(`m${curmatch}-team2-logo`);
           if (team1score === "0" && team2score === "0") {
             document.getElementById('t1Logo').style.left = '1229px';
             document.getElementById('t2Logo').style.left = '1595px';
