@@ -3694,3 +3694,42 @@ line-height: 1;
   left: 241px;
   z-index: 4;
 }
+
+@keyframes slide1 {
+  0% { 
+    transform: translate(-2000px, 287px);
+  }
+  100% { 
+    transform: translate(-0px, 287px);
+  }
+}
+
+@keyframes slide2 {
+  0% { 
+    transform: translate(2000px, 287px);
+  }
+  100% { 
+    
+    transform: translate(0px, 287px);
+  }
+}
+
+#animatedImage1 {
+  width: 530px;
+  height: 530px;
+  animation: slide1 0.5s 2s;
+  transform: translate(0, 287px);
+}
+
+#animatedImage2 {
+  width: 530px;
+  height: 530px;
+  animation: slide2 0.5s 2s;
+  transform: translate(0, 287px);
+}
+
+
+#animatedbox {
+  width: 1920px;
+  height: 1080px;
+}
