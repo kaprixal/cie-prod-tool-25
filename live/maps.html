@@ -248,6 +248,14 @@
         }else{
             icon = "..\\assets\\maps\\blank.png";
         }
+
+        if (map == "+"){
+            map = "Undecided";
+        }
+        if (state == "up next" && scores !== " - "){
+            state = "in progress";
+        }
+        console.log(scores)
         var div = document.getElementById(divId);
         var curmatch = localStorage.getItem("curr-match");
         div.classList.remove('unplayed', 'upnext', 'ipr', 'done-blue', 'done-red', 'done-draw');
