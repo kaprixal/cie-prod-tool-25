@@ -118,8 +118,22 @@
     getScore();
 
     function getScore() {
+      setOWOverlay();
       var curmatch = localStorage.getItem("curr-match");
+      console.log("curmatch:", curmatch);
+
+      var team1score = localStorage.getItem(`m${curmatch}t1totalscore`);
+      console.log("team1score:", team1score);
+
+      var team2score = localStorage.getItem(`m${curmatch}t2totalscore`);
+      console.log("team2score:", team2score);
+
+      var team1name = localStorage.getItem(`m${curmatch}-team1-name`);
+      console.log("team1name:", team1name);
+
       var team2name = localStorage.getItem(`m${curmatch}-team2-name`);
+      console.log("team2name:", team2name);
+
       document.getElementById("overlay-score-1").innerHTML = team1score;
 
       document.getElementById("overlay-score-2").innerHTML = team2score;
@@ -146,10 +160,6 @@
       } else if (localStorage.getItem("game") === "val") {
         getVALMaps();
         setVALOverlay();
-        if (format == "ft1") {
-          document.getElementById("bo3-mapset").style.display = "none";
-          document.getElementById("bo5-mapset").style.display = "none";
-        }
       }
     }
     function removeAllClasses(elementIds) {
@@ -162,6 +172,8 @@
       var curmatch = localStorage.getItem("curr-match");
       var t1score = localStorage.getItem(`m${curmatch}t1totalscore`);
       var t2score = localStorage.getItem(`m${curmatch}t2totalscore`);
+      console.log("t1score:", t1score);
+      console.log("t2score:", t2score);
       format = localStorage.getItem(`match${curmatch}-format`);
       if (format == "ft2") {
         document.getElementById("lol-bo3").style.display = "";
@@ -269,6 +281,7 @@
     function setOWOverlay() {
       var curmatch = localStorage.getItem("curr-match");
       var format = localStorage.getItem(`match${curmatch}-format`);
+      console.log("format:", format);
       if (format === "ft3") {
         document.getElementById("overlay-format").innerHTML = "First to 3";
       } else if (format === "ft2") {
@@ -364,10 +377,12 @@
 
       var t2score = localStorage.getItem(`m${curmatch}t2totalscore`);
       var format = localStorage.getItem(`match${curmatch}-format`);
+
       if (format == "ft2") {
         document.getElementById("val-bo3").style.display = "";
         document.getElementById("val-bo5").style.display = "none";
         if (t1score == "1") {
+          console.log(t1score);
           document.getElementById("p_7").style.backgroundColor = "black";
           document.getElementById("p_8").style.backgroundColor = "black";
           document.getElementById("p_7").style.backgroundColor = "#fff";
@@ -444,14 +459,11 @@
           document.getElementById("p_5").style.backgroundColor = "black";
           document.getElementById("p_6").style.backgroundColor = "black";
         }
-      } else if (format == "ft1") {
-        document.getElementById("val-bo5").style.display = "none!important";
-        document.getElementById("val-bo3").style.display = "none!important";
+      } else {
+        document.getElementById("val-bo5").style.display = "none";
+        document.getElementById("val-bo3").style.display = "none";
         document.getElementById("bo3-mapset").classList.add("hidden");
         document.getElementById("bo5-mapset").classList.add("hidden");
-
-        document.getElementById("val-bo3").classList.add("hidden");
-        document.getElementById("val-bo5").classList.add("hidden");
       }
     }
 
