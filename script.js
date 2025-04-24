@@ -278,6 +278,22 @@ const valmaps = [
   "Haven",
   "Split",
   "Ascent",
+  "Sunset",
+];
+
+const mrmaps = [
+  "+",
+  "Central Park",
+  "Hall of Djalia",
+  "Symbiotic Surface",
+  "Shin-Shibuya",
+  "Midtown",
+  "Spider-Islands",
+  "Yggdrasill Path",
+  "Krakoa",
+  "Hell's Heaven",
+  "Birnin T'Challa",
+  "Royal Palace",
 ];
 
 const valagents = [
@@ -309,6 +325,49 @@ const valagents = [
   "Vyse",
 ];
 
+const marvelRivalsHeroes = [
+  "+",
+  "Doctor Strange",
+  "Hulk",
+  "Iron Man",
+  "Spider-Man",
+  "Luna Snow",
+  "Namor",
+  "Loki",
+  "Black Panther",
+  "Magik",
+  "Rocket Raccoon",
+  "Groot",
+  "Peni Parker",
+  "Storm",
+  "Magneto",
+  "Star-Lord",
+  "Mantis",
+  "The Punisher",
+  "Scarlet Witch",
+  "Hela",
+  "Venom",
+  "Adam Warlock",
+  "Jeff the Land Shark",
+  "Thor",
+  "Winter Soldier",
+  "Captain America",
+  "Psylocke",
+  "Moon Knight",
+  "Hawkeye",
+  "Squirrel Girl",
+  "Iron Fist",
+  "Black Widow",
+  "Cloak & Dagger",
+  "Wolverine",
+  "Mister Fantastic",
+  "Invisible Woman",
+  "Human Torch",
+  "The Thing",
+  "Emma Frost",
+  "Ultron",
+];
+const marvelRivalsRoles = ["+", "Vanguard", "Duelist", "Strategist", "Flex"];
 valroles = ["+", "Sentinel", "Duelist", "Controller", "Initiator", "Flex"];
 // Function to generate select options based on values
 document.addEventListener("DOMContentLoaded", function () {
@@ -360,6 +419,13 @@ document.addEventListener("DOMContentLoaded", function () {
           option.textContent = value;
           selectElement.appendChild(option);
         });
+      } else if (localStorage.getItem("game") === "mr") {
+        marvelRivalsHeroes.forEach((value) => {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = value;
+          selectElement.appendChild(option);
+        });
       }
     });
 
@@ -396,6 +462,13 @@ document.addEventListener("DOMContentLoaded", function () {
           option.textContent = value;
           selectElement.appendChild(option);
         });
+      } else if (localStorage.getItem("game") === "mr") {
+        mrmaps.forEach((value) => {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = value;
+          selectElement.appendChild(option);
+        });
       }
     });
 
@@ -420,6 +493,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       } else if (localStorage.getItem("game") === "val") {
         valroles.forEach((value) => {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = value;
+          selectElement.appendChild(option);
+        });
+      } else if (localStorage.getItem("game") === "mr") {
+        marvelRivalsRoles.forEach((value) => {
           const option = document.createElement("option");
           option.value = value;
           option.textContent = value;
@@ -483,6 +563,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const team2Input = document.getElementById(`${match}-map${i}-t2`);
       swapValues(team1Input, team2Input);
     }
+    swapValues(
+      document.getElementById("m1-p11-name"),
+      document.getElementById("m1-p12-name")
+    );
   }
 
   // Helper function to swap values between two elements
