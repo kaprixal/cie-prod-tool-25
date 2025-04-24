@@ -33,6 +33,25 @@
         <img class="stacked-image" id="game-overlay" style="z-index: 0" />
         <div id="overlay-format" class="font-integral-bold capitalize"></div>
         <div id="overlay-title" class="font-integral-bold capitalize"></div>
+        <div id="mr-bo5" style="display: none; z-index: 10">
+          <div id="mr1" class="mr_square"></div>
+          <div id="mr2" class="mr_square"></div>
+          <div id="mr3" class="mr_square"></div>
+
+          <div id="mr4" class="mr_square"></div>
+          <div id="mr5" class="mr_square"></div>
+          <div id="mr6" class="mr_square"></div>
+        </div>
+
+        <div id="mr-bo3" style="display: none">
+          <div id="mr7" class="mr_square"></div>
+
+          <div id="mr8" class="mr_square"></div>
+
+          <div id="mr9" class="mr_square"></div>
+
+          <div id="mr10" class="mr_square"></div>
+        </div>
         <div id="lol-bo5" style="display: none; z-index: 10">
           <div id="s1" class="lol_square"></div>
           <div id="s2" class="lol_square"></div>
@@ -160,6 +179,8 @@
       } else if (localStorage.getItem("game") === "val") {
         getVALMaps();
         setVALOverlay();
+      } else if (localStorage.getItem("game") === "mr") {
+        setRivalsOverlay();
       }
     }
     function removeAllClasses(elementIds) {
@@ -331,6 +352,113 @@
         .classList.add("ow-overlay-logo2");
       document.getElementById("val-bo3").style.display = "none";
       document.getElementById("val-bo5").style.display = "none";
+    }
+
+    function setRivalsOverlay() {
+      document.getElementById("overlay-format").innerHTML = "";
+      removeAllClasses([
+        "overlay-score-1",
+        "overlay-score-2",
+        "overlay-name-1",
+        "overlay-name-2",
+        "overlay-format",
+        "overlay-title",
+        "overlay-logo-1",
+        "overlay-logo-2",
+        "bo3-mapset",
+        "bo5-mapset",
+      ]);
+      document.getElementById("bo3-mapset").classList.add("rivals-bo3-mapset");
+      document.getElementById("bo5-mapset").classList.add("rivals-bo5-mapset");
+      var curmatch = localStorage.getItem("curr-match");
+      document.getElementById("game-overlay").src =
+        "..\\assets\\in_game_overlay\\ingame_rivals_main.png";
+      document.getElementById("overlay-score-1").classList.add("hidden");
+      document.getElementById("overlay-score-2").classList.add("hidden");
+      document
+        .getElementById("overlay-name-1")
+        .classList.add("rivals-overlay-name-1");
+      document
+        .getElementById("overlay-name-2")
+        .classList.add("rivals-overlay-name-2");
+      document
+        .getElementById("overlay-title")
+        .classList.add("rivals-overlay-title");
+      document
+        .getElementById("overlay-logo-1")
+        .classList.add("rivals-overlay-logo1");
+      document
+        .getElementById("overlay-logo-2")
+        .classList.add("rivals-overlay-logo2");
+
+      var t1score = localStorage.getItem(`m${curmatch}t1totalscore`);
+
+      var t2score = localStorage.getItem(`m${curmatch}t2totalscore`);
+      var format = localStorage.getItem(`match${curmatch}-format`);
+
+      if (format == "ft2") {
+        document.getElementById("mr-bo3").style.display = "";
+        document.getElementById("mr-bo5").style.display = "none";
+        if (t1score == "1") {
+          document.getElementById("mr7").style.backgroundColor = "#fff";
+          document.getElementById("mr8").style.backgroundColor = "black";
+        } else if (t1score == "2") {
+          document.getElementById("mr7").style.backgroundColor = "#fff";
+          document.getElementById("mr8").style.backgroundColor = "#fff";
+        } else {
+          document.getElementById("mr7").style.backgroundColor = "black";
+          document.getElementById("mr8").style.backgroundColor = "black";
+        }
+
+        if (t2score == "1") {
+          document.getElementById("mr9").style.backgroundColor = "#fff";
+          document.getElementById("mr10").style.backgroundColor = "black";
+        } else if (t2score == "2") {
+          document.getElementById("mr9").style.backgroundColor = "#fff";
+          document.getElementById("mr10").style.backgroundColor = "#fff";
+        } else {
+          document.getElementById("mr9").style.backgroundColor = "black";
+          document.getElementById("mr10").style.backgroundColor = "black";
+        }
+      } else if (format == "ft3") {
+        document.getElementById("mr-bo5").style.display = "";
+        document.getElementById("mr-bo3").style.display = "none";
+        if (t1score == "1") {
+          document.getElementById("mr1").style.backgroundColor = "#fff";
+          document.getElementById("mr2").style.backgroundColor = "black";
+          document.getElementById("mr3").style.backgroundColor = "black";
+        } else if (t1score == "2") {
+          document.getElementById("mr1").style.backgroundColor = "#fff";
+          document.getElementById("mr2").style.backgroundColor = "#fff";
+          document.getElementById("mr3").style.backgroundColor = "black";
+        } else if (t1score == "3") {
+          document.getElementById("s1").style.backgroundColor = "#fff";
+          document.getElementById("s2").style.backgroundColor = "#fff";
+          document.getElementById("s3").style.backgroundColor = "#fff";
+        } else {
+          document.getElementById("mr1").style.backgroundColor = "black";
+          document.getElementById("mr2").style.backgroundColor = "black";
+          document.getElementById("mr3").style.backgroundColor = "black";
+        }
+
+        if (t2score == "1") {
+          document.getElementById("mr4").style.backgroundColor = "#fff";
+          document.getElementById("mr5").style.backgroundColor = "black";
+          document.getElementById("mr6").style.backgroundColor = "black";
+        } else if (t2score == "2") {
+          document.getElementById("mr4").style.backgroundColor = "#fff";
+          document.getElementById("mr5").style.backgroundColor = "#fff";
+          document.getElementById("mr6").style.backgroundColor = "black";
+        } else if (t2score == "3") {
+          document.getElementById("mr4").style.backgroundColor = "#fff";
+          document.getElementById("mr5").style.backgroundColor = "#fff";
+          document.getElementById("mr6").style.backgroundColor = "#fff";
+        } else {
+          document.getElementById("mr4").style.backgroundColor = "black";
+          document.getElementById("mr5").style.backgroundColor = "black";
+          document.getElementById("mr6").style.backgroundColor = "black";
+        }
+      }
     }
 
     function setVALOverlay() {

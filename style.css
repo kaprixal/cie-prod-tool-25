@@ -3364,6 +3364,54 @@ line-height: 1;
   left:1480px;
 }
 
+#mr1{
+  top:33px;
+  left:520px;
+}
+#mr7{
+  top:40px;
+  left:520px;
+}
+#mr8{
+  top:60px;
+  left:520px;
+}
+#mr2{
+  top:50px;
+  left:520px;
+}
+#mr3{
+  top:67px;
+  left:520px;
+}
+#mr4{
+  top:33px;
+  right:520px;
+}
+#mr9{
+  top:40px;
+  right:520px;
+}
+#mr10{
+  top:60px;
+  right:520px;
+}
+#mr5{
+  top:50px;
+  right:520px;
+}
+#mr6{
+  top:67px;
+  right:520px;
+}
+.mr_square{
+  position: absolute;
+  height: 14px;
+  width: 15px;
+  z-index: 3;
+  background-color: black;
+}
+
 .lol_square{
   position: absolute;
   height: 19px;
@@ -3371,6 +3419,7 @@ line-height: 1;
   z-index: 3;
   background-color: black;
 }
+
 
 #match-score{
   position: relative;
@@ -3387,6 +3436,51 @@ line-height: 1;
   top: 80px;
   left: 638.9px;
   z-index: 2;
+}
+
+.rivals-overlay-name-1{
+  position: absolute;
+  top: 40px;
+  left: 190px;
+  font-size: 20px;
+  color: white;
+}
+
+.rivals-overlay-name-2{
+  position: absolute;
+  top: 40px;
+  right: 190px;
+  font-size: 20px;
+  color: white;
+}
+
+.rivals-overlay-title{
+  position: absolute;
+  top: 1040px;
+  left: 850px;
+  width: 226px;
+  height: 24px;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  z-index: 3;
+}
+
+.rivals-overlay-logo1{
+  position: absolute;
+  top: 30px;
+  left: 437px;
+  z-index: 3;
+  height: 52px;
+  width: 52px;
+}
+.rivals-overlay-logo2{
+  position: absolute;
+  top: 30px;
+  right: 437px;
+  z-index: 3;
+  height: 52px;
+  width: 52px;
 }
 
 #logo1{
@@ -3736,7 +3830,6 @@ line-height: 1;
   animation: slide2 0.32s 1s;
   transform: translate(0, 287px);
 }
-
 
 #animatedbox {
   width: 1920px;
