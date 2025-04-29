@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../style.css" rel="stylesheet" />
+    <div
+      class="justify-center"
+      style="
+        display: grid;
+        grid-template-columns: 484.86px 607.87px 484.86px;
+        gap: 57px;
+        margin-top: 265px;
+        width: 100%;
+        text-align: center;
+      "
+    >
+      <div style="height: 77.22px">
+        <img
+          src="../assets/ow_ban_assets/tank.png"
+          onclick="resetOverlayStates()"
+        />
+        <div
+          class="grid"
+          style="
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Four equal columns */
+            gap: 7px; /* Add spacing between the images */
+            margin-top: 14px;
+          "
+        >
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('dva', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/dva.png" />
+            <img
+              id="overlay-dva"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10; /* Ensure overlay is on top */
+              "
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('doomfist', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/doomfist.png" />
+            <img
+              id="overlay-doomfist"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10;
+              "
+            />
+          </div>
+          <img src="../assets/ow_ban_assets/hazard.png" />
+          <img src="../assets/ow_ban_assets/junkerqueen.png" />
+          <img src="../assets/ow_ban_assets/mauga.png" />
+          <img src="../assets/ow_ban_assets/orisa.png" />
+          <img src="../assets/ow_ban_assets/ramattra.png" />
+          <img src="../assets/ow_ban_assets/reinhardt.png" />
+          <img src="../assets/ow_ban_assets/roadhog.png" />
+          <img src="../assets/ow_ban_assets/sigma.png" />
+          <img src="../assets/ow_ban_assets/winston.png" />
+          <img src="../assets/ow_ban_assets/wreckingball.png" />
+          <img src="../assets/ow_ban_assets/zarya.png" />
+        </div>
+      </div>
+
+      <div style="height: 77.22px">
+        <img src="../assets/ow_ban_assets/damage.png" />
+      </div>
+      <div style="height: 77.22px">
+        <img src="../assets/ow_ban_assets/support.png" />
+      </div>
+    </div>
+
+    <script>
+      const overlayStates = JSON.parse(
+        localStorage.getItem("overlayStates")
+      ) || {
+        dva: 0,
+        doomfist: 0,
+        hazard: 0,
+        junkerqueen: 0,
+        mauga: 0,
+        orisa: 0,
+        ramattra: 0,
+        reinhardt: 0,
+        roadhog: 0,
+        sigma: 0,
+        winston: 0,
+        wreckingball: 0,
+        zarya: 0,
+      };
+
+      const overlays = [
+        "../assets/ow_ban_assets/blueban.png", // Left click
+        "../assets/ow_ban_assets/redban.png", // Right click
+        "../assets/ow_ban_assets/prevban.png", // Middle click
+      ];
+
+      function toggleOverlay(hero, button) {
+        const overlayImage = document.getElementById(`overlay-${hero}`);
+        const overlayIndex = button === 0 ? 1 : button === 2 ? 2 : 3; // Map mouse buttons to overlays
+
+        if (overlayStates[hero] === overlayIndex) {
+          // If the same overlay is already applied, remove it
+          overlayStates[hero] = 0;
+          overlayImage.style.display = "none";
+          overlayImage.src = "";
+        } else {
+          // Apply the selected overlay
+          overlayStates[hero] = overlayIndex;
+          overlayImage.style.display = "block";
+          overlayImage.src = overlays[overlayIndex - 1];
+        }
+
+        // Save updated overlay states to localStorage
+        localStorage.setItem("overlayStates", JSON.stringify(overlayStates));
+      }
+
+      function resetOverlayStates() {
+        // Reset all overlay states to 0
+        for (const hero in overlayStates) {
+          overlayStates[hero] = 0;
+          const overlayImage = document.getElementById(`overlay-${hero}`);
+          if (overlayImage) {
+            overlayImage.style.display = "none";
+            overlayImage.src = "";
+          }
+        }
+
+        // Save the reset states to localStorage
+        localStorage.setItem("overlayStates", JSON.stringify(overlayStates));
+      }
+
+      // Apply saved overlay states on page load
+      window.addEventListener("DOMContentLoaded", () => {
+        for (const hero in overlayStates) {
+          const overlayImage = document.getElementById(`overlay-${hero}`);
+          if (overlayStates[hero] > 0) {
+            overlayImage.style.display = "block";
+            overlayImage.src = overlays[overlayStates[hero] - 1];
+          }
+        }
+      });
+    </script>
+  </head>
+</html>
