@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="../style.css" rel="stylesheet" />
+    <img
+      class="stacked-image"
+      id="mapset"
+      src="../assets/ow_ban_assets/versus.png"
+      style="top: 48px; left: 696px"
+    />
+    <img id="logo1" style="width:97px; left: 742px; top: 68px; z-index: 4;"></img>
+    <img id="logo2" style="width:97px; left: 1082px; top: 68px; z-index: 4;"></img>
     <div
       class="justify-center"
       style="
@@ -642,6 +650,18 @@
     </div>
 
     <script>
+      getLogo();
+
+      function getLogo(){
+        curmatch = localStorage.getItem("curr-match");
+          document.getElementById("logo1").src = localStorage.getItem(
+        `m${curmatch}-team1-logo`
+      );
+      document.getElementById("logo2").src = localStorage.getItem(
+        `m${curmatch}-team2-logo`
+      );
+      }
+      
       const overlayStates = JSON.parse(
         localStorage.getItem("overlayStates")
       ) || {
