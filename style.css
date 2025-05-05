@@ -2908,46 +2908,79 @@ line-height: 1;
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'DrukWide';
+    src: url('assets/fonts/DrukFonts/DrukWide-Bold-Trial.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DrukWide';
+    src: url('assets/fonts/DrukFonts/DrukWide-Super-Trial.otf') format('opentype');
+    font-weight: super;
+    font-style: normal;
+}
+
+.font-druk-bold  {
+    font-family: 'DrukWide';
+    font-weight: bold;
+    font-style: normal;
+}
+
+.font-druk-super {
+    font-family: 'DrukWide';
+    font-weight: super;
+    font-style: normal;
+}
+
 /* Built Tilting font styles */
 .font-built-bold {
-    font-family: 'BuiltTilting';
+    text-transform: uppercase;
+    font-family: 'DrukWide';
     font-weight: bold;
     font-style: normal;
 }
 
 .font-built-bolder {
-    font-family: 'BuiltTilting';
-    font-weight: bolder;
+  text-transform: uppercase;
+    font-family: 'DrukWide';
+    font-weight: super;
     font-style: normal;
 }
 
 .font-built-regular {
-    font-family: 'BuiltTilting';
+  text-transform: uppercase;
+    font-family: 'DrukWide';
     font-weight: normal;
     font-style: normal;
 }
 
 .font-built-light {
-    font-family: 'BuiltTilting';
+  text-transform: uppercase;
+    font-family: 'DrukWide';
     font-weight: lighter;
     font-style: normal;
 }
 
 /* Integral CF font styles */
 .font-integral-bolder {
-    font-family: 'IntegralCF';
-    font-weight: bolder;
+  text-transform: uppercase;
+    font-family: 'DrukWide';
+    font-weight: super;
     font-style: normal;
 }
 
 .font-integral-bold {
-    font-family: 'IntegralCF';
+  text-transform: uppercase;
+    font-family: 'DrukWide';
     font-weight: bold;
     font-style: normal;
 }
 
 .font-integral-regular {
-    font-family: 'IntegralCF';
+  text-transform: uppercase;
+    font-family: 'DrukWide';
     font-weight: normal;
     font-style: normal;
 }
@@ -3198,11 +3231,11 @@ line-height: 1;
   position:absolute; 
   z-index: 3; 
   color:white; 
-  top: 15px;
+  top: 18px;
   left: 910px;
   height: 22px;
   width: 140px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .ow-overlay-title{
@@ -3268,22 +3301,21 @@ line-height: 1;
 }
 
 .map-off{
-  padding: 10px;
-  font-size: 8px;
+  font-size: 6px;
   color: rgba(255, 255, 255, 0.31);
 }
 
 .map-on{
-  padding: 10px;
-  font-size: 8px;
+  font-size: 6px;
   color: rgba(255, 255, 255, 1);
 }
 
 .map-label{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
+  gap: 10px;
 }
 
 #current-map{
