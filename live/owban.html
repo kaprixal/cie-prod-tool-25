@@ -63,25 +63,581 @@
               "
             />
           </div>
-          <img src="../assets/ow_ban_assets/hazard.png" />
-          <img src="../assets/ow_ban_assets/junkerqueen.png" />
-          <img src="../assets/ow_ban_assets/mauga.png" />
-          <img src="../assets/ow_ban_assets/orisa.png" />
-          <img src="../assets/ow_ban_assets/ramattra.png" />
-          <img src="../assets/ow_ban_assets/reinhardt.png" />
-          <img src="../assets/ow_ban_assets/roadhog.png" />
-          <img src="../assets/ow_ban_assets/sigma.png" />
-          <img src="../assets/ow_ban_assets/winston.png" />
-          <img src="../assets/ow_ban_assets/wreckingball.png" />
-          <img src="../assets/ow_ban_assets/zarya.png" />
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('hazard', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/hazard.png" />
+            <img
+              id="overlay-hazard"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10;
+              "
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('junkerqueen', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/junkerqueen.png" />
+            <img
+              id="overlay-junkerqueen"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10;
+              "
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('mauga', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/mauga.png" />
+            <img
+              id="overlay-mauga"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('orisa', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/orisa.png" />
+            <img
+              id="overlay-orisa"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('ramattra', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/ramattra.png" />
+            <img
+              id="overlay-ramattra"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('reinhardt', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/reinhardt.png" />
+            <img
+              id="overlay-reinhardt"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('roadhog', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/roadhog.png" />
+            <img
+              id="overlay-roadhog"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 665px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('sigma', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/sigma.png" />
+            <img
+              id="overlay-sigma"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 665px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('winston', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/winston.png" />
+            <img
+              id="overlay-winston"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 665px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('wreckingball', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/wreckingball.png" />
+            <img
+              id="overlay-wreckingball"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 665px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('zarya', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/zarya.png" />
+            <img
+              id="overlay-zarya"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 820px; display: none; z-index: 10"
+            />
+          </div>
         </div>
       </div>
 
       <div style="height: 77.22px">
         <img src="../assets/ow_ban_assets/damage.png" />
+        <div
+          class="grid"
+          style="
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Four equal columns */
+            gap: 7px; /* Add spacing between the images */
+            margin-top: 14px;
+          "
+        >
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('ashe', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/ashe.png" />
+            <img
+              id="overlay-ashe"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10; /* Ensure overlay is on top */
+              "
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('bastion', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/bastion.png" />
+            <img
+              id="overlay-bastion"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10; /* Ensure overlay is on top */
+              "
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('cassidy', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/cassidy.png" />
+            <img
+              id="overlay-cassidy"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10; /* Ensure overlay is on top */
+              "
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('echo', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/echo.png" />
+            <img
+              id="overlay-echo"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10; /* Ensure overlay is on top */
+              "
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('freja', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/freja.png" />
+            <img
+              id="overlay-freja"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10; /* Ensure overlay is on top */
+              "
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('genji', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/genji.png" />
+            <img
+              id="overlay-genji"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('hanzo', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/hanzo.png" />
+            <img
+              id="overlay-hanzo"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('junkrat', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/junkrat.png" />
+            <img
+              id="overlay-junkrat"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('mei', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/mei.png" />
+            <img
+              id="overlay-mei"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('pharah', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/pharah.png" />
+            <img
+              id="overlay-pharah"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('reaper', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/reaper.png" />
+            <img
+              id="overlay-reaper"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 665px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('sojourn', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/sojourn.png" />
+            <img
+              id="overlay-sojourn"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 665px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('soldier76', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/soldier76.png" />
+            <img
+              id="overlay-soldier76"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 665px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('sombra', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/sombra.png" />
+            <img
+              id="overlay-sombra"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 665px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('symmetra', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/symmetra.png" />
+            <img
+              id="overlay-symmetra"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 665px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('torbjorn', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/torbjorn.png" />
+            <img
+              id="overlay-torbjorn"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 820px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('tracer', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/tracer.png" />
+            <img
+              id="overlay-tracer"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 820px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('venture', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/venture.png" />
+            <img
+              id="overlay-venture"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 820px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('widowmaker', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/widowmaker.png" />
+            <img
+              id="overlay-widowmaker"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 820px; display: none; z-index: 10"
+            />
+          </div>
+        </div>
       </div>
       <div style="height: 77.22px">
         <img src="../assets/ow_ban_assets/support.png" />
+        <div
+          class="grid"
+          style="
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Four equal columns */
+            gap: 7px; /* Add spacing between the images */
+            margin-top: 14px;
+          "
+        >
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('ana', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/ana.png" />
+            <img
+              id="overlay-ana"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10; /* Ensure overlay is on top */
+              "
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('baptiste', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/baptiste.png" />
+            <img
+              id="overlay-baptiste"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10;
+              "
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('brigitte', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/brigitte.png" />
+            <img
+              id="overlay-brigitte"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10;
+              "
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('illari', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/illari.png" />
+            <img
+              id="overlay-illari"
+              src=""
+              alt="Overlay"
+              style="
+                position: absolute;
+                top: 356.58px;
+                display: none;
+                z-index: 10;
+              "
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('juno', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/juno.png" />
+            <img
+              id="overlay-juno"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('kiriko', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/kiriko.png" />
+            <img
+              id="overlay-kiriko"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('lifeweaver', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/lifeweaver.png" />
+            <img
+              id="overlay-lifeweaver"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('lucio', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/lucio.png" />
+            <img
+              id="overlay-lucio"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 511px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('mercy', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/mercy.png" />
+            <img
+              id="overlay-mercy"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 665px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('moira', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/moira.png" />
+            <img
+              id="overlay-moira"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 665px; display: none; z-index: 10"
+            />
+          </div>
+          <div
+            class=""
+            onmousedown="event.preventDefault(); toggleOverlay('zenyatta', event.button)"
+          >
+            <img src="../assets/ow_ban_assets/zenyatta.png" />
+            <img
+              id="overlay-zenyatta"
+              src=""
+              alt="Overlay"
+              style="position: absolute; top: 665px; display: none; z-index: 10"
+            />
+          </div>
+        </div>
       </div>
     </div>
 
@@ -102,6 +658,36 @@
         winston: 0,
         wreckingball: 0,
         zarya: 0,
+        ashe: 0,
+        bastion: 0,
+        cassidy: 0,
+        echo: 0,
+        freja: 0,
+        genji: 0,
+        hanzo: 0,
+        junkrat: 0,
+        mei: 0,
+        pharah: 0,
+        reaper: 0,
+        sojourn: 0,
+        soldier76: 0,
+        sombra: 0,
+        symmetra: 0,
+        torbjorn: 0,
+        tracer: 0,
+        venture: 0,
+        widowmaker: 0,
+        ana: 0,
+        baptiste: 0,
+        brigitte: 0,
+        illari: 0,
+        juno: 0,
+        kiriko: 0,
+        lifeweaver: 0,
+        lucio: 0,
+        mercy: 0,
+        moira: 0,
+        zenyatta: 0,
       };
 
       const overlays = [
