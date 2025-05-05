@@ -429,20 +429,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    maptypeElements.forEach((selectElement) => {
-      // Clear existing options
-      selectElement.innerHTML = "";
-      selectElement.classList.add("fixed-width-select");
-      if (localStorage.getItem("game") === "ow2") {
-        owmaptypes.forEach((value) => {
-          const option = document.createElement("option");
-          option.value = value;
-          option.textContent = value;
-          selectElement.appendChild(option);
-        });
-      }
-    });
-
     mapElements.forEach((selectElement) => {
       // Clear existing options
       selectElement.innerHTML = "";
