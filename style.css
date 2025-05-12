@@ -3868,3 +3868,123 @@ line-height: 1;
   width: 1920px;
   height: 1080px;
 }
+
+#roster6-img-1 {
+  border-radius: 31px;
+  position: absolute;
+  top: 222px;
+  left: 102px;
+}
+
+#roster6-img-2 {
+  border-radius: 31px;
+  position: absolute;
+  top: 222px;
+  left: 392px;
+}
+
+#roster6-img-3 {
+  border-radius: 31px;
+  position: absolute;
+  top: 222px;
+  left: 682px;
+}
+
+#roster6-img-4 {
+  border-radius: 31px;
+  position: absolute;
+  top: 222px;
+  left: 972px;
+}
+
+#roster6-img-5 {
+  border-radius: 31px;
+  position: absolute;
+  top: 222px;
+  left: 1262px;
+}
+
+#roster6-img-6 {
+  border-radius: 31px;
+  position: absolute;
+  top: 222px;
+  left: 1553px;
+}
+
+
+#roster6-name-1{
+  font-size: 18px;
+  position: absolute;
+  height: 102px;
+  width: 262px;
+  top: 900px;
+  left: 100px;
+  z-index: 1;
+  
+}
+
+#roster6-name-2{
+  font-size: 18px;
+  position: absolute;
+  height: 100px;
+  width: 263px;
+  top: 900px;
+  left: 392px;
+  z-index: 1;
+  
+}
+
+#roster6-name-3{
+  font-size: 18px;
+  position: absolute;
+  height: 100px;
+  width: 263px;
+  top: 900px;
+  left: 682px;
+  z-index: 1;
+  
+}
+
+#roster6-name-4{
+  font-size: 18px;
+  position: absolute;
+  height: 100px;
+  width: 263px;
+  top: 900px;
+  left: 972px;
+  z-index: 1;
+  
+}
+
+#roster6-name-5{
+  font-size: 18px;
+  position: absolute;
+  height: 100px;
+  width: 263px;
+  top: 900px;
+  left: 1262px;
+  z-index: 1;
+  
+  
+}
+
+#roster6-name-6{
+  font-size: 18px;
+  position: absolute;
+  height: 100px;
+  width: 263px;
+  top: 900px;
+  left: 1553px;
+  z-index: 1;
+  
+  
+}
+
+.roles6{
+  position: absolute;
+  width: 1440px;
+  top: 840px;
+  left: 202px;
+  z-index: 4;
+  gap: 244px;
+}
