@@ -98,13 +98,6 @@
         var map4state = localStorage.getItem(`m${curmatch}-map4-state`);
         var map5state = localStorage.getItem(`m${curmatch}-map5-state`);
 
-        if (map1 === "BirninTchalla") map1 = "BT";
-        if (map2 === "BirninTchalla") map2 = "BT";
-        if (map3 === "BirninTchalla") map3 = "BT";
-        if (map4 === "BirninTchalla") map4 = "BT";
-        if (map5 === "BirninTchalla") map5 = "BT";
-        console.log(map1)
-
         if (format == "ft1") {
             document.getElementById("bo1m1display").src = "..\\assets\\maps\\rivals\\Rivals_Map_" + map1 + "5-1.png";
             document.getElementById("bo1m1state").innerHTML = map1state;
