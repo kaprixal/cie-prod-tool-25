@@ -91,7 +91,7 @@
         var map3n = localStorage.getItem(`m${curmatch}-map3-name`) == "+" ? "undecided" : localStorage.getItem(`m${curmatch}-map3-name`);
         var map4n = localStorage.getItem(`m${curmatch}-map4-name`) == "+" ? "undecided" : localStorage.getItem(`m${curmatch}-map4-name`);
         var map5n = localStorage.getItem(`m${curmatch}-map5-name`) == "+" ? "undecided" : localStorage.getItem(`m${curmatch}-map5-name`); 
-        
+        console.log(localStorage.getItem(`m${curmatch}-map1-name`).replace(/[\s:.'-]+/g, ''))
         var map1state = localStorage.getItem(`m${curmatch}-map1-state`);
         var map2state = localStorage.getItem(`m${curmatch}-map2-state`);
         var map3state = localStorage.getItem(`m${curmatch}-map3-state`);
@@ -346,10 +346,10 @@
         var winners = localStorage.getItem(`m${curmatch}winners`).replace(/[\s:,-]+/g, '');
         if (state === 'unplayed') {
             div.classList.add('unplayed');
-            div.innerHTML = "<br><br><h1 style=\"margin-top:210px; font-size:25px; height: 100px;\">" + map +"</h1><img class=\"icon\" style=\"margin-top: 135px;\" src=" + icon +">"
+            div.innerHTML = "<br><br><h1 style=\"margin-top:210px; font-size:20px; height: 100px;\">" + map +"</h1><img class=\"icon\" style=\"margin-top: 135px;\" src=" + icon +">"
         } else if (state === 'up next') {
             div.classList.add('upnext');
-            div.innerHTML = "<br><h1 style=\"margin-top:210px; font-size:20px;\">UP NEXT:</h1><h2 style=\"font-size: 25px; margin-top: 35px;\">" + map +"</h2><img class=\"icon\" src=" + icon +">"
+            div.innerHTML = "<br><h1 style=\"margin-top:210px; font-size:20px;\">UP NEXT:</h1><h2 style=\"font-size: 20px; margin-top: 35px;\">" + map +"</h2><img class=\"icon\" src=" + icon +">"
         } else if (state === 'in progress') {
             div.classList.add('ipr');
             div.innerHTML = "<br><h1 style=\"font-size: 80px; margin-top:210px;\">" + scores + "</h1><h2>" + map +"</h2><img class=\"icon\" src=" + icon + ">";
