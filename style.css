@@ -3477,7 +3477,7 @@ line-height: 1;
 .rivals-overlay-name-1{
   position: absolute;
   top: 40px;
-  left: 190px;
+  left: 20px;
   font-size: 20px;
   color: white;
 }
@@ -3485,7 +3485,7 @@ line-height: 1;
 .rivals-overlay-name-2{
   position: absolute;
   top: 40px;
-  right: 190px;
+  right: 20px;
   font-size: 20px;
   color: white;
 }
