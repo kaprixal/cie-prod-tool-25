@@ -3491,6 +3491,7 @@ line-height: 1;
 }
 
 .rivals-overlay-title{
+  display: hidden;
   position: absolute;
   top: 1040px;
   left: 850px;
